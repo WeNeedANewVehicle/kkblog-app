@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+    padding: 0px;
+    margin: 0px;
+    transition: 0.5s
+}
+
+:root {
+    --gray: #d6d6d6;
+    --black: #000000;
+}
+
+body {
+    width: 100vw;
+    height: 100dvh;
+}
+
+@layer utilities {
+    
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--black);
+        color: var(--gray);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: var(--gray);
+        color: var(--black);
+    }
+}
