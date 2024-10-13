@@ -2,36 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-    padding: 0px;
-    margin: 0px;
-    transition: 0.5s
-}
-
-:root {
+@layer base {
+  :root {
     --gray: #d6d6d6;
     --black: #000000;
-}
+    --white: #ffffff;
+  }
 
-body {
+  html,
+  body {
+    padding: 0px;
+    margin: 0px;
+    transition: 0.5s;
+  }
+
+  body {
     width: 100vw;
     height: 100dvh;
+  }
+
+  input {
+    color: var(--black);
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  #logo {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: var(--black);
+      color: var(--gray);
+    }
+
+    .icon {
+      stroke: var(--gray);
+      > * {
+        stroke: var(--gray);
+      }
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    body {
+      background-color: var(--gray);
+      color: var(--black);
+    }
+  }
 }
 
 @layer utilities {
-    
 }
 
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: var(--black);
-        color: var(--gray);
-    }
-}
+@layer components {
+  .error-message {
+    @apply text-red-700;
+  }
 
-@media (prefers-color-scheme: light) {
-    body {
-        background-color: var(--gray);
-        color: var(--black);
-    }
+  .invalid-input {
+    @apply border-red-700 border-solid border-4;
+  }
+
+  .sign-form-input {
+    @apply p-2;
+  }
 }
