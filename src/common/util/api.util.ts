@@ -23,15 +23,22 @@ async function api<P, T>({ url, method, body, queries, credentials, accessToken 
     if (accessToken) {
         headers.Authorization = `Bearer ${accessToken}`;
     }
-    const result = await fetch(baseUrl + url + (queries ?? ''), {
-        method,
-        body: JSON.stringify(body),
-        headers,
-        credentials,
-    })
 
+    try {
+        const result = await fetch(baseUrl + url + (queries ?? ''), {
+            method,
+            body: JSON.stringify(body),
+            headers,
+            credentials,
+        })
 
-    return result.json() as unknown as BaseResponse<T>;
+        return await result.json() as unknown as BaseResponse<T>
+    } catch (e) {
+
+        const error = e as unknown as ErrorBaseResponse;
+        throw error;
+    }
+
 }
 
 export default api;

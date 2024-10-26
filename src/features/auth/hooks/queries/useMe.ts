@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { authMeApi } from '../../api/auth'
 import tokenStorage from '@/common/storages/token-storage';
 
-const ME = 'ME';
+export const ME = 'ME';
 
 function useMe() {
     return useQuery({
@@ -10,9 +10,7 @@ function useMe() {
         queryFn: () => {
             const accessToken = tokenStorage.getAccessToken();
             return authMeApi(accessToken)
-        },
-        refetchOnWindowFocus: "always",
-        refetchOnReconnect: true,
+        }
     })
 }
 

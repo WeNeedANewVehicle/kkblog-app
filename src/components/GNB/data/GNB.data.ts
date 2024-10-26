@@ -20,8 +20,4 @@ export const menu: Menu = [
         text: '소개',
         to: route.about
     },
-    {
-        text: '주인장 로그인',
-        to: route.auth.signIn
-    }
 ];

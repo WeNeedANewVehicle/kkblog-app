@@ -7,6 +7,7 @@ import SignForm from '@/features/auth/components/SignForm'
 import Password from '@/components/Password'
 import Nbsp from '@/components/Nbsp'
 import LogoutGuard from '@/components/Guard/LogoutGuard'
+import Modal from '@/components/Modal/Modal'
 
 function Page() {
   const { register, onSubmit, handleSubmit, errors } = useSignInForm()
@@ -49,6 +50,7 @@ function Page() {
           <Link href={route.auth.signUp}>회원 가입</Link>
         </div>
       </SignForm>
+      <Modal />
     </LogoutGuard>
   )
 }

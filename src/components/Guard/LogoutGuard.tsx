@@ -4,22 +4,19 @@ import React, { PropsWithChildren, useEffect } from 'react'
 
 interface LogoutGuardProps extends PropsWithChildren {}
 function LogoutGuard(props: LogoutGuardProps) {
+  const { data: me, isFetching, isFetched } = useMe()
   const router = useRouter()
-  const { data: me } = useMe()
 
   useEffect(() => {
-    if (!me) {
+    if (!me || isFetching) {
       return
     }
 
+    console.log('logout guard', me)
     router.back()
-  }, [router, me])
+  }, [me, isFetching, router])
 
-  if (me) {
-    return
-  }
-
-  return props.children
+  return <div> {!me && props.children}</div>
 }
 
 export default LogoutGuard

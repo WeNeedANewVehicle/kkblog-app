@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { kia } from '@/theme/font'
 import './globals.css'
-import Provider from '@/components/Provider/Provider'
+import Provider from '@/components/Providers/Provider'
 import GNB from '@/components/GNB/GNB'
 import { menu } from '@/components/GNB/data/GNB.data'
 
@@ -17,12 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={kia.className}>
-        <GNB menu={menu} />
-        <main className={'pt-[50px]'}>
-          <Provider>{children}</Provider>
-        </main>
-      </body>
+      <Provider>
+        <body className={kia.className}>
+          <GNB menu={menu} />
+          <main>{children}</main>
+        </body>
+      </Provider>
     </html>
   )
 }

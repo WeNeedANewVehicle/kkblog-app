@@ -9,11 +9,11 @@ function LoginGuard(props: LoginGuardProps) {
   const { data: me, isFetching } = useMe()
 
   useEffect(() => {
-    if (me || isFetching) {
+    if (isFetching || me) {
       return
     }
 
-    router.replace(route.auth.signIn)
+    router.push(route.auth.signIn)
   }, [router, me, isFetching])
   return props.children
 }

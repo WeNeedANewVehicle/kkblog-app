@@ -29,6 +29,23 @@
     outline: none;
   }
 
+  input[type='submit'] {
+    cursor: pointer;
+  }
+
+  input[type='submit']:after {
+    background-color: red;
+    content: 'zz';
+    transition: 0.25s;
+    width: 25px;
+    height: 25px;
+  }
+
+  input[type='submit']:active {
+    transition: 0.25s;
+    transform: scale(200%, 200%%);
+  }
+
   #logo {
     font-size: 1rem;
     font-weight: 500;

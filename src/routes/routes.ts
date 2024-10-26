@@ -6,6 +6,7 @@ const route = {
         signIn: '/auth/sign-in',
         signUp: '/auth/sign-up',
         reset: '/auth/reset/password',
+        logout: '/auth/logout'
     },
 
     posts: "/posts",

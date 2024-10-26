@@ -1,6 +1,6 @@
 import { METHODS } from "@/common/constant/constant";
 import api from "@/common/util/api.util";
-import { SignInDto, SignInResponseDto, SignUpDto, SignUpResponseDto } from "@/features/auth/api/dto/signDto"
+import { MeResponseDto, SignInDto, SignInResponseDto, SignUpDto, SignUpResponseDto } from "@/features/auth/api/dto/signDto"
 
 // 로그인
 export async function signInApi(params: SignInDto) {
@@ -14,11 +14,13 @@ export async function signInApi(params: SignInDto) {
 
 // 인증
 export async function authMeApi(token: string | null) {
-  return await api({
+  const result = await api<string | null, MeResponseDto>({
     url: '/auth/me',
     credentials: "include",
     accessToken: token
   })
+
+  return result.data;
 }
 
 // 가입

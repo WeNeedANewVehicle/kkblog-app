@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react'
+import React, { FormEvent, useCallback } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import useSignIn from './queries/useSignIn';
@@ -10,21 +10,20 @@ const defaultValues = {
 };
 
 function useSignInForm() {
-    const { mutate: signIn, data } = useSignIn();
+    const { mutate: signIn, } = useSignIn();
     const { control, register, getValues, handleSubmit, formState } = useForm<SignInSchema>({
         resolver: zodResolver(signInSchema),
         defaultValues,
-        shouldUnregister: true,
     });
 
     const { errors } = formState;
 
-    const onSubmit = async (values: SignInSchema) => {
-        const res = signIn({
+    const onSubmit = useCallback(async (values: SignInSchema) => {
+        signIn({
             email: values.email,
             password: values.password
-        });
-    }
+        })
+    }, [signIn]);
 
     return {
         register,

@@ -1,14 +1,19 @@
+'use client'
 import Link from 'next/link'
 import React from 'react'
 import { Menu } from './data/GNB.data'
 import Logo from '../Icons/Logo'
 import Hamburger from '../Icons/Hamburger'
+import route from '@/routes/routes'
+import useMe from '@/features/auth/hooks/queries/useMe'
 
 interface GNBProps {
   menu: Menu
 }
 
 function GNB({ menu }: GNBProps) {
+  const { data } = useMe()
+
   return (
     <menu
       className={
@@ -32,6 +37,14 @@ function GNB({ menu }: GNBProps) {
               </Link>
             </li>
           ))}
+        <li>
+          <Link
+            href={data ? route.auth.logout : route.auth.signIn}
+            className="font-extrabold"
+          >
+            {data ? '로그아웃' : '로그인'}
+          </Link>
+        </li>
       </ul>
     </menu>
   )
