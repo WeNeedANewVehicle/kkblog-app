@@ -18,9 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Provider>
-        <body className={kia.className}>
+        <body className={`${kia.className} w-full min-h-screen`}>
           <GNB menu={menu} />
-          <main>{children}</main>
+          <main className={'pt-[50px] px-4 h-full'}>{children}</main>
         </body>
       </Provider>
     </html>
