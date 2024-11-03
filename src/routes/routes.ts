@@ -9,7 +9,10 @@ const route = {
         logout: '/auth/logout'
     },
 
-    posts: "/posts",
+    posts: {
+        index: "/posts",
+        write: "/posts/write"
+    },
     portfolio: "/portfolio",
 }
 
