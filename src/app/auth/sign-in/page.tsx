@@ -8,17 +8,19 @@ import Password from '@/components/Password'
 import Nbsp from '@/components/Nbsp'
 import LogoutGuard from '@/components/Guard/LogoutGuard'
 import Modal from '@/components/Modal/Modal'
+import Loading from '@/components/Loading/Loading'
+import SubmitButton from '@/components/SubmitButton/SubmitButton'
 
 function Page() {
-  const { register, onSubmit, handleSubmit, errors } = useSignInForm()
+  const { register, onSubmit, errors, isPending } = useSignInForm()
 
   return (
     <LogoutGuard>
-      <SignForm title="로그인" onSubmit={handleSubmit(onSubmit)}>
+      <SignForm title="로그인" onSubmit={onSubmit}>
         <label className={'flex flex-col gap-2'}>
           <span>이메일</span>
           <input
-            className={`sign-form-input ${errors.email ? 'invalid-input' : ''}`}
+            className={`sign-form-input ${errors.email ? 'border-warning' : ''}`}
             type="email"
             {...register('email')}
           />
@@ -30,24 +32,25 @@ function Page() {
         <label className={`flex flex-col gap-2 `}>
           <span>비밀번호</span>
           <Password
-            cssClass={`sign-form-input ${errors.password ? 'invalid-input' : ' '}`}
+            cssClass={`sign-form-input ${errors.password ? 'border-warning' : ' '}`}
             {...register('password')}
+            className={'bg-dark-600 text-timberwolf '}
           />
           <div className="error-message">
             {errors?.password?.message ?? <Nbsp />}
           </div>
         </label>
 
-        <input
-          type="submit"
-          className={'sign-form-input bg-white text-gray-800 my-4'}
-          value="로그인"
-        />
+        <SubmitButton isPending={isPending} />
 
         <div className="flex flex-col gap-4">
-          <Link href={route.auth.reset}>비밀번호 찾기</Link>
+          <Link href={route.auth.reset} className="hover:underline">
+            비밀번호 찾기
+          </Link>
 
-          <Link href={route.auth.signUp}>회원 가입</Link>
+          <Link href={route.auth.signUp} className="hover:underline">
+            회원 가입
+          </Link>
         </div>
       </SignForm>
       <Modal />
