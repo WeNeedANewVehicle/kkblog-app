@@ -12,13 +12,39 @@ const config: Config = {
     container: {
       center: true,
     },
+    colors: {
+      white: '#FFFFFF',
+      floral: '#FBFBF2',
+      platinum: '#E5E6E4',
+      timberwolf: '#CFD2CD',
+      silver: '#A6A2A2',
+      taupe: '#847577',
+      warning: {
+        light: '#ED6E85',
+        DEFAULT: '#DA1B3E',
+        darker: '#7F1024',
+      },
+      dark: {
+        100: '#5C5C5C',
+        200: '#525252',
+        300: '#474747',
+        400: '#3D3D3D',
+        500: '#333333',
+        600: '#292929',
+        700: '#1F1F1F',
+        800: '#141414',
+        900: '#0A0A0A'
+      }
+    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      screen: {},
+      boxShadow: {
+        light: "0px 0px 12px rgba(255, 255, 255, 1)"
+      }
     },
     screens: {
       sm: "375px",
