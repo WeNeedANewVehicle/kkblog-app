@@ -13,7 +13,6 @@ interface GNBProps {
 
 function GNB({ menu }: GNBProps) {
   const { data } = useMe()
-
   return (
     <menu
       className={

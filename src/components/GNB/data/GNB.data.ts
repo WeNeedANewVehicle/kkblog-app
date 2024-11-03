@@ -10,7 +10,7 @@ export type Menu = MenuItem[]
 export const menu: Menu = [
     {
         text: '글목록',
-        to: route.posts
+        to: route.posts.index
     },
     {
         text: '포트폴리오',

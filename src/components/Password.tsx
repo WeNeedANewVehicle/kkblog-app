@@ -24,7 +24,7 @@ const Password = forwardRef<HTMLInputElement, PassWordProps>(
     const type = useMemo(() => (isMasking ? 'password' : 'text'), [isMasking])
 
     return (
-      <div className={`flex gap-4 bg-white items-center ${cssClass ?? ''}`}>
+      <div className={`flex gap-4 items-center ${cssClass ?? ''}`}>
         <input ref={ref} type={type} {...restProps} />
         <span className={'px-2'} onClick={onToggleMasking}>
           {isMasking ? <VisibilityOff /> : <Visibility />}
