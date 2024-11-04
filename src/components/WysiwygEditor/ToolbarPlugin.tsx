@@ -20,6 +20,7 @@ import {
   UNDO_COMMAND,
 } from 'lexical'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import './WysiwygEditor.css'
 
 const LowPriority = 1
 

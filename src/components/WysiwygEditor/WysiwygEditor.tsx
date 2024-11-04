@@ -58,8 +58,9 @@ function WysiwygEditor() {
         <div className="editor-container">
           <div className="editor-inner">
             <RichTextPlugin
-              contentEditable={<ContentEditable />}
-              // placeholder={<div>Enter some text...</div>}
+              contentEditable={
+                <ContentEditable style={{ outline: 'none', padding: '1rem' }} />
+              }
               ErrorBoundary={LexicalErrorBoundary}
             />
             {/* <OnChangePlugin onChange={onChange} /> */}
