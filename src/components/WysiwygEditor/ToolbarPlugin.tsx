@@ -82,14 +82,14 @@ export default function ToolbarPlugin() {
         },
         LowPriority
       ),
-      // editor.registerCommand(
-      //   INSERT_IMAGE_COMMAND, 
-      //   (payload) => {
-      //     setIsImage(payload)
-      //     return false;
-      //   },
-      //   LowPriority
-      // )
+      editor.registerCommand(
+        INSERT_IMAGE_COMMAND, 
+        (payload) => {
+          setIsImage(!!payload)
+          return false;
+        },
+        LowPriority
+      )
     )
   }, [editor, $updateToolbar])
 
@@ -189,6 +189,16 @@ export default function ToolbarPlugin() {
       >
         <i className="format justify-align" />
       </button>{' '}
+
+      <button
+        onClick={() => {
+          editor.dispatchCommand(INSERT_IMAGE_COMMAND, 'image')
+        }}
+        className="toolbar-item"
+        aria-label="Insert Image"
+      >
+        이미지
+      </button>
     </div>
   )
 }
