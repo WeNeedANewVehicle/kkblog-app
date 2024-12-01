@@ -21,6 +21,7 @@ import {
 } from 'lexical'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import './WysiwygEditor.css'
+import { INSERT_IMAGE_COMMAND } from './commands/commands'
 
 const LowPriority = 1
 
@@ -37,6 +38,7 @@ export default function ToolbarPlugin() {
   const [isItalic, setIsItalic] = useState(false)
   const [isUnderline, setIsUnderline] = useState(false)
   const [isStrikethrough, setIsStrikethrough] = useState(false)
+  const [isImage, setIsImage] = useState(false);
 
   const $updateToolbar = useCallback(() => {
     const selection = $getSelection()
@@ -79,7 +81,15 @@ export default function ToolbarPlugin() {
           return false
         },
         LowPriority
-      )
+      ),
+      // editor.registerCommand(
+      //   INSERT_IMAGE_COMMAND, 
+      //   (payload) => {
+      //     setIsImage(payload)
+      //     return false;
+      //   },
+      //   LowPriority
+      // )
     )
   }, [editor, $updateToolbar])
 
