@@ -13,7 +13,7 @@
   body {
     padding: 0px;
     margin: 0px;
-    transition: 0.5s;
+    transition: 0.5s background-color;
   }
 
   body {
@@ -88,6 +88,14 @@
 }
 
 @layer components {
+  .layout {
+    @apply w-full min-h-screen;
+  }
+
+  .main {
+    @apply pt-[50px] px-4 h-full;
+  }
+
   .error-message {
     @apply text-warning text-sm;
   }

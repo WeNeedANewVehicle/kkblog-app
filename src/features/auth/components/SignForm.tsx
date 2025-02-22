@@ -14,7 +14,7 @@ function SignForm({ children, title, onSubmit }: SignFormProps) {
             'flex flex-col p-10 max-w-sm bg-dark-500 rounded-md shadow-light'
           }
         >
-          <h1 className={'text-8xl pb-8'}>{title}</h1>
+          <h1 className={'text-8xl pb-8 '}>{title}</h1>
           <form
             className={'flex flex-col gap-4 text-xl'}
             method="POST"

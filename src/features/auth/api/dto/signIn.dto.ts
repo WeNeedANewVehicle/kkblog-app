@@ -1,20 +1,20 @@
 export interface SignInDto {
-    email: string;
-    password: string;
+  email: string
+  password: string
 }
 
 export interface SignInResponseDto {
-    accessToken: string;
+  accessToken: string
 }
 
 export interface SignUpDto extends SignInDto {
-    nickname: string;
+  nickname: string
 }
 
 export interface SignUpResponseDto extends SignInResponseDto { }
 
 export interface MeResponseDto {
-    id: string;
-    email: string;
-    nickname: string;
+  id: string
+  email: string
+  nickname: string
 }

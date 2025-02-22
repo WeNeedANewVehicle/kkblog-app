@@ -1,3 +1,5 @@
-import { createCommand, LexicalCommand } from "lexical";
+import { createCommand, LexicalCommand } from 'lexical'
 
-export const INSERT_IMAGE_COMMAND: LexicalCommand<string> = createCommand();
+export const INSERT_IMAGE_COMMAND: LexicalCommand<string> = createCommand(
+  'INSERT_IMAGE_COMMAND'
+)

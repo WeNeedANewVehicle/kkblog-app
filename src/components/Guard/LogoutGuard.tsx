@@ -11,8 +11,6 @@ function LogoutGuard(props: LogoutGuardProps) {
     if (!me || isFetching) {
       return
     }
-
-    console.log('logout guard', me)
     router.back()
   }, [me, isFetching, router])
 

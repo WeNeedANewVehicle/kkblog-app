@@ -19,9 +19,11 @@ import {
   SELECTION_CHANGE_COMMAND,
   UNDO_COMMAND,
 } from 'lexical'
+
 import { useCallback, useEffect, useRef, useState } from 'react'
-import './WysiwygEditor.css'
-import { INSERT_IMAGE_COMMAND } from './commands/commands'
+import '../WysiwygEditor.css'
+import { INSERT_IMAGE_COMMAND } from '../commands/commands'
+import ImageUploadPlugin from './ImageUploadPlugin'
 
 const LowPriority = 1
 
@@ -38,7 +40,9 @@ export default function ToolbarPlugin() {
   const [isItalic, setIsItalic] = useState(false)
   const [isUnderline, setIsUnderline] = useState(false)
   const [isStrikethrough, setIsStrikethrough] = useState(false)
-  const [isImage, setIsImage] = useState(false);
+  const [isImage, setIsImage] = useState(false)
+
+  const imageFileRef = useRef<HTMLInputElement>(null)
 
   const $updateToolbar = useCallback(() => {
     const selection = $getSelection()
@@ -83,10 +87,10 @@ export default function ToolbarPlugin() {
         LowPriority
       ),
       editor.registerCommand(
-        INSERT_IMAGE_COMMAND, 
+        INSERT_IMAGE_COMMAND,
         (payload) => {
           setIsImage(!!payload)
-          return false;
+          return false
         },
         LowPriority
       )
@@ -188,17 +192,8 @@ export default function ToolbarPlugin() {
         aria-label="Justify Align"
       >
         <i className="format justify-align" />
-      </button>{' '}
-
-      <button
-        onClick={() => {
-          editor.dispatchCommand(INSERT_IMAGE_COMMAND, 'image')
-        }}
-        className="toolbar-item"
-        aria-label="Insert Image"
-      >
-        이미지
       </button>
+      <ImageUploadPlugin ref={imageFileRef} editor={editor} />
     </div>
   )
 }

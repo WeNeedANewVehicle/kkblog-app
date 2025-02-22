@@ -424,4 +424,8 @@
   i.justify-align {
     background-image: url('/icons/text-justify.svg');
   }
+
+  i.image {
+    background-image: url('/icons/image.svg');
+  }
 }

@@ -6,6 +6,7 @@ import Logo from '../Icons/Logo'
 import Hamburger from '../Icons/Hamburger'
 import route from '@/routes/routes'
 import useMe from '@/features/auth/hooks/queries/useMe'
+import './GNB.css';
 
 interface GNBProps {
   menu: Menu
@@ -13,11 +14,10 @@ interface GNBProps {
 
 function GNB({ menu }: GNBProps) {
   const { data } = useMe()
+  console.log(data)
   return (
     <menu
-      className={
-        'fixed flex h-[50px] justify-between items-center px-4 box-border w-full'
-      }
+      className='gnb'
     >
       <span className="flex md:hidden">
         <button>

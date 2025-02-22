@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components {
+    .gnb {
+        @apply fixed flex h-[50px] justify-between items-center px-4 box-border w-full border-b border-dark-500;
+    }
+}

@@ -1,8 +1,9 @@
 'use client'
 
 import React, { PropsWithChildren } from 'react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryClientProvider } from '@tanstack/react-query'
 import getQueryClient from './ReactQueryProvider'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 function Provider({ children }: PropsWithChildren) {
   // NOTE: 쿼리 클라이언트를 초기화 하는 중에는 useState 사용을 피할 것.
@@ -12,7 +13,10 @@ function Provider({ children }: PropsWithChildren) {
 
   const queryClient = getQueryClient()
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      {children}
+    </QueryClientProvider>
   )
 }
 
