@@ -1,0 +1,11 @@
+@tailwind utilities;
+
+@layer utilities {
+  .btn-md {
+    @apply px-4 py-2;
+  }
+
+  .link {
+    @apply underline;
+  }
+}

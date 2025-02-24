@@ -1,0 +1,77 @@
+@tailwind base;
+@layer base {
+    :root {
+      --gray: #d6d6d6;
+      --black: #000000;
+      --white: #ffffff;
+    }
+  
+    html,
+    body {
+      padding: 0px;
+      margin: 0px;
+      transition: 0.5s background-color;
+    }
+  
+    body {
+      background: red;
+      width: 100%;
+      max-width: 1920px;
+      min-height: 100dvh;
+    }
+  
+    main {
+      padding-top: 50px;
+    }
+  
+    input {
+      color: var(--black);
+    }
+  
+    input:focus {
+      outline: none;
+    }
+  
+    input[type='submit'] {
+      cursor: pointer;
+    }
+  
+    #logo {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+  
+    .spinner-animation {
+      animation: spin 2s infinite;
+      transform-origin: center center;
+    }
+  
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: var(--black);
+        color: var(--gray);
+      }
+  
+      .icon {
+        stroke: var(--gray);
+        > * {
+          stroke: var(--gray);
+        }
+      }
+    }
+  
+    @media (prefers-color-scheme: light) {
+      body {
+        color: var(--black);
+      }
+    }
+  }
