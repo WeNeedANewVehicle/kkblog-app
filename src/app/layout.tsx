@@ -17,12 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Provider>
-        <body className={`${kia.className} layout`}>
+      <body className={`${kia.className} layout`}>
+        <Provider>
           <GNB menu={menu} />
           <main className={'main'}>{children}</main>
-        </body>
-      </Provider>
+        </Provider>
+      </body>
     </html>
   )
 }

@@ -14,8 +14,8 @@ function Provider({ children }: PropsWithChildren) {
   const queryClient = getQueryClient()
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
       {children}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }
