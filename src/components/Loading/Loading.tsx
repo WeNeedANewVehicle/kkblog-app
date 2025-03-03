@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react'
-import Svg from '@/components/Icons/Svg'
 
 interface LoadingProps {
   size?: number
@@ -28,7 +27,7 @@ function Loading({
   }, [r, sw])
 
   return (
-    <Svg width={size} height={size}>
+    <svg width={size} height={size}>
       <circle
         r={radius}
         cx={cp}
@@ -48,7 +47,7 @@ function Loading({
         strokeDasharray={strokeDashArray}
         strokeDashoffset={strokeDashArray - strokeDashArray / 4}
       />
-    </Svg>
+    </svg>
   )
 }
 

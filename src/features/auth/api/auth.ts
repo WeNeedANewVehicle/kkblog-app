@@ -18,19 +18,18 @@ export async function signInApi(params: SignInDto) {
     body: params,
     credentials: 'include',
     middleware: (res) => {
-      const authorization = res.headers.get('Authorization');
+      const authorization = res.headers.get('Authorization')
 
-      const [bearer, token] = authorization?.split(' ') ?? ['', ''];
+      const [bearer, token] = authorization?.split(' ') ?? ['', '']
 
       if (bearer !== 'Bearer') {
-        throw new Error(messages.validation.auth.invalid_bearer_token);
+        throw new Error(messages.validation.auth.invalid_bearer_token)
       }
 
       if (token) {
         tokenStorage.setAccessToken(token)
       }
-
-    }
+    },
   })
 }
 

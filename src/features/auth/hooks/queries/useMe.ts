@@ -11,7 +11,7 @@ function useMe() {
     queryFn: () => {
       return authMeApi(accessToken)
     },
-    enabled: !!accessToken
+    enabled: !!accessToken,
   })
 }
 

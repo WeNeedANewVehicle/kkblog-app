@@ -11,7 +11,7 @@ export interface SignUpDto extends SignInDto {
   nickname: string
 }
 
-export interface SignUpResponseDto extends SignInResponseDto { }
+export interface SignUpResponseDto extends SignInResponseDto {}
 
 export interface MeResponseDto {
   id: string

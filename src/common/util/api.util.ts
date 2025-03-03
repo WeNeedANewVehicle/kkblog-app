@@ -9,7 +9,7 @@ interface ApiParams<P> {
   body?: P
   credentials?: RequestInit['credentials']
   accessToken?: string | null
-  middleware?: (response: Response) => unknown;
+  middleware?: (response: Response) => unknown
 }
 
 async function api<P, T>({
@@ -19,7 +19,7 @@ async function api<P, T>({
   queries,
   credentials,
   accessToken,
-  middleware
+  middleware,
 }: ApiParams<P>) {
   if (!method) {
     method = METHODS.GET
@@ -47,7 +47,7 @@ async function api<P, T>({
 
     return (await result.json()) as unknown as BaseResponse<T>
   } catch (e) {
-    const error = e as unknown as ErrorBaseResponse;
+    const error = e as unknown as ErrorBaseResponse
     throw error
   }
 }

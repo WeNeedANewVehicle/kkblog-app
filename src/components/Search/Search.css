@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components {
+    .search {
+        @apply flex border p-2 border-burgundy-600;
+    }
+}

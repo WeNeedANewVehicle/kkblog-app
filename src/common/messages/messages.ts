@@ -15,8 +15,8 @@ export const messages = {
     },
 
     auth: {
-      invalid_bearer_token: 'Bearer 토큰 검증 실패'
-    }
+      invalid_bearer_token: 'Bearer 토큰 검증 실패',
+    },
   },
   storage: {
     auth: {

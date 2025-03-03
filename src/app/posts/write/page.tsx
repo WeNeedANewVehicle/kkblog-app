@@ -16,7 +16,7 @@ const DynamicWysiwygEditor = dynamic(
 function PostWritePage() {
   const { goBack } = useNavigation()
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full gap-4">
       <Title />
 
       <DynamicWysiwygEditor />

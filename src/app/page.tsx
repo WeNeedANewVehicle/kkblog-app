@@ -1,5 +1,5 @@
 function Page() {
-  return <section>asdf</section>
+  return
 }
 
 export default Page
