@@ -344,7 +344,6 @@
     opacity: 0.2;
   }
 
-
   .toolbar button.toolbar-item.active {
     @apply bg-burgundy-100;
   }
@@ -354,7 +353,7 @@
   }
 
   .toolbar .toolbar-item:hover:not([disabled]) {
-    @apply  bg-burgundy-100 fill-white;
+    @apply bg-burgundy-100 fill-white;
   }
 
   .toolbar .divider {
@@ -422,7 +421,7 @@
 
   i.right-align {
     background-image: url('/icons/text-left.svg');
-    transform: rotateY(180deg)
+    transform: rotateY(180deg);
   }
 
   i.justify-align {
@@ -435,9 +434,7 @@
 }
 
 @layer components {
-
   .toolbar {
     @apply flex;
   }
-
 }

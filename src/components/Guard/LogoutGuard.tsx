@@ -14,7 +14,7 @@ function LogoutGuard(props: LogoutGuardProps) {
     router.back()
   }, [me, isFetching, router])
 
-  return props.children;
+  return props.children
 }
 
 export default LogoutGuard

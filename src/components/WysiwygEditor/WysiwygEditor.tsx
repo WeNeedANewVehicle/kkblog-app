@@ -26,7 +26,6 @@ function WysiwygEditor() {
   }
 
   return (
-
     <div className={'editor'}>
       내용
       <LexicalComposer initialConfig={initialConfig}>
@@ -35,7 +34,9 @@ function WysiwygEditor() {
           <div className="editor-inner">
             <RichTextPlugin
               contentEditable={
-                <ContentEditable style={{ outline: 'none', padding: '1rem', minHeight: 500 }} />
+                <ContentEditable
+                  style={{ outline: 'none', padding: '1rem', minHeight: 500 }}
+                />
               }
               ErrorBoundary={LexicalErrorBoundary}
             />

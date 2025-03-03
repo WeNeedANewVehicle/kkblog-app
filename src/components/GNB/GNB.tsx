@@ -16,7 +16,9 @@ function GNB({ menu }: GNBProps) {
 
   return (
     <menu className="gnb">
-      <Logo fill="white" className="logo" />
+      <Link href={route.index}>
+        <Logo fill="white" className="logo" />
+      </Link>
 
       <ul className="navigator">
         {menu.map(({ text, to }) => (
