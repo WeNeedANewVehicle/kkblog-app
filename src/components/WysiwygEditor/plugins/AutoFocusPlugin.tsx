@@ -2,8 +2,8 @@
 // highly composable. Furthermore, you can lazy load plugins if
 // desired, so you don't pay the cost for plugins until you
 
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext"
-import { useEffect } from "react"
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
+import { useEffect } from 'react'
 
 // actually use them.
 function AutoFocusPlugin() {
@@ -17,4 +17,4 @@ function AutoFocusPlugin() {
   return null
 }
 
-export default AutoFocusPlugin;
+export default AutoFocusPlugin

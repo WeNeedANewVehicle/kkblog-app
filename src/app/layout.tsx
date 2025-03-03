@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${kia.className} layout`}>
+      <body className={kia.className}>
         <Provider>
           <GNB menu={menu} />
           <main className={'main'}>{children}</main>

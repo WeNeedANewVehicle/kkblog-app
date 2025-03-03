@@ -19,6 +19,17 @@ const config: Config = {
       timberwolf: '#CFD2CD',
       silver: '#A6A2A2',
       taupe: '#847577',
+      burgundy: {
+        100: '#F5DCE0',
+        200: '#E5B7C0',
+        300: '#D48B9E',
+        400: '#C0617C',
+        500: '#A53D58',
+        600: '#800020', // (default)
+        700: '#6A001A',
+        800: '#540015',
+        900: '#3D000F',
+      },
       warning: {
         light: '#ED6E85',
         DEFAULT: '#DA1B3E',
@@ -44,6 +55,10 @@ const config: Config = {
       },
       boxShadow: {
         light: '0px 0px 12px rgba(255, 255, 255, 1)',
+      },
+      height: {
+        gnb: 'var(--gnb-h)',
+        'gnb-md': 'var(--gnb-h-md)',
       },
     },
     screens: {

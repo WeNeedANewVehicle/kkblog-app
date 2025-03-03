@@ -30,7 +30,7 @@ const nextConfig = {
                     prefixIds: true, // id prefix 여부
                     prefixClassNames: false, // 클래스에는 prefix 를 사용하지 않음
                   },
-                }
+                },
               ],
             },
           },

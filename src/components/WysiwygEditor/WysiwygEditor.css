@@ -42,6 +42,7 @@
     line-height: 20px;
     font-weight: 400;
     text-align: left;
+    border: 1px solid black;
   }
 
   .editor-inner {
@@ -49,6 +50,7 @@
     display: flex;
     flex-flow: column nowrap;
     flex-grow: 1;
+    min-height: 500px;
   }
 
   .editor-input {
@@ -342,8 +344,9 @@
     opacity: 0.2;
   }
 
+
   .toolbar button.toolbar-item.active {
-    background-color: rgba(223, 232, 250, 0.3);
+    @apply bg-burgundy-100;
   }
 
   .toolbar button.toolbar-item.active i {
@@ -351,7 +354,7 @@
   }
 
   .toolbar .toolbar-item:hover:not([disabled]) {
-    background-color: #eee;
+    @apply  bg-burgundy-100 fill-white;
   }
 
   .toolbar .divider {
@@ -385,11 +388,11 @@
   }
 
   i.undo {
-    background-image: url('/icons/arrow-counterclockwise.svg');
+    background-image: url('/icons/arrow-uturn-left.svg');
   }
 
   i.redo {
-    background-image: url('/icons/arrow-counterclockwise.svg');
+    background-image: url('/icons/arrow-uturn-left.svg');
     transform: rotateY(180deg);
   }
 
@@ -414,11 +417,12 @@
   }
 
   i.center-align {
-    background-image: url('/icons/text-center.svg');
+    background-image: url('/icons/bars.svg');
   }
 
   i.right-align {
-    background-image: url('/icons/text-right.svg');
+    background-image: url('/icons/text-left.svg');
+    transform: rotateY(180deg)
   }
 
   i.justify-align {
@@ -428,4 +432,12 @@
   i.image {
     background-image: url('/icons/image.svg');
   }
+}
+
+@layer components {
+
+  .toolbar {
+    @apply flex;
+  }
+
 }
