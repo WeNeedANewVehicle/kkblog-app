@@ -1,0 +1,21 @@
+<svg width="30" height="30" viewBox="0 0 32 32">
+    <circle
+    r="12"
+    cx="16"
+    cy="16"
+    stroke-width="4"
+    fill="none"
+    stroke="#F5DCE0"
+    />
+    <circle
+    class="animate-spin origin-center"
+    r="12"
+    cx="16"
+    cy="16"
+    fill="none"
+    stroke-width="4"
+    stroke="#A53D58"
+    stroke-dasharray="100"
+    stroke-dashoffset="75"
+    />
+</svg>
