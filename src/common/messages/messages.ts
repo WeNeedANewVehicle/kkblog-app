@@ -12,6 +12,7 @@ export const messages = {
       min_length: '닉네임은 최소 3자 이상입니다.',
       max_length: '닉네임은 최소 16자 이하입니다.',
       invalid: '닉네임에 특수문자를 포함할 수 없습니다.',
+      required: '닉네임을 입력해주세요.',
     },
 
     auth: {
@@ -23,6 +24,10 @@ export const messages = {
       set_access_token_failed:
         '엑세스 토큰을 로컬 스토리지에 저장하는데 실패했습니다.',
       get_access_token_failed: '엑세스 토큰을 가져오지 못했습니다.',
+    },
+    redirection: {
+      set_redirect_url_failed: '리디렉션 URL 설정에 실패했습니다.',
+      get_redirect_url_failed: '리디렉션 URL을 가져오지 못했습니다.',
     },
   },
 }

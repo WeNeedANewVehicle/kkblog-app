@@ -16,7 +16,11 @@ const tokenStorage = {
   getAccessToken() {
     try {
       const token = window.localStorage.getItem(ACCESS_TOKEN)
-      return token ?? null
+
+      if (!token) {
+        return null
+      }
+      return token
     } catch (e) {
       throw new Error(storage.auth.get_access_token_failed)
     }

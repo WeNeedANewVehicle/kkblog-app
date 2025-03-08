@@ -1,6 +1,8 @@
-import { baseUrl, METHODS } from '../constant/constant'
-import { BaseResponse, ErrorBaseResponse } from '../dto/base-response.dto'
-import tokenStorage from '../storages/token-storage'
+import { baseUrl, HttpStatus, METHODS } from '@/common/constant/constant';
+import { BaseResponse, ErrorBaseResponse } from '@/common/dto/base-response.dto'
+import tokenStorage from '@/common/storages/token-storage';
+import { messages } from '@/common/messages/messages';
+import { refreshAccessTokenApi } from '@/features/auth/api/auth';
 
 interface ApiParams<P> {
   url: string
@@ -45,9 +47,17 @@ async function api<P, T>({
       middleware(result)
     }
 
-    return (await result.json()) as unknown as BaseResponse<T>
+    if (result.ok) {
+      return (await result.json()) as BaseResponse<T>
+    }
+
+    throw await result.json() as ErrorBaseResponse;
   } catch (e) {
     const error = e as unknown as ErrorBaseResponse
+    if (error?.meta?.status === HttpStatus.UNAUTHORIZED && error?.meta?.code === 'ACCESS TOKEN EXPIRED') {
+      await refreshAccessTokenApi();
+    }
+
     throw error
   }
 }

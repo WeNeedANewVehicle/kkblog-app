@@ -1,10 +1,11 @@
-interface Meta {
+export interface Meta {
   status: number
-  message: string
+  code: string
 }
 
-interface ErrorResponse {
+export interface ErrorResponse {
   path: string
+  timestamp: number
   message: string
 }
 

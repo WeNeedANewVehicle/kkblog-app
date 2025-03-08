@@ -1,26 +1,31 @@
-import type { Metadata } from 'next'
+'use client'
 import { kia } from '@/theme/font'
 import './globals.css'
 import Provider from '@/components/Providers/Provider'
 import GNB from '@/components/GNB/GNB'
 import { menu } from '@/components/GNB/data/GNB.data'
-
-export const metadata: Metadata = {
-  title: 'KKBlog - 크크블로그',
-  description: '안녕하세요. 크크블로그입니다.',
-}
+import { usePathname } from 'next/navigation'
+import { hideGnbPaths } from '@/common/constant/constant'
+import Head from 'next/head'
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const pathname = usePathname()
+
+  const isHideGnb = hideGnbPaths.find((path) => pathname.startsWith(path))
   return (
     <html lang="en">
+      <Head>
+        <title>크크블로그</title>
+      </Head>
+      
       <body className={kia.className}>
         <Provider>
-          <GNB menu={menu} />
-          <main className={'main'}>{children}</main>
+          {!isHideGnb && <GNB menu={menu} />}
+          <main id="main">{children}</main>
         </Provider>
       </body>
     </html>

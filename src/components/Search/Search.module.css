@@ -1,0 +1,28 @@
+.wrapper {
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.inner {
+}
+
+.search {
+  border: 2px solid var(--color-black);
+  border-radius: 4px;
+  padding: 0px;
+}
+
+.input {
+  border: none;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  stroke: var(--color-black);
+}
+
+.btn {
+  background: none;
+}
+
