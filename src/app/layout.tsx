@@ -21,7 +21,7 @@ export default function RootLayout({
       <Head>
         <title>크크블로그</title>
       </Head>
-      
+
       <body className={kia.className}>
         <Provider>
           {!isHideGnb && <GNB menu={menu} />}

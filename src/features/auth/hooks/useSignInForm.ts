@@ -10,11 +10,10 @@ const defaultValues = {
 }
 
 function useSignInForm() {
-  const { register, handleSubmit, formState } =
-    useForm<SignInSchema>({
-      resolver: zodResolver(signInSchema),
-      defaultValues,
-    })
+  const { register, handleSubmit, formState } = useForm<SignInSchema>({
+    resolver: zodResolver(signInSchema),
+    defaultValues,
+  })
 
   const { mutate: signIn, isPending: isSignInPending } = useSignIn()
 

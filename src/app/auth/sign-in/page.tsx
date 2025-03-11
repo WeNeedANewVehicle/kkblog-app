@@ -39,12 +39,16 @@ function Page() {
 
             <div />
 
-            <Button type="submit" size="md" className="button-md" isLoading={isPending}>
+            <Button
+              type="submit"
+              size="md"
+              className="button-md"
+              isLoading={isPending}
+            >
               로그인
             </Button>
 
             <Link href={route.auth.reset}>비밀번호가 기억나지 않습니다.</Link>
-
           </form>
         </div>
       </div>

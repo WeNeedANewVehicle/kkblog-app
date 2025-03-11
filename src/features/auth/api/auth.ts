@@ -35,13 +35,13 @@ export async function signInApi(params: SignInDto) {
 
 // 인증
 export async function authMeApi() {
-  const accessToken = tokenStorage.getAccessToken();
+  const accessToken = tokenStorage.getAccessToken()
   const result = await api<string | null, MeResponseDto>({
     url: '/auth/me',
-    accessToken
+    accessToken,
   })
 
-  return result.data;
+  return result.data
 }
 
 // 가입
@@ -59,7 +59,7 @@ export async function refreshAccessTokenApi() {
     url: '/auth/refresh/token',
     credentials: 'include',
     middleware: (res) => {
-      const accessToken = res.headers.get('Authorization');
+      const accessToken = res.headers.get('Authorization')
       const [bearer, token] = accessToken?.split(' ') ?? ['', '']
 
       if (bearer !== 'Bearer') {
@@ -69,6 +69,6 @@ export async function refreshAccessTokenApi() {
       if (token) {
         tokenStorage.setAccessToken(token)
       }
-    }
+    },
   })
 }

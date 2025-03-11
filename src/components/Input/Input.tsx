@@ -3,7 +3,7 @@ import styles from '@/components/Input/Input.module.css'
 import { ElementSize } from '@/common/types/styles.type'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  inputSize?: ElementSize;
+  inputSize?: ElementSize
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
@@ -11,7 +11,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return (
     <input
       //
-      className={`${className ?? ''} ${inputSize && styles[inputSize]}`}
+      className={`${className ?? ''} ${inputSize ? styles[inputSize] : ''}`}
       {...rest}
       ref={ref}
     />

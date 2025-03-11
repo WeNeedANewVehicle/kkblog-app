@@ -5,17 +5,32 @@
     cy="16"
     stroke-width="4"
     fill="none"
-    stroke="#F5DCE0"
+    stroke="var(--color-gray-400)"
     />
     <circle
-    class="animate-spin origin-center"
+    class="animate-spin"
     r="12"
     cx="16"
     cy="16"
     fill="none"
     stroke-width="4"
-    stroke="#A53D58"
+    stroke="var(--color-gray-700)"
     stroke-dasharray="100"
     stroke-dashoffset="75"
     />
+    <style>
+        .animate-spin {
+            animation: 1s ease-out spin 1s infinite;
+            transform-origin: center;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </svg>

@@ -9,10 +9,10 @@ export interface SignInResponseDto {
 
 export interface SignUpDto extends SignInDto {
   nickname: string
-  confirm: string;
+  confirm: string
 }
 
-export interface SignUpResponseDto extends SignInResponseDto { }
+export interface SignUpResponseDto extends SignInResponseDto {}
 
 export interface MeResponseDto {
   id: string

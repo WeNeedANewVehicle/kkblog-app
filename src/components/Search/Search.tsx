@@ -6,12 +6,12 @@ import Input from '@/components/Input/Input'
 
 function Search() {
   return (
-    <div className={`flex items-center justify-center`}>
-      <form className={`flex items-center gap-half`}>
+    <div className={`flex items-center justify-center ${styles.wrapper}`}>
+      <form className={`flex items-center gap-half w-full`}>
         <div className={`flex items-center ${styles.search}`}>
           <Input type="search" className={styles.input} placeholder="검색" />
 
-          <Button className={styles.btn}>
+          <Button className={`${styles.btn}`}>
             <SearchIcon className={styles.icon} />
           </Button>
         </div>

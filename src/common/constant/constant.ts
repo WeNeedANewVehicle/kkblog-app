@@ -13,7 +13,7 @@ export enum METHODS {
   OPTIONS = 'OPTIONS',
 }
 
-export const hideGnbPaths = [route.auth.signUp, route.auth.signIn]
+export const hideGnbPaths = [route.auth.signUp, route.auth.signIn, route.posts.write]
 
 export enum HttpStatus {
   CONTINUE = 100,

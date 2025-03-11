@@ -129,7 +129,9 @@ body {
   width: 100%;
   max-width: 1280px;
   min-height: 100dvh;
+  padding: 1rem;
   transition: background-color 0.5s linear;
+  border: 1px solid red;
 }
 
 .logo {
@@ -153,12 +155,24 @@ body {
   display: flex;
 }
 
+.flex-1 {
+  flex: 1;
+}
+
 .flex-column {
   flex-flow: column;
 }
 
 .justify-center {
   justify-content: center;
+}
+
+.justify-start {
+  justify-content: start;
+}
+
+.justify-end {
+  justify-content: end;
 }
 
 .justify-between {
@@ -171,6 +185,10 @@ body {
 
 .self-center {
   align-self: center;
+}
+
+.self-start {
+  align-self: flex-start;
 }
 
 .gap-half {
@@ -199,6 +217,35 @@ body {
 
 .margin-auto {
   margin: auto;
+}
+
+.sm {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.md {
+  padding: 1rem 1.5rem;
+  font-size: 1.5rem;
+}
+
+.lg {
+  padding: 1.5rem 2rem;
+  font-size: 2rem;
+}
+
+.bg-black {
+  background-color: var(--color-black);
+}
+
+.bg-white {
+  background-color: var(--color-white);
+}
+
+@media screen and (min-width: 768px) {
+  #main {
+    padding: 1rem;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

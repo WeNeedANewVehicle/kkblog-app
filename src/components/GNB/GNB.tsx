@@ -7,7 +7,7 @@ import useMe from '@/features/auth/hooks/queries/useMe'
 import Logo from '@/../public/icons/logo.svg'
 import redirectStorage from '@/common/storages/redirect-storage'
 import { usePathname } from 'next/navigation'
-import styles from './GNB.module.css'
+import styles from '@/components/GNB/GNB.module.css'
 
 interface GNBProps {
   menu: Menu

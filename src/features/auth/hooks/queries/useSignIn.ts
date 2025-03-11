@@ -9,11 +9,11 @@ export const SIGN_IN = 'SIGN_IN'
 
 function useSignIn() {
   const router = useRouter()
-  const redirectionUrl = redirectStorage.getRedirectUrl();
+  const redirectionUrl = redirectStorage.getRedirectUrl()
   return useMutation({
     mutationFn: signInApi,
     onSuccess: () => {
-      router.replace(redirectionUrl ?? route.index);
+      router.replace(redirectionUrl ?? route.index)
     },
     onError: (error: ErrorBaseResponse) => {
       alert(error.error.message)

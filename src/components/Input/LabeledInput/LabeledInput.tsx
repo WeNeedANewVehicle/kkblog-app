@@ -6,9 +6,15 @@ interface LabeledTextProps extends LabelHTMLAttributes<HTMLLabelElement> {
   required?: boolean
 }
 
-function LabeledText({ label, required, children }: LabeledTextProps) {
+function LabeledText({
+  label,
+  required,
+  children,
+  className,
+  ...rest
+}: LabeledTextProps) {
   return (
-    <label className={`flex flex-column gap-half`}>
+    <label className={`flex flex-column gap-half ${className ?? ''}`} {...rest}>
       <div className={styles.text}>
         {label} {required && <b className={styles.required}>*</b>}
       </div>

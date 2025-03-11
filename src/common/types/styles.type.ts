@@ -1,1 +1,1 @@
-export type ElementSize = 'sm' | 'md' | 'lg';
+export type ElementSize = 'sm' | 'md' | 'lg'

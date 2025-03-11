@@ -1,19 +1,21 @@
 .wrapper {
   gap: 0.5rem;
   align-items: center;
-}
-
-.inner {
+  max-width: 768px;
+  width: 100%;
 }
 
 .search {
   border: 2px solid var(--color-black);
   border-radius: 4px;
   padding: 0px;
+  padding-right: 0.8rem;
+  width: 100%;
 }
 
 .input {
   border: none;
+  width: 100%;
 }
 
 .icon {
@@ -25,4 +27,3 @@
 .btn {
   background: none;
 }
-

@@ -1,11 +1,14 @@
 'use client'
-import Title from '@/components/WysiwygEditor/Title'
 import useNavigation from '@/features/posts/hooks/useNavigation'
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
 import Loading from '@/../public/icons/loading.svg'
 import LoginGuard from '@/components/Guard/LoginGuard'
 import Button from '@/components/Button/Button'
+import LabeledText from '@/components/Input/LabeledInput/LabeledInput'
+import Input from '@/components/Input/Input'
+import Link from 'next/link'
+import route from '@/routes/routes'
 
 const DynamicWysiwygEditor = dynamic(
   () => import('@/components/WysiwygEditor/WysiwygEditor'),
@@ -17,19 +20,27 @@ const DynamicWysiwygEditor = dynamic(
 
 function PostWritePage() {
   const { goBack } = useNavigation()
+
   return (
     <LoginGuard>
-      <div className="flex flex-col h-full gap-4">
-        <Title />
+      <div className="flex flex-column flex-1 gap-1">
+        <div>
+          <LabeledText label="제목">
+            <Input />
+          </LabeledText>
+        </div>
+        
+        <div className='flex flex-column flex-1 gap-half '>
+          <h2>내용</h2>
+          <DynamicWysiwygEditor />
+        </div>
 
-        <DynamicWysiwygEditor />
-
-        <div className="flex gap-4 basis-8">
-          <Button className="btn-md bg-warning" onClick={goBack}>
+        <div className="flex gap-1">
+          <Link className='sm bg-black' href={route.posts.index}>
             돌아가기
-          </Button>
-          <Button className="btn-md bg-taupe">임시 저장</Button>
-          <Button className="btn-md bg-taupe">작성</Button>
+          </Link>
+          <Button size="sm">임시 저장</Button>
+          <Button size="sm">작성</Button>
         </div>
       </div>
     </LoginGuard>

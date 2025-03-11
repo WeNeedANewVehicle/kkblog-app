@@ -1,51 +1,81 @@
-'use client'
-
-import { LexicalComposer } from '@lexical/react/LexicalComposer'
-import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin'
-import { ContentEditable } from '@lexical/react/LexicalContentEditable'
-import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin'
-import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary'
-import ToolbarPlugin from './plugins/ToolbarPlugin'
-import WysiwysEditorTheme from './WysiwysEditorTheme'
-import AutoFocusPlugin from './plugins/AutoFocusPlugin'
-import { ImageNode } from './nodes/ImageNode'
-
-// Catch any errors that occur during Lexical updates and log them
-// or throw them as needed. If you don't throw them, Lexical will
-// try to recover gracefully without losing user data.
-function onError(error: any) {
-  console.error(error)
-}
+import { CKEditor } from '@ckeditor/ckeditor5-react'
+import {
+  ClassicEditor,
+  Essentials,
+  Paragraph,
+  Bold,
+  Italic,
+  Image,
+  ImageCaption,
+  ImageResize,
+  ImageStyle,
+  ImageToolbar,
+  ImageUpload,
+  LinkImage,
+  Underline,
+  Strikethrough,
+  Code,
+  CodeBlock,
+  Superscript,
+  Subscript,
+} from 'ckeditor5'
+import React from 'react'
+import styles from '@/components/WysiwygEditor/WysiwygEditor.module.css'
+import 'ckeditor5/ckeditor5.css'
+import './WysiwygEditor.css'
 
 function WysiwygEditor() {
-  const initialConfig = {
-    namespace: 'Editor',
-    theme: WysiwysEditorTheme,
-    nodes: [ImageNode],
-    onError,
-  }
-
   return (
-    <div className={'editor'}>
-      내용
-      <LexicalComposer initialConfig={initialConfig}>
-        <ToolbarPlugin />
-        <div className="editor-container">
-          <div className="editor-inner">
-            <RichTextPlugin
-              contentEditable={
-                <ContentEditable
-                  style={{ outline: 'none', padding: '1rem', minHeight: 500 }}
-                />
-              }
-              ErrorBoundary={LexicalErrorBoundary}
-            />
-            <HistoryPlugin />
-            <AutoFocusPlugin />
-          </div>
-        </div>
-      </LexicalComposer>
+    <div className={styles.wrapper}>
+      <CKEditor
+        editor={ClassicEditor}
+        config={{
+          licenseKey: 'GPL',
+          plugins: [
+            Essentials,
+            Paragraph,
+            Bold,
+            Italic,
+            Underline,
+            Strikethrough,
+            Code,
+            CodeBlock,
+            Superscript,
+            Subscript,
+            Image,
+            ImageCaption,
+            ImageResize,
+            ImageStyle,
+            ImageToolbar,
+            LinkImage,
+            ImageUpload,
+          ],
+          toolbar: [
+            'undo',
+            'redo',
+            '|',
+            'bold',
+            'italic',
+            'underline',
+            'strikethrough',
+            'code',
+            'codeBlock',
+            'subscript',
+            'superscript',
+            '|',
+            'insertImage',
+            'imageStyle:inline',
+            'imageStyle:wrapText',
+            'imageStyle:breakText',
+            '|',
+            'toggleImageCaption',
+            'imageTextAlternative',
+          ],
+        }}
+        
+      />
     </div>
+      
   )
 }
 
