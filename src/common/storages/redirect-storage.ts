@@ -15,6 +15,10 @@ const redirectStorage = {
 
   getRedirectUrl() {
     try {
+      if (typeof window === 'undefined') {
+        return '';
+      }
+
       const redirectUrl = window.sessionStorage.getItem(REDIRECTION_URL)
       return redirectUrl ?? null
     } catch (e) {
