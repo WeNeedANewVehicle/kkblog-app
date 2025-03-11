@@ -24,11 +24,15 @@ class UploadAdapter {
         console.log(data, file)
         const response = await uploadImageFileApi(file)
 
-        if (response.error) {
-            throw new Error('Failed to upload image')
-        }
+        return new Promise(() => {
+            if (response.error) {
+                throw response.error
+            }
 
-        return response.data;
+            return response.data;
+        })
+        .then(res => ({ default: res }))
+        .catch(err => err);
       }
   
       abort() {
