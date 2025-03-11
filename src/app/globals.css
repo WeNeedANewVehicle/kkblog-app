@@ -24,6 +24,79 @@
   --header-height: 64px;
 }
 
+.bg-gray-100 {
+  background-color: var(--color-gray-100);
+}
+
+.bg-gray-200 {
+  background-color: var(--color-gray-200);
+}
+
+.bg-gray-300 {
+  background-color: var(--color-gray-300);
+}
+
+.bg-gray-400 {
+  background-color: var(--color-gray-400);
+}
+
+.bg-gray-500 {
+  background-color: var(--color-gray-500);
+}
+
+.bg-gray-600 {
+  background-color: var(--color-gray-600);
+}
+
+.bg-gray-700 {
+  background-color: var(--color-gray-700);
+}
+
+.bg-gray-800 {
+  background-color: var(--color-gray-800);
+}
+
+.bg-gray-000 {
+  background-color: var(--color-gray-900);
+}
+
+
+.text-gray-100 {
+  color: var(--color-gray-100);
+}
+
+.text-gray-200 {
+  color: var(--color-gray-200);
+}
+
+.text-gray-300 {
+  color: var(--color-gray-300);
+}
+
+.text-gray-400 {
+  color: var(--color-gray-400);
+}
+
+.text-gray-500 {
+  color: var(--color-gray-500);
+}
+
+.text-gray-600 {
+  color: var(--color-gray-600);
+}
+
+.text-gray-700 {
+  color: var(--color-gray-700);
+}
+
+.text-gray-800 {
+  color: var(--color-gray-800);
+}
+
+.text-gray-000 {
+  color: var(--color-gray-900);
+}
+
 *,
 ::after,
 ::before,
@@ -51,8 +124,9 @@ menu {
   list-style: none;
 }
 
-a {
+a, a:visited {
   text-decoration: none;
+  color: inherit;
 }
 
 img,
@@ -240,6 +314,14 @@ body {
 
 .bg-white {
   background-color: var(--color-white);
+}
+
+.color-white {
+  color: var(--color-white);
+}
+
+.text-bold {
+  font-weight: bold;
 }
 
 @media screen and (min-width: 768px) {

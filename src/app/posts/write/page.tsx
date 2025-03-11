@@ -36,11 +36,11 @@ function PostWritePage() {
         </div>
 
         <div className="flex gap-1">
-          <Link className='sm bg-black' href={route.posts.index}>
+          <Link className='sm flex items-center bg-gray-100 color-gray-200' href={route.posts.index}>
             돌아가기
           </Link>
           <Button size="sm">임시 저장</Button>
-          <Button size="sm">작성</Button>
+          <Button size="sm" className='bg-black color-white'>작성</Button>
         </div>
       </div>
     </LoginGuard>

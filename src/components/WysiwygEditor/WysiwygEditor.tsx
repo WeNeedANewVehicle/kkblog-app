@@ -28,6 +28,7 @@ function WysiwygEditor() {
   return (
     <div className={styles.wrapper}>
       <CKEditor
+
         editor={ClassicEditor}
         config={{
           licenseKey: 'GPL',
@@ -71,6 +72,7 @@ function WysiwygEditor() {
             'toggleImageCaption',
             'imageTextAlternative',
           ],
+          extraPlugins: []
         }}
         
       />

@@ -12,7 +12,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const { children, isLoading, className, size, ...rest } = props
   return (
     <button
-      className={`flex justify-center ${className ?? ''} ${size && styles[size]}`}
+      className={`flex items-center justify-center ${className ?? ''} ${size && styles[size]}`}
       {...rest}
       ref={ref}
     >
@@ -22,4 +22,5 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   )
 })
 
+Button.displayName = 'Button'
 export default Button
