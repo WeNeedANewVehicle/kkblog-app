@@ -16,6 +16,7 @@ interface GNBProps {
 function GNB({ menu }: GNBProps) {
   const { data } = useMe()
   const pathname = usePathname()
+  
   const onClickLink = useCallback(() => {
     redirectStorage.setRedirectUrl(pathname)
   }, [pathname])

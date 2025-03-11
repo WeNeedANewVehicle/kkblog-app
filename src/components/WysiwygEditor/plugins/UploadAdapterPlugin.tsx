@@ -40,7 +40,7 @@ class UploadAdapter {
       }
 }
 
-function UploadAdapterPlugin(editor: Editor) {
+export function UploadAdapterPlugin(editor: Editor) {
     editor.plugins.get('FileRepository').createUploadAdapter = (loader) => new UploadAdapter(loader)
 
 }

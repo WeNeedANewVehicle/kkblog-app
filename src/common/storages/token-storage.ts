@@ -7,6 +7,10 @@ const { storage } = messages
 const tokenStorage = {
   setAccessToken(token: string) {
     try {
+      if (typeof window === 'undefined') {
+        return '';
+      }
+
       window.localStorage.setItem(ACCESS_TOKEN, token)
     } catch (e) {
       throw new Error(storage.auth.set_access_token_failed)
@@ -15,6 +19,10 @@ const tokenStorage = {
 
   getAccessToken() {
     try {
+      if (typeof window === 'undefined') {
+        return '';
+      }
+
       const token = window.localStorage.getItem(ACCESS_TOKEN)
 
       if (!token) {
@@ -22,7 +30,8 @@ const tokenStorage = {
       }
       return token
     } catch (e) {
-      throw new Error(storage.auth.get_access_token_failed)
+      console.log('????', e);
+      // throw new Error(storage.auth.get_access_token_failed)
     }
   },
 

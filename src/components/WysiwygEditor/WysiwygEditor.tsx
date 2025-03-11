@@ -21,6 +21,7 @@ import {
 } from 'ckeditor5'
 import React from 'react'
 import styles from '@/components/WysiwygEditor/WysiwygEditor.module.css'
+import { UploadAdapterPlugin } from '@/components/WysiwygEditor/plugins/UploadAdapterPlugin'
 import 'ckeditor5/ckeditor5.css'
 import './WysiwygEditor.css'
 
@@ -72,7 +73,7 @@ function WysiwygEditor() {
             'toggleImageCaption',
             'imageTextAlternative',
           ],
-          extraPlugins: []
+          extraPlugins: [UploadAdapterPlugin]
         }}
         
       />

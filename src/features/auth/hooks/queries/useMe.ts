@@ -1,3 +1,5 @@
+'use client';
+
 import { useQuery } from '@tanstack/react-query'
 import { authMeApi } from '../../api/auth'
 import tokenStorage from '@/common/storages/token-storage'
