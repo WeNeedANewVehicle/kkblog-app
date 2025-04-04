@@ -25,7 +25,7 @@ function PostsPage() {
 
       <ul className={`${styles.postList} w-full gap-1`}>
         {postList.map((post) => (
-          <PostItem key={post.id} title={post.title} id={post.id} />
+          <PostItem key={post.id} {...post} />
         ))}
       </ul>
     </section>

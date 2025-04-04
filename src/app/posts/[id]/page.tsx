@@ -9,7 +9,7 @@ import { Metadata, ResolvingMetadata } from 'next'
 import { ErrorResponse } from '@/common/dto/base-response.dto'
 
 export async function generateMetadata(
-  { params, searchParams }: PostPageProps,
+  { params, searchParams }: PostPageMetadata,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { id } = await params
@@ -21,11 +21,11 @@ export async function generateMetadata(
       description: data.content,
     }
   } catch (err) {
-    notFound()
+    return notFound()
   }
 }
 
-interface PostPageProps extends PostProps {
+interface PostPageMetadata {
   params: DynamicParam<'id'>['params']
   searchParams: DynamicSearchParams
 }
