@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { HTMLAttributes } from 'react'
 
-function Modal() {
-  return <dialog>test</dialog>
+export interface ModalProps extends HTMLAttributes<HTMLDialogElement> {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+function Modal({ children, ...rest }: ModalProps) {
+  return <dialog {...rest}>{children}</dialog>
 }
 
 export default Modal

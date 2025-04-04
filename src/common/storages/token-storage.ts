@@ -8,7 +8,7 @@ const tokenStorage = {
   setAccessToken(token: string) {
     try {
       if (typeof window === 'undefined') {
-        return '';
+        return ''
       }
 
       window.localStorage.setItem(ACCESS_TOKEN, token)
@@ -20,7 +20,7 @@ const tokenStorage = {
   getAccessToken() {
     try {
       if (typeof window === 'undefined') {
-        return '';
+        return ''
       }
 
       const token = window.localStorage.getItem(ACCESS_TOKEN)
@@ -30,7 +30,7 @@ const tokenStorage = {
       }
       return token
     } catch (e) {
-      console.log('????', e);
+      console.log('????', e)
       // throw new Error(storage.auth.get_access_token_failed)
     }
   },

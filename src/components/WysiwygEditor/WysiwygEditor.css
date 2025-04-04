@@ -1,5 +1,8 @@
-.ck-reset, .ck-editor, .ck-editor__main, .ck-content{
-    display: flex;
-    flex-flow: column;
-    flex: 1;
+.ck-reset,
+.ck-editor,
+.ck-editor__main,
+.ck-content {
+  display: flex;
+  flex-flow: column;
+  flex: 1;
 }

@@ -1,6 +1,3 @@
-export interface UploadImageFileDto {
-}
+export interface UploadImageFileDto {}
 
-export interface UploadImageResponseDto {
-
-}
+export interface UploadImageResponseDto {}

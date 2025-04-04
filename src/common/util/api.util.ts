@@ -1,7 +1,6 @@
 import { baseUrl, HttpStatus, METHODS } from '@/common/constant/constant'
 import { BaseResponse, ErrorBaseResponse } from '@/common/dto/base-response.dto'
 import tokenStorage from '@/common/storages/token-storage'
-import { messages } from '@/common/messages/messages'
 import { refreshAccessTokenApi } from '@/features/auth/api/auth'
 
 interface ApiParams<P> {
@@ -22,13 +21,19 @@ async function api<P, T>({
   credentials,
   accessToken,
   middleware,
-}: ApiParams<P>) {
+}: ApiParams<P>): Promise<BaseResponse<T>> {
   if (!method) {
     method = METHODS.GET
   }
 
+  const isFile = body instanceof FormData
   const headers: RequestInit['headers'] = {
     'Content-Type': 'application/json',
+  }
+
+  if (isFile) {
+    delete headers['Content-Type']
+    headers['Accept-Charset'] = 'utf-8'
   }
 
   if (accessToken) {
@@ -38,7 +43,7 @@ async function api<P, T>({
   try {
     const result = await fetch(baseUrl + url + (queries ?? ''), {
       method,
-      body: JSON.stringify(body),
+      body: isFile ? body : JSON.stringify(body),
       headers,
       credentials,
     })
@@ -60,6 +65,19 @@ async function api<P, T>({
       error?.meta?.code === 'ACCESS TOKEN EXPIRED'
     ) {
       await refreshAccessTokenApi()
+        .then(() => {
+          const accessToken = tokenStorage.getAccessToken()
+          return api<P, T>({
+            url,
+            method,
+            queries,
+            body,
+            credentials,
+            accessToken,
+            middleware,
+          })
+        })
+        .catch(alert)
     }
 
     throw error

@@ -1,6 +1,11 @@
+export interface Paging {
+  cursor: string
+}
+
 export interface Meta {
   status: number
   code: string
+  paging?: Paging
 }
 
 export interface ErrorResponse {

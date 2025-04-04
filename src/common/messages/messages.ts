@@ -19,6 +19,7 @@ export const messages = {
       invalid_bearer_token: 'Bearer 토큰 검증 실패',
     },
   },
+
   storage: {
     auth: {
       set_access_token_failed:
@@ -30,4 +31,10 @@ export const messages = {
       get_redirect_url_failed: '리디렉션 URL을 가져오지 못했습니다.',
     },
   },
+
+  context: {
+    cannot_find_app_context: "AppContext를 찾을 수 없습니다.",
+    cannot_find_set_app_context: "SetAppContext를 찾을 수 없습니다."
+  }
+
 }

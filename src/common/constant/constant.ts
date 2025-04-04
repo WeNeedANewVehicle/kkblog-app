@@ -13,7 +13,11 @@ export enum METHODS {
   OPTIONS = 'OPTIONS',
 }
 
-export const hideGnbPaths = [route.auth.signUp, route.auth.signIn, route.posts.write]
+export const hideGnbPaths = [
+  route.auth.signUp,
+  route.auth.signIn,
+  route.posts.write,
+]
 
 export enum HttpStatus {
   CONTINUE = 100,
@@ -70,3 +74,5 @@ export enum ErrorMessage {
   EMAIL_CONFLICT = 'EMAIL CONFLICT',
   NICKNAME_CONFLICT = 'NICKNAME CONFLICT',
 }
+
+export const allowedFileExtensions = []

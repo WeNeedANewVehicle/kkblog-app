@@ -27,3 +27,10 @@
 .btn {
   background: none;
 }
+
+@media (prefers-color-scheme: dark) {
+  .search {
+    border: 2px solid var(--color-gray-200);
+    background-color: var(--color-white);
+  }
+}

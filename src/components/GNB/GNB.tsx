@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
-import React, { useCallback, useMemo } from 'react'
-import { Menu } from './data/GNB.data'
+import React, { useCallback } from 'react'
+import { Menu } from '@/components/GNB/data/GNB.data'
 import route from '@/routes/routes'
 import useMe from '@/features/auth/hooks/queries/useMe'
 import Logo from '@/../public/icons/logo.svg'
@@ -16,7 +16,7 @@ interface GNBProps {
 function GNB({ menu }: GNBProps) {
   const { data } = useMe()
   const pathname = usePathname()
-  
+
   const onClickLink = useCallback(() => {
     redirectStorage.setRedirectUrl(pathname)
   }, [pathname])

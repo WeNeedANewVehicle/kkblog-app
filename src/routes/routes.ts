@@ -11,9 +11,13 @@ const route = {
 
   posts: {
     index: '/posts',
+    detail: (id: string) => `/posts/${id}`,
     write: '/posts/write',
   },
   portfolio: '/portfolio',
+
+  error: '/error',
+  notFound: '/not-found',
 }
 
 export default route

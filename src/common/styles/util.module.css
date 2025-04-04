@@ -1,0 +1,9 @@
+.noLineFeed {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.oneLine {
+  text-overflow: ellipsis;
+  --webkit-line-clamp: 1;
+}

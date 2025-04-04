@@ -1,7 +1,7 @@
 'use client'
 import { kia } from '@/theme/font'
 import './globals.css'
-import Provider from '@/components/Providers/Provider'
+import Providers from '@/components/Providers/Providers'
 import GNB from '@/components/GNB/GNB'
 import { menu } from '@/components/GNB/data/GNB.data'
 import { usePathname } from 'next/navigation'
@@ -15,7 +15,8 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname()
 
-  const isHideGnb = hideGnbPaths.find((path) => pathname.startsWith(path))
+  const isHideGnb = hideGnbPaths.find((path) => pathname.startsWith(path));
+  
   return (
     <html lang="en">
       <Head>
@@ -23,10 +24,10 @@ export default function RootLayout({
       </Head>
 
       <body className={kia.className}>
-        <Provider>
+        <Providers>
           {!isHideGnb && <GNB menu={menu} />}
           <main id="main">{children}</main>
-        </Provider>
+        </Providers>
       </body>
     </html>
   )

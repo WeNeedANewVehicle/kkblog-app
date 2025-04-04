@@ -1,0 +1,8 @@
+.wrapper {
+  flex-flow: wrap;
+}
+
+.input {
+  padding: 0rem;
+  width: fit-content;
+}

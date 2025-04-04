@@ -18,6 +18,7 @@ import {
   CodeBlock,
   Superscript,
   Subscript,
+  EventInfo,
 } from 'ckeditor5'
 import React from 'react'
 import styles from '@/components/WysiwygEditor/WysiwygEditor.module.css'
@@ -25,11 +26,15 @@ import { UploadAdapterPlugin } from '@/components/WysiwygEditor/plugins/UploadAd
 import 'ckeditor5/ckeditor5.css'
 import './WysiwygEditor.css'
 
-function WysiwygEditor() {
+interface WysiwygEditorProps {
+  onChange: (event: EventInfo, editor: ClassicEditor) => void
+}
+
+function WysiwygEditor({ onChange }: WysiwygEditorProps) {
   return (
     <div className={styles.wrapper}>
       <CKEditor
-
+        onChange={onChange}
         editor={ClassicEditor}
         config={{
           licenseKey: 'GPL',
@@ -73,12 +78,10 @@ function WysiwygEditor() {
             'toggleImageCaption',
             'imageTextAlternative',
           ],
-          extraPlugins: [UploadAdapterPlugin]
+          extraPlugins: [UploadAdapterPlugin],
         }}
-        
       />
     </div>
-      
   )
 }
 

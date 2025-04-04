@@ -1,0 +1,9 @@
+.textBlack {
+  color: var(--color-black);
+}
+
+@media (prefers-color-scheme: dark) {
+  .textBlack {
+    color: var(--color-gray-200);
+  }
+}

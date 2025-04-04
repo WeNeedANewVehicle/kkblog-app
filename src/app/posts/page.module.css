@@ -1,4 +1,22 @@
 .write {
-    background-color: var(--color-black);
-    color: var(--color-white);
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.postList {
+  display: grid;
+  grid-template-columns: repeat(1, 100%);
+  width: 100%;
+}
+
+@media screen and (min-width: 480px) {
+  .postList {
+    grid-template-columns: repeat(2, calc(50% - 0.5rem));
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .postList {
+    grid-template-columns: repeat(3, calc(33.3% - 0.66rem));
+  }
 }

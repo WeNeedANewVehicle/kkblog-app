@@ -20,3 +20,9 @@
 .link {
   width: fit-content;
 }
+
+@media (prefers-color-scheme: dark) {
+  .inner {
+    background-color: var(--color-black);
+  }
+}
