@@ -33,8 +33,7 @@ export const messages = {
   },
 
   context: {
-    cannot_find_app_context: "AppContext를 찾을 수 없습니다.",
-    cannot_find_set_app_context: "SetAppContext를 찾을 수 없습니다."
-  }
-
+    cannot_find_app_context: 'AppContext를 찾을 수 없습니다.',
+    cannot_find_set_app_context: 'SetAppContext를 찾을 수 없습니다.',
+  },
 }

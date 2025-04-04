@@ -13,9 +13,9 @@ function Providers({ children }: PropsWithChildren) {
   //       render if it suspends and there is no boundary
 
   const queryClient = getQueryClient()
-  
+
   return (
-    <AppContextProvider>    
+    <AppContextProvider>
       <QueryClientProvider client={queryClient}>
         {children}
         <ReactQueryDevtools initialIsOpen={false} />

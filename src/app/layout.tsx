@@ -1,12 +1,13 @@
 'use client'
 import { kia } from '@/theme/font'
-import './globals.css'
 import Providers from '@/components/Providers/Providers'
 import GNB from '@/components/GNB/GNB'
 import { menu } from '@/components/GNB/data/GNB.data'
-import { usePathname } from 'next/navigation'
 import { hideGnbPaths } from '@/common/constant/constant'
+import ModalContainer from '@/components/Modal/ModalContainer'
 import Head from 'next/head'
+import { usePathname } from 'next/navigation'
+import './globals.css'
 
 export default function RootLayout({
   children,
@@ -15,8 +16,8 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname()
 
-  const isHideGnb = hideGnbPaths.find((path) => pathname.startsWith(path));
-  
+  const isHideGnb = hideGnbPaths.find((path) => pathname.startsWith(path))
+
   return (
     <html lang="en">
       <Head>
@@ -27,6 +28,7 @@ export default function RootLayout({
         <Providers>
           {!isHideGnb && <GNB menu={menu} />}
           <main id="main">{children}</main>
+          <ModalContainer />
         </Providers>
       </body>
     </html>

@@ -14,8 +14,6 @@ function usePostForm() {
     name: 'tags',
   })
 
-  console.log('values:', watch())
-
   return {
     isValid: formState.isValid,
     isLoading: formState.isLoading,

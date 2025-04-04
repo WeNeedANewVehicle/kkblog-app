@@ -1,9 +1,8 @@
-import { FC } from "react";
 import { ModalProps } from "../Modal";
 
-export interface ModalContextType {
-    isOpen: boolean,
-    component: FC<ModalProps> | null,
+export interface ModalContextState<T> {
+  Component: React.ComponentType<T extends ModalProps ? T : ModalProps>;
+  props: T
 }
 
-export type ModalContext = Array<ModalContextType>;
+export type ModalContext = Array<ModalContextState<any>>

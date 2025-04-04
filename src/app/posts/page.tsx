@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import React, { useMemo } from 'react'
 import styles from '@/app/posts/page.module.css'
+import buttonCss from '@/common/styles/button.module.css';
 import Search from '@/components/Search/Search'
 import route from '@/routes/routes'
 import useGetPosts from '@/features/posts/hooks/useGetPosts'
@@ -17,7 +18,7 @@ function PostsPage() {
       <Search />
 
       <div className="flex w-full justify-end">
-        <Link href={route.posts.write} className={`sm ${styles.write}`}>
+        <Link href={route.posts.write} className={`sm ${buttonCss.black}`}>
           글쓰기
         </Link>
       </div>

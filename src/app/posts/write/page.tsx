@@ -1,6 +1,6 @@
 'use client'
 import dynamic from 'next/dynamic'
-import React, { ChangeEvent, useCallback, useMemo } from 'react'
+import React, { ChangeEvent, useCallback, useEffect, useMemo } from 'react'
 import Loading from '@/../public/icons/loading.svg'
 import LoginGuard from '@/components/Guard/LoginGuard'
 import Button from '@/components/Button/Button'
@@ -8,14 +8,12 @@ import LabeledText from '@/components/Input/LabeledInput/LabeledInput'
 import Input from '@/components/Input/Input'
 import Link from 'next/link'
 import route from '@/routes/routes'
-import FileUpload from '@/components/Button/FileUpload/FileUpload'
 import usePostForm from '@/features/posts/hooks/usePostForm'
-import PostTag from '@/components/Post/PostTag/PostTag'
 import TagsInput from '@/components/Input/TagInput/TagInput'
 import useCreatePost from '@/features/posts/hooks/useCreatePost'
-import { useRouter } from 'next/navigation'
-import { useAppContext } from '@/components/Providers/hooks/useAppContext'
-import { useSetAppContext } from '@/components/Providers/hooks/useSetAppContext'
+
+import SeoModal from '@/components/Modal/SeoModal/SeoModal'
+import useModal from '@/components/Modal/hooks/useModal'
 
 const DynamicWysiwygEditor = dynamic(
   () => import('@/components/WysiwygEditor/WysiwygEditor'),
@@ -36,11 +34,11 @@ function PostWritePage() {
     isValid,
     isSubmitting,
     isLoading,
-  } = usePostForm();
+  } = usePostForm()
 
-  const dispatch = useSetAppContext()
+  const { open, close } = useModal(SeoModal);
   const { mutateAsync: createPost } = useCreatePost()
-
+  
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value
@@ -60,10 +58,13 @@ function PostWritePage() {
     useCallback(
       async (values) => {
         delete values.tagInput
-
+        open({
+          isOpen: true,
+          onClose: close
+        });
         // await createPost(values)
       },
-      [createPost, dispatch]
+      [createPost, open]
     )
   )
 
@@ -71,6 +72,15 @@ function PostWritePage() {
     () => !isValid || isLoading || isSubmitting,
     [isValid, isLoading, isSubmitting]
   )
+
+  useEffect(() => {
+    return () => {
+      open({
+        onClose: close,
+        isOpen: false,
+      })
+    }
+  }, []);
 
   return (
     <LoginGuard>

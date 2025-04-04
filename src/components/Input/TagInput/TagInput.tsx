@@ -1,10 +1,7 @@
 import React, { forwardRef } from 'react'
 import Input, { InputProps } from '@/components/Input/Input'
 import PostTag, { PostTagProps } from '@/components/Post/PostTag/PostTag'
-import {
-  UseFieldArrayAppend,
-  UseFieldArrayRemove,
-} from 'react-hook-form'
+import { UseFieldArrayAppend, UseFieldArrayRemove } from 'react-hook-form'
 import { PostSchema } from '@/features/posts/schema/post.schema'
 import styles from '@/components/Input/TagInput/TagInput.module.css'
 
