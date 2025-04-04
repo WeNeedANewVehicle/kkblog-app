@@ -1,43 +1,51 @@
 import React, { useCallback } from 'react'
 import { useSetAppContext } from '@/components/Providers/hooks/useSetAppContext'
-import { ModalProps } from '@/components/Modal/Modal';
+import { ModalProps } from '@/components/Modal/Modal'
 
-function useModal<T>(Component: React.ComponentType<T extends ModalProps ? T : ModalProps>) {
+function useModal<T>(
+  Component: React.ComponentType<T extends ModalProps ? T : ModalProps>
+) {
   const dispatch = useSetAppContext()
 
   const open = useCallback(
     (props: T extends ModalProps ? T : ModalProps) => {
-
       dispatch((prevState) => {
-        const target = prevState.modal.find(m => m.Component === Component);
+        const target = prevState.modal.find((m) => m.Component === Component)
 
         return {
           ...prevState,
-          modal: target ? prevState.modal.map(
-            m => m.Component === Component
-              ? ({ ...m, props: { ...props, isOpen: props.isOpen } }) : m)
+          modal: target
+            ? prevState.modal.map((m) =>
+              m.Component === Component
+                ? { ...m, props: { ...props, isOpen: props.isOpen } }
+                : m
+            )
             : prevState.modal.concat({
               Component,
               props,
-            })
+            }),
         }
-      });
+      })
     },
-    [dispatch]
-  );
+    [dispatch, Component]
+  )
 
   const close = useCallback(() => {
     dispatch((state) => {
       return {
-        ...state, modal: state.modal.map(m => {
+        ...state,
+        modal: state.modal.map((m) => {
           return {
             ...m,
-            props: m.Component === Component ? ({ ...m.props, isOpen: false }) : m.props
+            props:
+              m.Component === Component
+                ? { ...m.props, isOpen: false }
+                : m.props,
           }
         }),
       }
     })
-  }, [dispatch])
+  }, [dispatch, Component])
 
   return { open, close }
 }

@@ -1,7 +1,7 @@
-import { ModalProps } from "../Modal";
+import { ModalProps } from '@/components/Modal/Modal'
 
 export interface ModalContextState<T> {
-  Component: React.ComponentType<T extends ModalProps ? T : ModalProps>;
+  Component: React.ComponentType<T extends ModalProps ? T : ModalProps>
   props: T
 }
 

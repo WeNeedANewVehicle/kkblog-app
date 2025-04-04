@@ -36,9 +36,9 @@ function PostWritePage() {
     isLoading,
   } = usePostForm()
 
-  const { open, close } = useModal(SeoModal);
+  const { open, close } = useModal(SeoModal)
   const { mutateAsync: createPost } = useCreatePost()
-  
+
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value
@@ -60,11 +60,11 @@ function PostWritePage() {
         delete values.tagInput
         open({
           isOpen: true,
-          onClose: close
-        });
+          onClose: close,
+        })
         // await createPost(values)
       },
-      [createPost, open]
+      [createPost, open, close]
     )
   )
 
@@ -80,7 +80,8 @@ function PostWritePage() {
         isOpen: false,
       })
     }
-  }, []);
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <LoginGuard>

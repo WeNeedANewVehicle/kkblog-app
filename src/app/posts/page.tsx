@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import React, { useMemo } from 'react'
 import styles from '@/app/posts/page.module.css'
-import buttonCss from '@/common/styles/button.module.css';
+import buttonCss from '@/common/styles/button.module.css'
 import Search from '@/components/Search/Search'
 import route from '@/routes/routes'
 import useGetPosts from '@/features/posts/hooks/useGetPosts'
