@@ -264,6 +264,10 @@ body {
   align-self: flex-start;
 }
 
+.self-end {
+  align-self: flex-end;
+}
+
 .gap-half {
   gap: 0.5rem;
 }
