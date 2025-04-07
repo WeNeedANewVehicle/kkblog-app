@@ -1,9 +1,21 @@
-.noLineFeed {
+.noLf {
   white-space: nowrap;
   overflow: hidden;
 }
 
-.oneLine {
+.oneLf {
   text-overflow: ellipsis;
   --webkit-line-clamp: 1;
+}
+
+.twoLf {
+  text-overflow: ellipsis;
+  --webkit-line-clamp: 2;
+}
+
+.threeLf {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  --webkit-line-clamp: 3;
 }

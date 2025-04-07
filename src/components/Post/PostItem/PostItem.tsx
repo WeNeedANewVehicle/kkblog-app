@@ -5,21 +5,50 @@ import React from 'react'
 import style from '@/components/Post/PostItem/PostItem.module.css'
 import commonCss from '@/common/styles/common.module.css'
 import utilCss from '@/common/styles/util.module.css'
+import PostThumbnail from '@/components/Post/PostThumbnail/PostThumbnail'
+import { combineCss } from '@/common/styles/comebineCss'
+import { timeAgo } from '@/common/util/time.util'
 
-import ImageIcon from '@/../public/icons/image.svg'
+export interface PostItemProps extends GetPostsItemResponseDto {}
 
-interface PostItemProps extends GetPostsItemResponseDto {}
+function PostItem({
+  content,
+  createdAt,
+  id,
+  tags,
+  title,
+  thumbnail,
+  desc,
+  author,
+}: PostItemProps) {
 
-function PostItem({ content, createdAt, id, tags, title }: PostItemProps) {
+  console.log(timeAgo(createdAt))
   return (
-    <li className={style.wrapper}>
+    <li className={`bg-gray-100 ${style.wrapper}`}>
       <Link href={route.posts.detail(id)}>
-        <ImageIcon className={style.icon} />
-        <h2
-          className={`${style.title} ${commonCss.textBlack} ${utilCss.noLineFeed} ${utilCss.oneLine}`}
-        >
-          {title}
-        </h2>
+        <PostThumbnail title={title} thumbnail={thumbnail} />
+
+        <div className={`flex flex-column gap-half sm bg-gray-700 ${style.inner}`}>
+          <h2
+            className={combineCss(
+              commonCss.textBlack,
+              utilCss.noLf,
+              utilCss.oneLf
+            )}
+          >
+            {title}
+          </h2>
+          <p
+            className={`overflow-hidden ${combineCss(style.desc, utilCss.threeLf)}`}
+          >
+            {desc ?? '콘텐츠에 미리보기 내용이 없습니다.'}
+          </p>
+
+          <div className="flex justify-between text-gray-600">
+            <div className="">{author.nickname}</div>
+            <div>{timeAgo(createdAt)}</div>
+          </div>
+        </div>
       </Link>
     </li>
   )

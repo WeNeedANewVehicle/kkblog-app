@@ -8,4 +8,6 @@ export interface Posts {
   files?: Files[]
   createdAt: string
   updatedAt: string
+  desc?: string
+  thumbnail?: string
 }

@@ -3,7 +3,7 @@ import style from '@/components/Post/Post.module.css'
 import { GetPostResponseDto } from '@/features/posts/api/dto/get-post.dto'
 import PostTag from '@/components/Post/PostTag/PostTag'
 
-export interface PostProps extends GetPostResponseDto {}
+export interface PostProps extends Omit<GetPostResponseDto, 'updatedAt'> {}
 
 function Post({ author, title, tags, content, createdAt }: PostProps) {
   return (

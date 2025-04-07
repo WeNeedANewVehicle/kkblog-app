@@ -207,6 +207,10 @@ body {
   transition: background-color 0.5s linear;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .logo {
   width: 5rem;
 }
@@ -234,6 +238,10 @@ body {
 
 .flex-column {
   flex-flow: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 .justify-center {
@@ -337,6 +345,30 @@ body {
 
 .border-none {
   border: none;
+}
+
+.position-abs {
+  position: absolute;
+}
+
+.position-fix {
+  position: fixed;
+}
+
+.position-rel {
+  position: relative;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
 }
 
 @media screen and (min-width: 768px) {

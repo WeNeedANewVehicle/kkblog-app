@@ -1,12 +1,11 @@
 import { HttpStatus } from '@/common/constant/constant'
-import { DynamicParam } from '@/common/types/dynamic-params.type'
-import { DynamicSearchParams } from '@/common/types/search-params.type'
+import { DynamicParam } from '@/common/types/dynamicParams.type'
+import { DynamicSearchParams } from '@/common/types/searchParams.type'
 import { toReadableDate } from '@/common/util/time.util'
-import Post, { PostProps } from '@/components/Post/Post'
+import Post from '@/components/Post/Post'
 import { getPostApi } from '@/features/posts/api/posts'
 import { notFound } from 'next/navigation'
 import { Metadata, ResolvingMetadata } from 'next'
-import { ErrorResponse } from '@/common/dto/base-response.dto'
 
 export async function generateMetadata(
   { params, searchParams }: PostPageMetadata,
@@ -19,6 +18,15 @@ export async function generateMetadata(
     return {
       title: `크크블로그 - ${data.title}`,
       description: data.content,
+      openGraph: {
+        type: 'article',
+        description: data.content,
+        publishedTime: data.createdAt,
+        title: data.title,
+        siteName: '크크블로그',
+        tags: data.tags.map((tag) => tag.label),
+        modifiedTime: data.updatedAt,
+      },
     }
   } catch (err) {
     return notFound()

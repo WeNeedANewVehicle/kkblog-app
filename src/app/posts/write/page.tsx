@@ -11,7 +11,6 @@ import route from '@/routes/routes'
 import usePostForm from '@/features/posts/hooks/usePostForm'
 import TagsInput from '@/components/Input/TagInput/TagInput'
 import useCreatePost from '@/features/posts/hooks/useCreatePost'
-
 import SeoModal from '@/components/Modal/SeoModal/SeoModal'
 import useModal from '@/components/Modal/hooks/useModal'
 
@@ -61,10 +60,12 @@ function PostWritePage() {
         open({
           isOpen: true,
           onClose: close,
+          register,
+          onConfirm: async () => await createPost(values),
+          onUpload: () => {},
         })
-        // await createPost(values)
       },
-      [createPost, open, close]
+      [createPost, open, close, register]
     )
   )
 
@@ -78,6 +79,9 @@ function PostWritePage() {
       open({
         onClose: close,
         isOpen: false,
+        register,
+        onConfirm: () => {},
+        onUpload: () => {},
       })
     }
     // eslint-disable-next-line

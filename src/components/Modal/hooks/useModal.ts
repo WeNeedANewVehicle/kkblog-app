@@ -16,14 +16,14 @@ function useModal<T>(
           ...prevState,
           modal: target
             ? prevState.modal.map((m) =>
-              m.Component === Component
-                ? { ...m, props: { ...props, isOpen: props.isOpen } }
-                : m
-            )
+                m.Component === Component
+                  ? { ...m, props: { ...props, isOpen: props.isOpen } }
+                  : m
+              )
             : prevState.modal.concat({
-              Component,
-              props,
-            }),
+                Component,
+                props,
+              }),
         }
       })
     },

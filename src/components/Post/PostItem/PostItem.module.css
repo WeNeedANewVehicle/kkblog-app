@@ -1,11 +1,29 @@
 .wrapper {
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.icon {
-  width: 100%;
-  height: auto;
+.desc {
+  color: var(--color-gray-500);
+  height: 70px;
 }
 
-.title {
-  font-size: 1.5rem;
+.inner {
+  background-color: var(--color-gray-700);
+}
+
+.tags {
+  padding: 0rem 1rem;
+  bottom: 0.5rem;
+  align-self: flex-start;
+  
+}
+
+@media (prefers-color-scheme: dark) {
+  .wrapper {
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.4),
+      0 1px 3px rgba(0, 0, 0, 0.6);
+  }
 }

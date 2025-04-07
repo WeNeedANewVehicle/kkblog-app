@@ -1,0 +1,22 @@
+.thumbnail {
+  height: 150px;
+}
+
+.noThumbnail {
+  color: var(--color-gray-600);
+}
+
+.noThumbnail > p {
+  height: 2rem;
+}
+
+.icon {
+  stroke: var(--color-gray-600);
+}
+
+@media (prefers-color-scheme: dark) {
+  .thumbnail,
+  .noThumbnail {
+    background-color: var(--color-gray-800);
+  }
+}
