@@ -45,6 +45,7 @@ function Page() {
               className="btn-black px-3 py-2.5 "
               type="submit"
               isLoading={isPending}
+              disabled={isPending}
             >
               로그인
             </Button>
