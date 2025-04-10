@@ -16,7 +16,7 @@ function NotFound() {
   return (
     <div className="flex flex-1 justify-center">
       <div className={'flex flex-column justify-center self-center'}>
-        <title>크크블로그 - 페이지를 찾을 수 없습니다.</title>
+        <title>페이지를 찾을 수 없습니다. | 크크블로그</title>
 
         <div>
           <Image
