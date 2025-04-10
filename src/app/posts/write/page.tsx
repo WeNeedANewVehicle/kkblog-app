@@ -67,7 +67,7 @@ function PostWritePage() {
         delete values.tagInput
         setIsOpen(true)
       },
-      [close, register, getValues, onConfirm, watch]
+      [register, getValues, onConfirm, watch]
     )
   )
 
