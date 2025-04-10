@@ -16,6 +16,7 @@ function PostThumbnail({ thumbnail, title }: PostThumbnailProps) {
           fill
           src={thumbnail}
           alt={`게시물 "${title}"의 썸네일 이미지가 보입니다.`}
+          style={{ objectFit: 'cover' }}
         />
       ) : (
         <div

@@ -77,7 +77,7 @@ async function api<P, T>({
             middleware,
           })
         })
-        .catch(alert)
+        .catch((err) => alert(JSON.stringify(err)))
     }
 
     throw error

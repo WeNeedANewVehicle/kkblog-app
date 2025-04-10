@@ -16,11 +16,11 @@ export async function generateMetadata(
   try {
     const { data, meta, error } = await getPostApi(id)
     return {
-      title: `크크블로그 - ${data.title}`,
+      title: `${data.title} | 크크블로그`,
       description: data.content,
       openGraph: {
         type: 'article',
-        description: data.content,
+        description: data.desc ?? data.content,
         publishedTime: data.createdAt,
         title: data.title,
         siteName: '크크블로그',

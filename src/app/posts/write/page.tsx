@@ -1,6 +1,6 @@
 'use client'
 import dynamic from 'next/dynamic'
-import React, { ChangeEvent, useCallback, useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Loading from '@/../public/icons/loading.svg'
 import LoginGuard from '@/components/Guard/LoginGuard'
 import Button from '@/components/Button/Button'
@@ -12,7 +12,7 @@ import usePostForm from '@/features/posts/hooks/usePostForm'
 import TagsInput from '@/components/Input/TagInput/TagInput'
 import useCreatePost from '@/features/posts/hooks/useCreatePost'
 import SeoModal from '@/components/Modal/SeoModal/SeoModal'
-import useModal from '@/components/Modal/hooks/useModal'
+import useUploadFile from '@/features/files/hooks/useUploadFile'
 
 const DynamicWysiwygEditor = dynamic(
   () => import('@/components/WysiwygEditor/WysiwygEditor'),
@@ -25,47 +25,49 @@ const DynamicWysiwygEditor = dynamic(
 function PostWritePage() {
   const {
     register,
-    fields,
-    remove,
-    append,
-    setValue,
+    tagFields,
+    getValues,
+    setFocus,
     handleSubmit,
+    onChangeEditor,
+    onChangeTag,
+    watch,
     isValid,
     isSubmitting,
     isLoading,
   } = usePostForm()
 
-  const { open, close } = useModal(SeoModal)
+  const [isOpen, setIsOpen] = useState(false)
   const { mutateAsync: createPost } = useCreatePost()
+  const { mutateAsync: uploadFile, isPending } = useUploadFile()
 
-  const onChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value
-      const isEmpty = value.trim() === ','
+  const onConfirm = handleSubmit(async (values) => {
+    const attachedFiles = values.attachedFiles?.item(0)
+    const form = new FormData()
 
-      if (e.target.value.endsWith(',') && !isEmpty) {
-        append({
-          label: e.target.value.slice(0, -1),
-        })
-        e.target.value = ''
-      }
-    },
-    [append]
-  )
+    if (attachedFiles) {
+      form.append('file', attachedFiles, attachedFiles.name)
+    }
+
+    const result = await uploadFile(form)
+
+    await createPost({
+      content: values.content,
+      tags: values?.tags ?? [],
+      title: values.title,
+      files: values.files,
+      thumbnail: result.data,
+      desc: values.desc,
+    })
+  })
 
   const onSubmit = handleSubmit(
     useCallback(
       async (values) => {
         delete values.tagInput
-        open({
-          isOpen: true,
-          onClose: close,
-          register,
-          onConfirm: async () => await createPost(values),
-          onUpload: () => {},
-        })
+        setIsOpen(true)
       },
-      [createPost, open, close, register]
+      [open, close, register, getValues, onConfirm, watch]
     )
   )
 
@@ -76,13 +78,7 @@ function PostWritePage() {
 
   useEffect(() => {
     return () => {
-      open({
-        onClose: close,
-        isOpen: false,
-        register,
-        onConfirm: () => {},
-        onUpload: () => {},
-      })
+      setFocus('title')
     }
     // eslint-disable-next-line
   }, [])
@@ -100,11 +96,11 @@ function PostWritePage() {
           <TagsInput
             //
             isEdit
-            fields={fields}
-            remove={remove}
-            append={append}
+            fields={tagFields.fields}
+            remove={tagFields.remove}
+            append={tagFields.append}
             {...register('tagInput', {
-              onChange,
+              onChange: onChangeTag,
             })}
           />
 
@@ -113,9 +109,7 @@ function PostWritePage() {
 
         <div className="flex flex-column flex-1 gap-half ">
           <h2>내용</h2>
-          <DynamicWysiwygEditor
-            onChange={(_, editor) => setValue('content', editor.getData())}
-          />
+          <DynamicWysiwygEditor onChange={onChangeEditor} />
         </div>
 
         <div className="flex gap-1">
@@ -136,6 +130,16 @@ function PostWritePage() {
           </Button>
         </div>
       </form>
+
+      <SeoModal
+        //
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        getValues={getValues}
+        watch={watch}
+        onConfirm={onConfirm}
+        register={register}
+      />
     </LoginGuard>
   )
 }

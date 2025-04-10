@@ -4,7 +4,7 @@ import api from '@/common/util/api.util'
 import {
   CreatePostDto,
   CreatePostResponseDto,
-} from '@/features/posts/api/dto/post.dto'
+} from '@/features/posts/api/dto/createPost.dto'
 import { GetPostResponseDto } from '@/features/posts/api/dto/get-post.dto'
 import {
   GetPostsDto,

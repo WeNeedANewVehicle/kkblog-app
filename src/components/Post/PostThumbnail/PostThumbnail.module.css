@@ -1,5 +1,15 @@
 .thumbnail {
-  height: 150px;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.thumbnail > img {
+  transition: transform 0.3s ease;
+}
+
+.thumbnail:hover > img {
+  transform: scale(110%);
+  transition: transform 0.3s ease;
 }
 
 .noThumbnail {

@@ -96,6 +96,10 @@
   color: var(--color-gray-900);
 }
 
+.burgundy-600 {
+  color: var(--color-burgundy-600);
+}
+
 *,
 ::after,
 ::before,
@@ -153,20 +157,8 @@ svg {
 button {
   cursor: pointer;
   color: var(--color-black);
-  transition: all 0.2s ease-in-out;
-}
-
-button:hover {
-  /* background: linear-gradient(
-    180deg,
-    var(--color-burgundy-400),
-    var(--color-burgundy-600)
-  ); */
-  /* box-shadow: 0 2px 0 var(--color-burgundy-700); */
-}
-
-button:active {
-  /* background: var(--color-burgundy-700); */
+  font: kia;
+  background: none;
 }
 
 button:disabled {
@@ -178,14 +170,8 @@ input {
   padding: 10px 12px;
   font-size: 16px;
   border: 2px solid var(--color-gray-800);
-  /* border-radius: 4px; */
   outline: none;
   transition: all 0.2s ease-in-out;
-}
-
-input:focus {
-  /* border-color: var(--color-burgundy-700);
-  box-shadow: 0 0 5px var(--color-burgundy-400); */
 }
 
 body {

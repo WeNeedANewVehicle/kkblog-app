@@ -13,6 +13,7 @@ const route = {
     index: '/posts',
     detail: (id: string) => `/posts/${id}`,
     write: '/posts/write',
+    edit: (id: string) => `/posts/edit/${id}`,
   },
   portfolio: '/portfolio',
 

@@ -1,5 +1,5 @@
 import { baseUrl } from '@/common/constant/constant'
-import { uploadFileApi } from '@/features/files/file'
+import { uploadFileApi } from '@/features/files/api/file'
 import { Editor, FileLoader } from 'ckeditor5'
 
 class UploadAdapter {

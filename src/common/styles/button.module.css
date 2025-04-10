@@ -2,3 +2,7 @@
   background-color: var(--color-black);
   color: var(--color-white);
 }
+
+.burgundy600 {
+  background-color: var(--color-burgundy-600);
+}

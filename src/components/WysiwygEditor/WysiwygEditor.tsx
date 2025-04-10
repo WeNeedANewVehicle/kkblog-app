@@ -26,7 +26,7 @@ import { UploadAdapterPlugin } from '@/components/WysiwygEditor/plugins/UploadAd
 import 'ckeditor5/ckeditor5.css'
 import './WysiwygEditor.css'
 
-interface WysiwygEditorProps {
+export interface WysiwygEditorProps {
   onChange: (event: EventInfo, editor: ClassicEditor) => void
 }
 
