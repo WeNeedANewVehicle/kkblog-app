@@ -20,7 +20,7 @@ function PostThumbnail({ thumbnail, title }: PostThumbnailProps) {
         />
       ) : (
         <div
-          className={`flex flex-column justify-center items-center bg-white ${style.noThumbnail}`}
+          className={`flex flex-col justify-center items-center bg-white ${style.noThumbnail}`}
         >
           <ImageIcon className={style.icon} />
           <p> 미리보기가 없습니다. </p>

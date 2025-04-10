@@ -1,3 +1,29 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-burgundy-100: #f5dce0;
+  --color-burgundy-200: #e5b7c0;
+  --color-burgundy-300: #d48b9e;
+  --color-burgundy-400: #c0617c;
+  --color-burgundy-500: #a53d58;
+  --color-burgundy-600: #800020;
+  --color-burgundy-700: #6a001a;
+  --color-burgundy-800: #540015;
+  --color-burgundy-900: #3d000f;
+
+  --color-white: #fff;
+  --color-gray-100: #f8f9fa;
+  --color-gray-200: #e9ecef;
+  --color-gray-300: #dee2e6;
+  --color-gray-400: #ced4da;
+  --color-gray-500: #adb5bd;
+  --color-gray-600: #6c757d;
+  --color-gray-700: #495057;
+  --color-gray-800: #343a40;
+  --color-gray-900: #212529;
+  --color-black: #000;
+}
+
 :root {
   --color-burgundy-100: #f5dce0;
   --color-burgundy-200: #e5b7c0;
@@ -24,101 +50,24 @@
   --header-height: 64px;
 }
 
-.bg-gray-100 {
-  background-color: var(--color-gray-100);
+.gnb {
+  @apply sticky m-auto w-full max-w-[1280px] flex justify-between top-0 p-4 text-white border-b-gray-200 border-b bg-white dark:bg-gray-900 dark:border-b-gray-600 dark:text-gray-200;
 }
 
-.bg-gray-200 {
-  background-color: var(--color-gray-200);
+.navigator {
+  @apply flex items-center gap-4 font-bold;
 }
 
-.bg-gray-300 {
-  background-color: var(--color-gray-300);
+.btn-black {
+  @apply bg-black text-white;
 }
 
-.bg-gray-400 {
-  background-color: var(--color-gray-400);
+.error-border {
+  @apply border-2 border-red-500;
 }
 
-.bg-gray-500 {
-  background-color: var(--color-gray-500);
-}
-
-.bg-gray-600 {
-  background-color: var(--color-gray-600);
-}
-
-.bg-gray-700 {
-  background-color: var(--color-gray-700);
-}
-
-.bg-gray-800 {
-  background-color: var(--color-gray-800);
-}
-
-.bg-gray-000 {
-  background-color: var(--color-gray-900);
-}
-
-.text-gray-100 {
-  color: var(--color-gray-100);
-}
-
-.text-gray-200 {
-  color: var(--color-gray-200);
-}
-
-.text-gray-300 {
-  color: var(--color-gray-300);
-}
-
-.text-gray-400 {
-  color: var(--color-gray-400);
-}
-
-.text-gray-500 {
-  color: var(--color-gray-500);
-}
-
-.text-gray-600 {
-  color: var(--color-gray-600);
-}
-
-.text-gray-700 {
-  color: var(--color-gray-700);
-}
-
-.text-gray-800 {
-  color: var(--color-gray-800);
-}
-
-.text-gray-900 {
-  color: var(--color-gray-900);
-}
-
-.burgundy-600 {
-  color: var(--color-burgundy-600);
-}
-
-*,
-::after,
-::before,
-::backdrop,
-::file-selector-button {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  border: 0 solid;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
+.box-sm {
+  @apply px-3 py-2.5;
 }
 
 ol,
@@ -156,9 +105,6 @@ svg {
 
 button {
   cursor: pointer;
-  color: var(--color-black);
-  font: kia;
-  background: none;
 }
 
 button:disabled {
@@ -188,7 +134,7 @@ body {
   max-width: 1280px;
 
   /** GNB가 65px 이므로 그만큼 감소 */
-  min-height: calc(100dvh - 65px);
+  min-height: 100dvh;
   padding: 1rem;
   transition: background-color 0.5s linear;
 }
@@ -214,69 +160,15 @@ body {
   stroke: none;
 }
 
-.flex {
-  display: flex;
-}
-
-.flex-1 {
-  flex: 1;
-}
-
-.flex-column {
-  flex-flow: column;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.justify-start {
-  justify-content: start;
-}
-
-.justify-end {
-  justify-content: end;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.self-center {
-  align-self: center;
-}
-
-.self-start {
-  align-self: flex-start;
-}
-
-.self-end {
-  align-self: flex-end;
-}
-
 .gap-half {
   gap: 0.5rem;
 }
 
-.gap-1 {
-  gap: 1rem;
-}
 
 .gap-1.5 {
   gap: 1.5rem;
 }
 
-.gap-2 {
-  gap: 2rem;
-}
 
 .w-full {
   width: 100%;
@@ -303,14 +195,6 @@ body {
 .lg {
   padding: 1.5rem 2rem;
   font-size: 2rem;
-}
-
-.bg-black {
-  background-color: var(--color-black);
-}
-
-.bg-black:disabled {
-  background-color: var(--color-gray-500);
 }
 
 .bg-white {

@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-import { signInApi } from '../../api/auth'
-import { ErrorBaseResponse } from '@/common/dto/base-response.dto'
+import { signInApi } from '@/features/auth/api/auth'
 import { useRouter } from 'next/navigation'
 import redirectStorage from '@/common/storages/redirect-storage'
 import route from '@/routes/routes'
@@ -14,10 +13,7 @@ function useSignIn() {
     mutationFn: signInApi,
     onSuccess: () => {
       router.replace(redirectionUrl ?? route.index)
-    },
-    onError: (error: ErrorBaseResponse) => {
-      alert(error.error.message)
-    },
+    }
   })
 }
 

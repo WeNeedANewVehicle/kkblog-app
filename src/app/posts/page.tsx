@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import React, { useMemo } from 'react'
-import styles from '@/app/posts/page.module.css'
 import buttonCss from '@/common/styles/button.module.css'
 import Search from '@/components/Search/Search'
 import route from '@/routes/routes'
@@ -14,7 +13,7 @@ function PostsPage() {
 
   const postList = useMemo(() => posts?.data ?? [], [posts?.data])
   return (
-    <section className="flex flex-column items-center justify-center gap-2">
+    <section className="flex flex-col items-center justify-center gap-2">
       <Search />
 
       <div className="flex w-full justify-end">
@@ -23,7 +22,9 @@ function PostsPage() {
         </Link>
       </div>
 
-      <ul className={`${styles.postList} w-full gap-1`}>
+      <ul
+        className={`grid w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8`}
+      >
         {postList.map((post) => (
           <PostItem key={post.id} {...post} />
         ))}

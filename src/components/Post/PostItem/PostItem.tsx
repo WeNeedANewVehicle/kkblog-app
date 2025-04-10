@@ -20,13 +20,11 @@ function PostItem({
   author,
 }: PostItemProps) {
   return (
-    <li className={`bg-gray-100 ${style.wrapper}`}>
+    <li className={`bg-gray-100 ${style.wrapper} shadow-2xs`}>
       <Link href={route.posts.detail(id)}>
         <PostThumbnail title={title} thumbnail={thumbnail} />
 
-        <div
-          className={`flex flex-column gap-half sm bg-gray-700 ${style.inner}`}
-        >
+        <div className={`flex flex-col gap-half sm bg-gray-700 ${style.inner}`}>
           <h2
             className={combineCss(
               commonCss.textBlack,

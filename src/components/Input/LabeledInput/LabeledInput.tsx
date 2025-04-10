@@ -14,7 +14,7 @@ function LabeledText({
   ...rest
 }: LabeledTextProps) {
   return (
-    <label className={`flex flex-column gap-half ${className ?? ''}`} {...rest}>
+    <label className={`flex flex-col gap-half ${className ?? ''}`} {...rest}>
       <div className={styles.text}>
         {label} {required && <b className={styles.required}>*</b>}
       </div>

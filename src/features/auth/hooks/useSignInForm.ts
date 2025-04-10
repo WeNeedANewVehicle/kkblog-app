@@ -15,7 +15,7 @@ function useSignInForm() {
     defaultValues,
   })
 
-  const { mutate: signIn, isPending: isSignInPending } = useSignIn()
+  const { mutate: signIn, isPending: isSignInPending, data, error: signInError } = useSignIn()
 
   const { errors } = formState
 
@@ -33,6 +33,8 @@ function useSignInForm() {
     onSubmit: handleSubmit(onSubmit),
     errors,
     isPending,
+    data,
+    signInError,
   }
 }
 

@@ -19,18 +19,16 @@ function Post({ author, title, tags, content, createdAt, id }: PostProps) {
         </div>
 
         <div className="flex justify-end gap-half">
-        <Link className={style.edit} href={route.posts.edit(id)}>
-          수정
-        </Link>
-        <Button className={style.delete}>삭제</Button>
-      </div>
+          <Link className={style.edit} href={route.posts.edit(id)}>
+            수정
+          </Link>
+          <Button className={style.delete}>삭제</Button>
+        </div>
 
         <ul className="flex gap-half">
           {tags?.map((tag) => <PostTag label={tag?.label} key={tag.id} />)}
         </ul>
       </div>
-
-     
 
       <hr className={style.hr} />
 

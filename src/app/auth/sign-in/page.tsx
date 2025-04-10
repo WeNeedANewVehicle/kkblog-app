@@ -9,46 +9,52 @@ import Button from '@/components/Button/Button'
 import Link from 'next/link'
 import route from '@/routes/routes'
 import ErrorMessage from '@/components/ErrorMessage/ErrorMessage'
-import styles from '@/app/auth/sign-in/sign-in.module.css'
 import Password from '@/components/Input/Password/Password'
 
 function Page() {
-  const { register, onSubmit, errors, isPending } = useSignInForm()
+  const { register, onSubmit, errors, isPending, signInError } = useSignInForm()
 
   return (
     <LogoutGuard>
-      <div className={`flex self-center margin-auto ${styles.wrapper}`}>
-        <div className={`flex flex-column gap-2 ${styles.inner}`}>
-          <Link
-            href={route.index}
-            className={`flex self-center ${styles.link}`}
-          >
+      <div className="flex flex-col items-center justify-center flex-1">
+        <div className="flex flex-col self-center justify-center gap-8">
+          <Link href={route.index} className="flex self-center">
             <Logo className="logo-lg" width={100} />
           </Link>
 
-          <form className="flex flex-column gap-1" onSubmit={onSubmit}>
+          <form className="flex flex-col gap-2" onSubmit={onSubmit}>
             <LabeledText label="이메일">
-              <Input inputSize="md" {...register('email')} />
+              <Input
+                {...register('email')}
+                placeholder="example@email.com"
+                className={`w-full ${errors.email && 'error-border'}`}
+              />
               <ErrorMessage message={errors.email?.message} />
             </LabeledText>
 
             <LabeledText label="비밀번호">
-              <Password inputSize="md" {...register('password')} />
+              <Password
+                {...register('password')}
+                placeholder="********"
+                className="w-full"
+              />
               <ErrorMessage message={errors.password?.message} />
             </LabeledText>
 
-            <div />
-
             <Button
+              className="btn-black px-3 py-2.5 "
               type="submit"
-              size="md"
-              className="button-md"
               isLoading={isPending}
             >
               로그인
             </Button>
 
-            <Link href={route.auth.reset}>비밀번호가 기억나지 않습니다.</Link>
+            <ErrorMessage message={signInError?.error.message}/>
+
+            <div className="flex flex-col gap-4 pt-4">
+              <Link href={route.auth.reset}>비밀번호가 기억나지 않습니다.</Link>
+              <Link href={route.auth.signUp}>계정을 생성하고 싶습니다.</Link>
+            </div>
           </form>
         </div>
       </div>

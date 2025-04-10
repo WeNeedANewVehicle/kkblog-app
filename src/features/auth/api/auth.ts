@@ -22,6 +22,10 @@ export async function signInApi(params: SignInDto) {
       const authorization = res.headers.get('Authorization')
       const [bearer, token] = authorization?.split(' ') ?? ['', '']
 
+      if (res.status >= 400 && res.status < 500) {
+        return res;
+      }
+
       if (bearer !== 'Bearer') {
         throw new Error(messages.validation.auth.invalid_bearer_token)
       }

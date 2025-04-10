@@ -7,7 +7,6 @@ import useMe from '@/features/auth/hooks/queries/useMe'
 import Logo from '@/../public/icons/logo.svg'
 import redirectStorage from '@/common/storages/redirect-storage'
 import { usePathname } from 'next/navigation'
-import styles from '@/components/GNB/GNB.module.css'
 
 interface GNBProps {
   menu: Menu
@@ -22,16 +21,19 @@ function GNB({ menu }: GNBProps) {
   }, [pathname])
 
   const active = useCallback(
-    (url: string) => (pathname.startsWith(url) ? styles.active : ''),
+    (url: string) =>
+      pathname.startsWith(url)
+        ? 'border-b-black dark:border-b-gray-200 border-b-2'
+        : '',
     [pathname]
   )
 
   return (
-    <menu id={styles.gnb}>
-      <ul className={styles.navigator}>
+    <menu className="gnb">
+      <ul className="navigator">
         {menu.map(({ text, to }) => (
           <li key={to} className={active(to)}>
-            <Link href={to} className={styles.link}>
+            <Link href={to} className="text-black dark:text-gray-200">
               {text}
             </Link>
           </li>
@@ -42,11 +44,10 @@ function GNB({ menu }: GNBProps) {
         <Logo fill="white" className="logo" />
       </Link>
 
-      <ul className={styles.navigator}>
+      <ul className="navigator">
         <li>
           <Link
-            role=""
-            className={styles.link}
+            className="text-black dark:text-gray-200"
             href={data ? route.auth.logout : route.auth.signIn}
             onClick={onClickLink}
           >
@@ -56,7 +57,7 @@ function GNB({ menu }: GNBProps) {
 
         <li>
           <Link
-            className={styles.link}
+            className="text-black dark:text-gray-200"
             href={route.auth.signUp}
             onClick={onClickLink}
           >

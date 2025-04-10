@@ -8,7 +8,6 @@ import React, {
 import Eye from '@/../public/icons/eye.svg'
 import EyeSlach from '@/../public/icons/eye-slash.svg'
 import Input, { InputProps } from '@/components/Input/Input'
-import styles from '@/components/Input/Password/Password.module.css'
 import Button from '@/components/Button/Button'
 
 export type PassWordProps = Omit<InputProps, 'type' | 'ref'>
@@ -26,25 +25,25 @@ const Password = forwardRef<HTMLInputElement, PassWordProps>(
     return (
       <div
         //
-        className={`flex gap-4 items-center ${styles.wrapper} ${className ?? ''}`}
+        className={`flex gap-4 items-center border-2 pr-3 border-gray-800 dark:bg-[none] ${className ?? ''}`}
       >
         <Input
           //
           ref={ref}
+          className="border-0!"
           type={type}
-          className={styles.input}
           {...restProps}
         />
         <Button
           //
-          className={styles.masking}
+          className="bg"
           aria-label="암호 노출 여부 토글 버튼"
           onClick={onToggleMasking}
         >
           {isMasking ? (
-            <EyeSlach className={styles.toggle} />
+            <EyeSlach className="stroke-1 stroke-black dark:stroke-gray-800" />
           ) : (
-            <Eye className={styles.toggle} />
+            <Eye className="stroke-1 stroke-black dark:stroke-gray-800" />
           )}
         </Button>
       </div>
