@@ -2,6 +2,14 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'pub-708a35c7c33c409db2888a28ce5ad813.r2.dev',
+      },
+    ],
+  },
+
   webpack(config) {
     // 기존 svg 로더 제거
     const fileLoaderRule = config.module.rules.find((rule) =>
