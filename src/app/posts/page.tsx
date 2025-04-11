@@ -2,24 +2,24 @@
 
 import Link from 'next/link'
 import React, { useMemo } from 'react'
-import buttonCss from '@/common/styles/button.module.css'
 import Search from '@/components/Search/Search'
 import route from '@/routes/routes'
 import useGetPosts from '@/features/posts/hooks/useGetPosts'
 import PostItem from '@/components/Post/PostItem/PostItem'
+import useMe from '@/features/auth/hooks/queries/useMe'
 
 function PostsPage() {
   const { data: posts } = useGetPosts()
-
+  const { data: me } = useMe()
   const postList = useMemo(() => posts?.data ?? [], [posts?.data])
   return (
-    <section className="flex flex-col items-center justify-center gap-2">
+    <section className="flex flex-col items-center justify-center gap-8 pt-20">
       <Search />
 
       <div className="flex w-full justify-end">
-        <Link href={route.posts.write} className={`sm ${buttonCss.black}`}>
+        {<Link href={route.posts.write} className="btn-black px-3 py-2.5">
           글쓰기
-        </Link>
+        </Link>}
       </div>
 
       <ul
