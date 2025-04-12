@@ -50,7 +50,7 @@ function Page() {
               로그인
             </Button>
 
-            <ErrorMessage message={signInError?.error.message}/>
+            <ErrorMessage message={signInError?.error?.message}/>
 
             <div className="flex flex-col gap-4 pt-4">
               <Link href={route.auth.reset}>비밀번호가 기억나지 않습니다.</Link>

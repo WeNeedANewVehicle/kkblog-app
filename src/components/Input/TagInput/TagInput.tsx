@@ -3,7 +3,6 @@ import Input, { InputProps } from '@/components/Input/Input'
 import PostTag, { PostTagProps } from '@/components/Post/PostTag/PostTag'
 import { UseFieldArrayAppend, UseFieldArrayRemove } from 'react-hook-form'
 import { PostSchema } from '@/features/posts/schema/post.schema'
-import styles from '@/components/Input/TagInput/TagInput.module.css'
 
 interface TagsInputProps extends InputProps {
   fields: PostSchema['tags']
@@ -15,7 +14,9 @@ interface TagsInputProps extends InputProps {
 const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
   ({ fields, remove, append, isEdit, ...inputProps }, ref) => {
     return (
-      <div className={`flex gap-half bg-white sm ${styles.wrapper}`}>
+      <div className={`flex flex-col gap-2 bg-white dark:bg-gray-900 `}>
+        <ul className='flex gap-2 flex-wrap w-full'>
+
         {fields?.map((tag, index) => (
           <PostTag
             //
@@ -25,12 +26,13 @@ const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
             isEdit={isEdit}
           />
         ))}
+        </ul>
 
         <Input
-          className={`flex border-none ${styles.input}`}
+          className={`flex border-none p-0 w-fit border-2 border-gray-800`}
           {...inputProps}
           ref={ref}
-          placeholder="태그 입력"
+          placeholder="태그를 입력하세요"
         />
       </div>
     )

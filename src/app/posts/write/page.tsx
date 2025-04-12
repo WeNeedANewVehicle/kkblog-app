@@ -13,12 +13,13 @@ import TagsInput from '@/components/Input/TagInput/TagInput'
 import useCreatePost from '@/features/posts/hooks/useCreatePost'
 import SeoModal from '@/components/Modal/SeoModal/SeoModal'
 import useUploadFile from '@/features/files/hooks/useUploadFile'
+import ErrorMessage from '@/components/ErrorMessage/ErrorMessage'
 
 const DynamicWysiwygEditor = dynamic(
   () => import('@/components/WysiwygEditor/WysiwygEditor'),
   {
     ssr: false,
-    loading: () => <Loading />,
+    loading: () => <div><Loading /><div>에디터를 불러오는 중입니다.</div></div>,
   }
 )
 
@@ -32,9 +33,7 @@ function PostWritePage() {
     onChangeEditor,
     onChangeTag,
     watch,
-    isValid,
-    isSubmitting,
-    isLoading,
+    formState,
   } = usePostForm()
 
   const [isOpen, setIsOpen] = useState(false)
@@ -67,13 +66,8 @@ function PostWritePage() {
         delete values.tagInput
         setIsOpen(true)
       },
-      [register, getValues, onConfirm, watch]
+      []
     )
-  )
-
-  const isDisabled = useMemo(
-    () => !isValid || isLoading || isSubmitting,
-    [isValid, isLoading, isSubmitting]
   )
 
   useEffect(() => {
@@ -85,46 +79,50 @@ function PostWritePage() {
 
   return (
     <LoginGuard>
-      <form className="flex flex-column flex-1 gap-1" onSubmit={onSubmit}>
+      <form className="flex flex-col flex-1 gap-4" onSubmit={onSubmit}>
         <div>
           <LabeledText label="제목">
-            <Input {...register('title')} />
+            <Input {...register('title')} placeholder='여기에 제목을 입력하세요'/>
           </LabeledText>
+          <ErrorMessage message={formState.errors.title?.message} />
         </div>
 
-        <div className="flex flex-column gap-1">
+        <div className="flex flex-col gap-1">
+          <div>
+            태그 ({tagFields.fields.length}/10)
+          </div>
           <TagsInput
             //
             isEdit
             fields={tagFields.fields}
             remove={tagFields.remove}
             append={tagFields.append}
+            maxLength={10}
             {...register('tagInput', {
               onChange: onChangeTag,
             })}
           />
-
-          <div className="flex gap-half"></div>
+          <ErrorMessage message={formState.errors.tagInput?.message ?? formState.errors.tags?.message }/>
         </div>
 
-        <div className="flex flex-column flex-1 gap-half ">
+        <div className="flex flex-col flex-1 gap-4">
           <h2>내용</h2>
           <DynamicWysiwygEditor onChange={onChangeEditor} />
+          <ErrorMessage message={formState.errors.content?.message}/>
         </div>
 
-        <div className="flex gap-1">
+        <div className="flex gap-4">
           <Link
-            className="sm flex items-center bg-gray-100 color-gray-200"
+            className="flex items-center bg-gray-100 color-gray-200"
             href={route.posts.index}
           >
             돌아가기
           </Link>
-          <Button size="sm">임시 저장</Button>
+          <Button className=''>임시 저장</Button>
           <Button
             type="submit"
-            size="sm"
             className="bg-black color-white"
-            disabled={isDisabled}
+            disabled={formState.isLoading || formState.isSubmitting}
           >
             작성
           </Button>

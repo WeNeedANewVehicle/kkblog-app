@@ -8,7 +8,7 @@
   height: 100dvh;
   transform: translate3d(0, 0, 0);
   transform-origin: bottom;
-  transition: 0.5s all ease-out;
+  transition: 0.5s transform ease-out;
   padding: 1rem;
 }
 
@@ -23,7 +23,7 @@
 .closed {
   transform: translate3d(0, 100dvh, 0);
   transform-origin: bottom;
-  transition: 0.5s all ease-out;
+  transition: 0.5s transform ease-out;
 }
 
 .preview {

@@ -110,11 +110,6 @@ video {
   height: auto;
 }
 
-svg {
-  width: 2rem;
-  height: 2rem;
-}
-
 button {
   cursor: pointer;
 }

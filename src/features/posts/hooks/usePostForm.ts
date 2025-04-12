@@ -15,6 +15,8 @@ function usePostForm() {
     setFocus,
     watch,
     getValues,
+    setError,
+    clearErrors
   } = useForm<PostSchema>({
     resolver: zodResolver(postSchema),
     defaultValues: {
@@ -26,6 +28,7 @@ function usePostForm() {
       title: '',
       id: undefined,
     },
+    mode: 'all'
   })
 
   const tagFields = useFieldArray({
@@ -53,33 +56,33 @@ function usePostForm() {
 
   const onChangeTag = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value
+      let value = e.target.value;
 
-      const isExist = tagFields.fields.find((tag) => tag.label === value)
+      const pureValue = value.replaceAll(',', '');
+      const isExist = tagFields.fields.find((tag) => tag.label === pureValue)
 
       if (isExist) {
-        alert('같은 이름의 태그가 있습니다.')
-        return (e.target.value = '')
+        setError('tags', { message: '같은 이름의 태그가 존재합니다.' })
+        setError('tagInput', { message: '같은 이름의 태그가 존재합니다.' });
+        return;
       }
 
-      const isEmpty = value.trim() === ','
+      const isEmpty = value.trim() === '' || pureValue === '';
 
-      if (e.target.value.endsWith(',') && !isEmpty) {
+      if (!isEmpty && value.endsWith(',')) {
+        clearErrors('tags')
         tagFields.append({
-          label: e.target.value.slice(0, -1),
+          label: pureValue,
           id: undefined,
         })
         e.target.value = ''
       }
     },
-    [tagFields]
+    [tagFields, setError, clearErrors]
   )
 
   return {
-    isValid: formState.isValid,
-    isLoading: formState.isLoading,
-    isSubmitting: formState.isSubmitting,
-    errors: formState.errors,
+    formState,
     onChangeEditor,
     onChangeTag,
     handleSubmit,
