@@ -41,7 +41,7 @@ function GNB({ menu }: GNBProps) {
       </ul>
 
       <Link href={route.index}>
-        <Logo fill="white" className="logo" />
+        <Logo fill="white" width={100} height="auto" />
       </Link>
 
       <ul className="navigator">

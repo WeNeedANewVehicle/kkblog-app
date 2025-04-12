@@ -18,7 +18,7 @@ function Page() {
     <LogoutGuard>
       <div className="flex flex-col self-center justify-center flex-auto gap-5 max-w-3xl w-full">
         <Link href={route.index} className="flex self-center">
-          <Logo className="logo-lg" width={100} />
+          <Logo width={200} height={'auto'} />
         </Link>
         <form
           className="flex flex-col self-center justify-center gap-2 w-full"

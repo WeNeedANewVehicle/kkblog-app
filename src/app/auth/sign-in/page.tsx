@@ -19,7 +19,7 @@ function Page() {
       <div className="flex flex-col items-center justify-center flex-1">
         <div className="flex flex-col self-center justify-center gap-8">
           <Link href={route.index} className="flex self-center">
-            <Logo className="logo-lg" width={100} />
+            <Logo width={200} height={'auto'} />
           </Link>
 
           <form className="flex flex-col gap-2" onSubmit={onSubmit}>

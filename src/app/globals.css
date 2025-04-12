@@ -150,18 +150,6 @@ body {
   cursor: pointer;
 }
 
-.logo {
-  width: 5rem;
-}
-
-.logo-md {
-  width: 7.5rem;
-}
-
-.logo-lg {
-  width: 10rem;
-}
-
 .logo > path {
   fill: var(--color-black);
   stroke: none;
