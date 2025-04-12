@@ -29,7 +29,7 @@ function Page() {
               type="email"
               {...register('email')}
               placeholder="example@email.com"
-              className={`input-md border ${errors.email ? 'error-border' : 'border-dark-600'}`}
+              className={`border ${errors.email ? 'error-border' : 'border-dark-600'}`}
             />
             <ErrorMessage message={errors.email?.message} />
           </LabeledInput>
@@ -38,14 +38,14 @@ function Page() {
             <Input
               {...register('nickname')}
               placeholder="크크블로그"
-              className={`input-md border ${errors.nickname ? 'error-border' : 'border-dark-600'}`}
+              className={`border ${errors.nickname ? 'error-border' : 'border-dark-600'}`}
             />
             <ErrorMessage message={errors.nickname?.message} />
           </LabeledInput>
 
           <LabeledInput required label="비밀번호">
             <Password
-              className={`input-md border ${errors.password ? 'error-border' : 'border-dark-600'}`}
+              className={`border ${errors.password ? 'error-border' : 'border-dark-600'}`}
               {...register('password')}
               placeholder="********"
             />
@@ -54,7 +54,7 @@ function Page() {
 
           <LabeledInput required label="비밀번호 검증">
             <Password
-              className={`input-md border ${errors.confirm ? 'error-border' : 'border-dark-600'}`}
+              className={`border ${errors.confirm ? 'error-border' : 'border-dark-600'}`}
               {...register('confirm')}
               placeholder="********"
             />

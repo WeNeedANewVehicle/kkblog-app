@@ -16,14 +16,14 @@ function Page() {
 
   return (
     <LogoutGuard>
-      <div className="flex flex-col items-center justify-center flex-1">
-        <div className="flex flex-col self-center justify-center gap-8">
+      <div className="flex flex-col self-center items-center justify-center flex-1 max-w-3xl w-full">
+        <div className="flex flex-col self-center justify-center gap-8 w-full">
           <Link href={route.index} className="flex self-center">
             <Logo width={200} height={'auto'} />
           </Link>
 
           <form className="flex flex-col gap-2" onSubmit={onSubmit}>
-            <LabeledText label="이메일">
+            <LabeledText required label="이메일">
               <Input
                 {...register('email')}
                 placeholder="example@email.com"
@@ -32,7 +32,7 @@ function Page() {
               <ErrorMessage message={errors.email?.message} />
             </LabeledText>
 
-            <LabeledText label="비밀번호">
+            <LabeledText required label="비밀번호">
               <Password
                 {...register('password')}
                 placeholder="********"
