@@ -4,8 +4,15 @@ import { DynamicSearchParams } from '@/common/types/searchParams.type'
 import { toReadableDate } from '@/common/util/time.util'
 import Post from '@/components/Post/Post'
 import { getPostApi } from '@/features/posts/api/posts'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { Metadata, ResolvingMetadata } from 'next'
+import { ErrorBaseResponse } from '@/common/dto/base-response.dto'
+import route from '@/routes/routes'
+
+interface PostPageMetadata {
+  params: DynamicParam<'id'>['params']
+  searchParams: DynamicSearchParams
+}
 
 export async function generateMetadata(
   { params, searchParams }: PostPageMetadata,
@@ -14,7 +21,7 @@ export async function generateMetadata(
   const { id } = await params
 
   try {
-    const { data, meta, error } = await getPostApi(id)
+    const { data } = await getPostApi(id)
     return {
       title: `${data.title} | 크크블로그`,
       description: data.content,
@@ -28,14 +35,15 @@ export async function generateMetadata(
         modifiedTime: data.updatedAt,
       },
     }
-  } catch (err) {
-    return notFound()
-  }
-}
+  } catch (err)  {
+    const { meta } = err as unknown as ErrorBaseResponse;
+    
+    if (meta.status === HttpStatus.NOT_FOUND) {
+      return notFound()
+    }
 
-interface PostPageMetadata {
-  params: DynamicParam<'id'>['params']
-  searchParams: DynamicSearchParams
+    redirect(route.error)
+  }
 }
 
 async function Page({ params }: DynamicParam<'id'>) {
