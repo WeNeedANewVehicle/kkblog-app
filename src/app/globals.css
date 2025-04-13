@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 
 @theme {
+
+  --breakpoint-sm: 30rem;
+  --breakpoint-md: 48rem;
   --color-burgundy-100: #f5dce0;
   --color-burgundy-200: #e5b7c0;
   --color-burgundy-300: #d48b9e;
