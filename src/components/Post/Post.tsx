@@ -11,11 +11,11 @@ export interface PostProps extends Omit<GetPostResponseDto, 'updatedAt'> {}
 function Post({ author, title, tags, content, createdAt, id }: PostProps) {
   return (
     <article className={style.wrapper}>
-      <div className="flex flex-column gap-half">
+      <div className="flex flex-col gap-4">
         <h2 className={style.title}>{title}</h2>
         <div className="flex justify-between">
           <div>{author?.nickname}</div>
-          <div className="text-gray-400">{createdAt}</div>
+          <div className="text-gray-400 dark:text-gray-600">{createdAt}</div>
         </div>
 
         <div className="flex justify-end gap-half">
