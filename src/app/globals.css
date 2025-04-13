@@ -23,7 +23,7 @@
   --color-gray-900: #212529;
   --color-black: #000;
 
-  --animate-scale: scale 0.3s forwards both;
+  --animate-scale: scale 0.3s both;
   --animate-collapse-x: collapse-x 0.3s forwards both;
 
   @keyframes scale {

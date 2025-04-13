@@ -14,7 +14,8 @@ function PostThumbnail({ thumbnail, title }: PostThumbnailProps) {
           src={thumbnail}
           alt={`게시물 "${title}"의 썸네일 이미지가 보입니다.`}
           priority
-          style={{ objectFit: 'cover', transition: 'transform' }}
+          className='transition-transform'
+          style={{ objectFit: 'cover' }}
         />
       ) : (
         <div
