@@ -16,26 +16,17 @@ function PostItem({
   author,
 }: PostItemProps) {
   return (
-    <li className={`bg-gray-100 shadow-2xl hover:animate-scale`}>
+    <li className={`bg-gray-100 shadow-2xl transition-transform hover:animate-scale`}>
       <Link href={route.posts.detail(id)}>
         <PostThumbnail title={title} thumbnail={thumbnail} />
 
         <div className="flex flex-col justify-between p-4 bg-gray-100 aspect-video dark:bg-gray-700">
-          <div className='flex flex-col gap-2'>
-            <h2
-              className="line-clamp-1"
-            >
-              {title}
-            </h2>
-            <p
-              className='line-clamp-3 text-gray-500'
-            >
+          <div className="flex flex-col gap-2">
+            <h2 className="line-clamp-1">{title}</h2>
+            <p className="line-clamp-3 text-gray-500">
               {desc ?? '콘텐츠에 미리보기 내용이 없습니다.'}
             </p>
-            
-            
           </div>
-          
 
           <div className={`flex justify-between text-gray-600`}>
             <div>{author.nickname}</div>

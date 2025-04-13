@@ -19,7 +19,12 @@ const DynamicWysiwygEditor = dynamic(
   () => import('@/components/WysiwygEditor/WysiwygEditor'),
   {
     ssr: false,
-    loading: () => <div><Loading /><div>에디터를 불러오는 중입니다.</div></div>,
+    loading: () => (
+      <div>
+        <Loading />
+        <div>에디터를 불러오는 중입니다.</div>
+      </div>
+    ),
   }
 )
 
@@ -61,13 +66,10 @@ function PostWritePage() {
   })
 
   const onSubmit = handleSubmit(
-    useCallback(
-      async (values) => {
-        delete values.tagInput
-        setIsOpen(true)
-      },
-      []
-    )
+    useCallback(async (values) => {
+      delete values.tagInput
+      setIsOpen(true)
+    }, [])
   )
 
   useEffect(() => {
@@ -82,15 +84,16 @@ function PostWritePage() {
       <form className="flex flex-col flex-1 gap-4" onSubmit={onSubmit}>
         <div>
           <LabeledText label="제목">
-            <Input {...register('title')} placeholder='여기에 제목을 입력하세요'/>
+            <Input
+              {...register('title')}
+              placeholder="여기에 제목을 입력하세요"
+            />
           </LabeledText>
           <ErrorMessage message={formState.errors.title?.message} />
         </div>
 
         <div className="flex flex-col gap-1">
-          <div>
-            태그 ({tagFields.fields.length}/10)
-          </div>
+          <div>태그 ({tagFields.fields.length}/10)</div>
           <TagsInput
             //
             isEdit
@@ -102,13 +105,18 @@ function PostWritePage() {
               onChange: onChangeTag,
             })}
           />
-          <ErrorMessage message={formState.errors.tagInput?.message ?? formState.errors.tags?.message }/>
+          <ErrorMessage
+            message={
+              formState.errors.tagInput?.message ??
+              formState.errors.tags?.message
+            }
+          />
         </div>
 
         <div className="flex flex-col flex-1 gap-4">
           <h2>내용</h2>
           <DynamicWysiwygEditor onChange={onChangeEditor} />
-          <ErrorMessage message={formState.errors.content?.message}/>
+          <ErrorMessage message={formState.errors.content?.message} />
         </div>
 
         <div className="flex gap-4">
@@ -118,7 +126,7 @@ function PostWritePage() {
           >
             돌아가기
           </Link>
-          <Button className=''>임시 저장</Button>
+          <Button className="">임시 저장</Button>
           <Button
             type="submit"
             className="bg-black color-white"

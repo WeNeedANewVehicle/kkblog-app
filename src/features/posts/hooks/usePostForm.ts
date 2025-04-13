@@ -16,7 +16,7 @@ function usePostForm() {
     watch,
     getValues,
     setError,
-    clearErrors
+    clearErrors,
   } = useForm<PostSchema>({
     resolver: zodResolver(postSchema),
     defaultValues: {
@@ -28,7 +28,7 @@ function usePostForm() {
       title: '',
       id: undefined,
     },
-    mode: 'all'
+    mode: 'all',
   })
 
   const tagFields = useFieldArray({
@@ -56,18 +56,18 @@ function usePostForm() {
 
   const onChangeTag = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      let value = e.target.value;
+      let value = e.target.value
 
-      const pureValue = value.replaceAll(',', '');
+      const pureValue = value.replaceAll(',', '')
       const isExist = tagFields.fields.find((tag) => tag.label === pureValue)
 
       if (isExist) {
         setError('tags', { message: '같은 이름의 태그가 존재합니다.' })
-        setError('tagInput', { message: '같은 이름의 태그가 존재합니다.' });
-        return;
+        setError('tagInput', { message: '같은 이름의 태그가 존재합니다.' })
+        return
       }
 
-      const isEmpty = value.trim() === '' || pureValue === '';
+      const isEmpty = value.trim() === '' || pureValue === ''
 
       if (!isEmpty && value.endsWith(',')) {
         clearErrors('tags')

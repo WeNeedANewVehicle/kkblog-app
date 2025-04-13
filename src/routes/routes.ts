@@ -19,6 +19,10 @@ const route = {
 
   error: '/error',
   notFound: '/not-found',
+  users: {
+    index: '/users',
+    profile: '/users/profile',
+  },
 }
 
 export default route

@@ -9,6 +9,7 @@ import React, {
 
 const initialAppContext: AppContextType = {
   modal: [],
+  isMenuOpen: false,
 }
 
 export const AppContext = createContext(initialAppContext)

@@ -9,45 +9,48 @@ export const postSchema = z.object({
   desc: z.string().optional(),
   tagInput: z.string().optional(), // 태그를 추가할 때 입력 데이터
   thumbnail: z.string().url().optional(),
-  tags: z.array(tagSchema)
+  tags: z
+    .array(tagSchema)
     .max(10)
     .optional()
     .transform((tags) => {
       if (!tags) {
-        return tags;
+        return tags
       }
 
-      const labelMap = new Map<string, TagSchema[]>();
+      const labelMap = new Map<string, TagSchema[]>()
 
       for (const tag of tags) {
         if (!labelMap.has(tag.label)) {
-          labelMap.set(tag.label, []);
+          labelMap.set(tag.label, [])
         }
         const labels = labelMap.get(tag.label)
         labels!.push(tag)
       }
 
-      const result: TagSchema[] = [];
+      const result: TagSchema[] = []
 
       for (const [label, group] of Array.from(labelMap.entries())) {
-
         // id가 있는 항목 필터
-        const withId = group.filter((item: TagSchema) => item.id !== undefined);
+        const withId = group.filter((item: TagSchema) => item.id !== undefined)
         if (withId.length > 0) {
           // id가 있는 항목 중 첫 번째만 사용
-          result.push(withId[0]);
+          result.push(withId[0])
         } else {
           // 모두 id가 undefined면 최초 하나만 남김
-          result.push(group[0]);
+          result.push(group[0])
         }
       }
 
-      return result;
+      return result
     })
-    .refine((tags) => {
-      const set = new Set(tags?.map(tag => tag.label));
-      return set.size === tags?.length;
-    }, { message: '중복된 태그 이름이 있습니다.' }),
+    .refine(
+      (tags) => {
+        const set = new Set(tags?.map((tag) => tag.label))
+        return set.size === tags?.length
+      },
+      { message: '중복된 태그 이름이 있습니다.' }
+    ),
 
   files: z.array(fileSchema).optional(),
 

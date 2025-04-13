@@ -15,17 +15,16 @@ const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
   ({ fields, remove, append, isEdit, ...inputProps }, ref) => {
     return (
       <div className={`flex flex-col gap-2 bg-white dark:bg-gray-900 `}>
-        <ul className='flex gap-2 flex-wrap w-full'>
-
-        {fields?.map((tag, index) => (
-          <PostTag
-            //
-            key={tag?.id ?? index}
-            label={tag.label}
-            onDelete={() => remove(index)}
-            isEdit={isEdit}
-          />
-        ))}
+        <ul className="flex gap-2 flex-wrap w-full">
+          {fields?.map((tag, index) => (
+            <PostTag
+              //
+              key={tag?.id ?? index}
+              label={tag.label}
+              onDelete={() => remove(index)}
+              isEdit={isEdit}
+            />
+          ))}
         </ul>
 
         <Input

@@ -15,7 +15,12 @@ function useSignInForm() {
     defaultValues,
   })
 
-  const { mutate: signIn, isPending: isSignInPending, data, error: signInError } = useSignIn()
+  const {
+    mutate: signIn,
+    isPending: isSignInPending,
+    data,
+    error: signInError,
+  } = useSignIn()
 
   const { errors } = formState
 

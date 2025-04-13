@@ -17,9 +17,11 @@ function PostsPage() {
       <Search />
 
       <div className="flex w-full justify-end">
-        {<Link href={route.posts.write} className="btn-black px-3 py-2.5">
-          글쓰기
-        </Link>}
+        {
+          <Link href={route.posts.write} className="btn-black px-3 py-2.5">
+            글쓰기
+          </Link>
+        }
       </div>
 
       <ul

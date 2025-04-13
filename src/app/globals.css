@@ -23,46 +23,105 @@
   --color-gray-900: #212529;
   --color-black: #000;
 
-  --animate-scale: scale 0.3s forwards;
+  --animate-scale: scale 0.3s forwards both;
+  --animate-collapse-x: collapse-x 0.3s forwards both;
 
   @keyframes scale {
     from {
       transform: scale(100%);
     }
     to {
-      transform: scale(110%);  
+      transform: scale(110%);
     }
+  }
+
+  @keyframes collapse-x {
+    from {
+      transform: scaleX(0%);
+    } 
+    to {
+      transform: scaleY(100%);
+    }
+
+
   }
 }
 
-:root {
-  --color-burgundy-100: #f5dce0;
-  --color-burgundy-200: #e5b7c0;
-  --color-burgundy-300: #d48b9e;
-  --color-burgundy-400: #c0617c;
-  --color-burgundy-500: #a53d58;
-  --color-burgundy-600: #800020;
-  --color-burgundy-700: #6a001a;
-  --color-burgundy-800: #540015;
-  --color-burgundy-900: #3d000f;
+@layer base {
+  .logo > path {
+    fill: var(--color-black);
+    stroke: none;
+  }
 
-  --color-white: #fff;
-  --color-gray-100: #f8f9fa;
-  --color-gray-200: #e9ecef;
-  --color-gray-300: #dee2e6;
-  --color-gray-400: #ced4da;
-  --color-gray-500: #adb5bd;
-  --color-gray-600: #6c757d;
-  --color-gray-700: #495057;
-  --color-gray-800: #343a40;
-  --color-gray-900: #212529;
-  --color-black: #000;
+  ol,
+  ul,
+  menu {
+    list-style: none;
+  }
 
-  --header-height: 64px;
+  a {
+    text-decoration: none;
+  }
+
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
+    display: block;
+    vertical-align: middle;
+  }
+
+  svg {
+    cursor: pointer;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 2px solid var(--color-gray-800);
+    outline: none;
+    transition: all 0.2s ease-in-out;
+  }
+
+  body {
+    margin: 0 auto;
+    width: 100%;
+  }
 }
 
-.gnb {
-  @apply sticky m-auto w-full max-w-[1280px] flex justify-between top-0 p-4 text-white border-b-gray-200 border-b bg-white dark:bg-gray-900 dark:border-b-gray-600 dark:text-gray-200;
+.header-border-b {
+  @apply border-b-gray-200 dark:border-b-gray-600;
+}
+
+.header {
+  @apply sticky m-auto w-full max-w-[1280px] flex justify-between top-0 p-4 text-white border-b bg-white dark:bg-gray-900 dark:text-gray-200 ;
+}
+
+.icon {
+  @apply w-6 h-6 stroke-2 stroke-black [&>path]:fill-black;
+}
+
+.icon-btn {
+  @apply p-1 rounded-4xl hover:bg-gray-200 dark:hover:bg-gray-800;
 }
 
 .navigator {
@@ -81,55 +140,12 @@
   @apply px-3 py-2.5;
 }
 
-
-ol,
-ul,
-menu {
-  list-style: none;
+.mobile-hidden {
+  @apply max-[480px]:hidden;
 }
 
-a {
-  text-decoration: none;
-}
-
-img,
-svg,
-video,
-canvas,
-audio,
-iframe,
-embed,
-object {
-  display: block;
-  vertical-align: middle;
-}
-
-img,
-video {
-  max-width: 100%;
-  height: auto;
-}
-
-button {
-  cursor: pointer;
-}
-
-button:disabled {
-  cursor: not-allowed;
-}
-
-input {
-  width: 100%;
-  padding: 10px 12px;
-  font-size: 16px;
-  border: 2px solid var(--color-gray-800);
-  outline: none;
-  transition: all 0.2s ease-in-out;
-}
-
-body {
-  margin: 0 auto;
-  width: 100%;
+.mobile-visible {
+  @apply min-[480px]:hidden;
 }
 
 #main {
@@ -159,11 +175,9 @@ body {
   gap: 0.5rem;
 }
 
-
 .gap-1.5 {
   gap: 1.5rem;
 }
-
 
 .w-full {
   width: 100%;
@@ -191,7 +205,6 @@ body {
   padding: 1.5rem 2rem;
   font-size: 2rem;
 }
-
 
 .color-white {
   color: var(--color-white);
@@ -249,9 +262,7 @@ body {
     color: var(--color-gray-200);
   }
 
-  .logo > path,
-  .logo-md > path,
-  .logo-lg > path {
+  .logo > path {
     fill: var(--color-gray-200);
     stroke: var(--color-gray-200);
   }

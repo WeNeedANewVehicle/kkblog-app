@@ -23,7 +23,7 @@ export async function signInApi(params: SignInDto) {
       const [bearer, token] = authorization?.split(' ') ?? ['', '']
 
       if (res.status >= 400 && res.status < 500) {
-        return res;
+        return res
       }
 
       if (bearer !== 'Bearer') {

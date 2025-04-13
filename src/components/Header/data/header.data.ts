@@ -1,13 +1,11 @@
 import route from '@/routes/routes'
 
-export interface MenuItem {
+export interface HeaderMenuItem {
   to: string
   text: string
 }
 
-export type Menu = MenuItem[]
-
-export const menu: Menu = [
+export const menu: HeaderMenuItem[] = [
   {
     text: '글목록',
     to: route.posts.index,

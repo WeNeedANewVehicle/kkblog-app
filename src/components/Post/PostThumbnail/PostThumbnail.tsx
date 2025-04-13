@@ -7,9 +7,7 @@ type PostThumbnailProps = Pick<PostItemProps, 'thumbnail' | 'title'>
 
 function PostThumbnail({ thumbnail, title }: PostThumbnailProps) {
   return (
-    <div
-      className="flex justify-center items-center relative bg-white dark:bg-gray-800 w-full overflow-hidden aspect-video"
-    >
+    <div className="flex justify-center items-center relative bg-white dark:bg-gray-800 w-full overflow-hidden aspect-video">
       {thumbnail ? (
         <Image
           fill
@@ -22,7 +20,7 @@ function PostThumbnail({ thumbnail, title }: PostThumbnailProps) {
         <div
           className={`flex flex-col justify-center items-center bg-white dark:bg-gray-800 text-gray-600`}
         >
-          <ImageIcon className="stroke-gray-600" />
+          <ImageIcon className="stroke-gray-600" width={100} height={'auto'} />
           <p> 미리보기가 없습니다. </p>
         </div>
       )}

@@ -13,7 +13,7 @@ function useSignIn() {
     mutationFn: signInApi,
     onSuccess: () => {
       router.replace(redirectionUrl ?? route.index)
-    }
+    },
   })
 }
 
