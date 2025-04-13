@@ -16,7 +16,9 @@ function PostItem({
   author,
 }: PostItemProps) {
   return (
-    <li className={`bg-gray-100 shadow-2xl [&>a>div>img]:scale-100 hover:[&>a>div>img]:scale-110`}>
+    <li
+      className={`bg-gray-100 shadow-2xl [&>a>div>img]:scale-100 hover:[&>a>div>img]:scale-110`}
+    >
       <Link href={route.posts.detail(id)}>
         <PostThumbnail title={title} thumbnail={thumbnail} />
 

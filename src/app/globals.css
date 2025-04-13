@@ -38,12 +38,10 @@
   @keyframes collapse-x {
     from {
       transform: scaleX(0%);
-    } 
+    }
     to {
       transform: scaleY(100%);
     }
-
-
   }
 }
 
@@ -93,18 +91,25 @@
     cursor: not-allowed;
   }
 
-  input {
+  /* input {
     width: 100%;
     padding: 10px 12px;
     font-size: 16px;
     border: 2px solid var(--color-gray-800);
     outline: none;
     transition: all 0.2s ease-in-out;
-  }
+  } */
 
   body {
     margin: 0 auto;
     width: 100%;
+  }
+
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    display: none;
   }
 }
 
@@ -113,11 +118,11 @@
 }
 
 .header {
-  @apply sticky m-auto w-full max-w-[1280px] flex justify-between top-0 p-4 text-white border-b bg-white dark:bg-gray-900 dark:text-gray-200 ;
+  @apply sticky m-auto w-full max-w-[1280px] flex justify-between top-0 p-4 text-white border-b bg-white dark:bg-gray-900 dark:text-gray-200;
 }
 
 .icon {
-  @apply w-6 h-6 stroke-2 stroke-black [&>path]:fill-black;
+  @apply w-6 h-6 stroke-2;
 }
 
 .icon-btn {
@@ -148,6 +153,10 @@
   @apply min-[480px]:hidden;
 }
 
+.interact-gray-icon {
+  @apply stroke-gray-800 dark:stroke-gray-600
+}
+
 #main {
   margin: 0 auto;
   display: flex;
@@ -164,86 +173,6 @@
 
 .pointer {
   cursor: pointer;
-}
-
-.logo > path {
-  fill: var(--color-black);
-  stroke: none;
-}
-
-.gap-half {
-  gap: 0.5rem;
-}
-
-.gap-1.5 {
-  gap: 1.5rem;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.h-full {
-  height: 100%;
-}
-
-.margin-auto {
-  margin: auto;
-}
-
-.sm {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-}
-
-.md {
-  padding: 1rem 1.5rem;
-  font-size: 1.5rem;
-}
-
-.lg {
-  padding: 1.5rem 2rem;
-  font-size: 2rem;
-}
-
-.color-white {
-  color: var(--color-white);
-}
-
-.color-black {
-  color: var(--color-black);
-}
-
-.text-bold {
-  font-weight: bold;
-}
-
-.border-none {
-  border: none;
-}
-
-.position-abs {
-  position: absolute;
-}
-
-.position-fix {
-  position: fixed;
-}
-
-.position-rel {
-  position: relative;
-}
-
-.overflow-hidden {
-  overflow: hidden;
-}
-
-.overflow-y-hidden {
-  overflow-y: hidden;
-}
-
-.overflow-x-hidden {
-  overflow-x: hidden;
 }
 
 @media screen and (min-width: 768px) {

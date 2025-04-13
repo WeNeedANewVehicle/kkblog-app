@@ -25,7 +25,7 @@ const Password = forwardRef<HTMLInputElement, PassWordProps>(
     return (
       <div
         //
-        className={`flex gap-4 items-center border-2 pr-3 border-gray-800 dark:bg-[none] ${className ?? ''}`}
+        className={`flex gap-4 items-center border-2 pr-3 border-gray-800 dark:bg-[none] ${className || ''}`}
       >
         <Input
           //
@@ -36,14 +36,14 @@ const Password = forwardRef<HTMLInputElement, PassWordProps>(
         />
         <Button
           //
-          className="bg"
+          className="icon-btn"
           aria-label="암호 노출 여부 토글 버튼"
           onClick={onToggleMasking}
         >
           {isMasking ? (
-            <EyeSlach className="stroke-1 stroke-black dark:stroke-gray-800" />
+            <EyeSlach className="icon interact-gray-icon [&>path]:fill-none!" />
           ) : (
-            <Eye className="stroke-1 stroke-black dark:stroke-gray-800" />
+            <Eye className="icon interact-gray-icon [&>path]:fill-none!" />
           )}
         </Button>
       </div>

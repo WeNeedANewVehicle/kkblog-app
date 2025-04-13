@@ -27,7 +27,7 @@ function ConfirmModal({
       {...rest}
     >
       <CloseIcon className={`flex self-end ${style.close}`} onClick={onClose} />
-      <h2 className={`flex self-center text-bold ${style.title}`}>{title}</h2>
+      <h2 className={`flex self-center font-bold ${style.title}`}>{title}</h2>
       {children}
     </Modal>
   )

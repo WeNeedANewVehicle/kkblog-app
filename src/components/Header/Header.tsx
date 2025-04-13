@@ -10,7 +10,7 @@ import redirectStorage from '@/common/storages/redirect-storage'
 import { usePathname } from 'next/navigation'
 import MobileHeader from '@/components/Header/MobileHeader'
 import { useSetAppContext } from '@/components/Providers/hooks/useSetAppContext'
-import Button from '@/components/Button/Button';
+import Button from '@/components/Button/Button'
 
 interface HeaderProps {
   menu: HeaderMenuItem[]
@@ -35,8 +35,8 @@ function Header({ menu }: HeaderProps) {
   const dispatch = useSetAppContext()
 
   const onOpenMobileHeader = useCallback(() => {
-    dispatch(state => ({ ...state, isMenuOpen: true }))
-  }, [dispatch]);
+    dispatch((state) => ({ ...state, isMenuOpen: true }))
+  }, [dispatch])
 
   return (
     <menu className="header header-border-b z-[9999]">
@@ -76,7 +76,10 @@ function Header({ menu }: HeaderProps) {
         </li>
 
         <Button className="mobile-visible icon-btn">
-          <MenuIcon className="icon" onClick={onOpenMobileHeader}/>
+          <MenuIcon
+            className="icon stroke-black dark:stroke-gray-200 stroke-2"
+            onClick={onOpenMobileHeader}
+          />
         </Button>
       </ul>
 

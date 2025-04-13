@@ -27,7 +27,7 @@ function Page() {
               <Input
                 {...register('email')}
                 placeholder="example@email.com"
-                className={`w-full ${errors.email && 'error-border'}`}
+                className={`${errors.email && 'error-border'}`}
               />
               <ErrorMessage message={errors.email?.message} />
             </LabeledText>
@@ -36,7 +36,7 @@ function Page() {
               <Password
                 {...register('password')}
                 placeholder="********"
-                className="w-full"
+                className={`${errors.password && 'error-border'}`}
               />
               <ErrorMessage message={errors.password?.message} />
             </LabeledText>

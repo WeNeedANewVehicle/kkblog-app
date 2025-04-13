@@ -35,9 +35,9 @@ export async function generateMetadata(
         modifiedTime: data.updatedAt,
       },
     }
-  } catch (err)  {
-    const { meta } = err as unknown as ErrorBaseResponse;
-    
+  } catch (err) {
+    const { meta } = err as unknown as ErrorBaseResponse
+
     if (meta.status === HttpStatus.NOT_FOUND) {
       return notFound()
     }

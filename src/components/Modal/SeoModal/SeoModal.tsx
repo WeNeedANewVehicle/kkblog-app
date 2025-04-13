@@ -36,12 +36,12 @@ function SeoModal({
       {...rest}
     >
       <CloseIcon className={`flex self-end ${style.close}`} onClick={onClose} />
-      <h2 className={`flex self-center text-bold ${style.title}`}>SEO 설정 </h2>
+      <h2 className={`flex self-center font-bold ${style.title}`}>SEO 설정 </h2>
       <form className="flex flex-column gap-1" onSubmit={onConfirm}>
         <div>
           <LabeledText label="썸네일 이미지">
             <div
-              className={`flex justify-center items-center position-rel ${style.preview}`}
+              className={`flex justify-center items-center relative ${style.preview}`}
             >
               <label
                 className={`flex sm pointer ${buttonCss.black}`}
