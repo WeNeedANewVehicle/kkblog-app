@@ -1,5 +1,3 @@
 import { CreatePostDto } from './createPost.dto'
 
-export interface UpdatePostDto extends CreatePostDto {
-  id: string
-}
+export interface UpdatePostDto extends CreatePostDto {}

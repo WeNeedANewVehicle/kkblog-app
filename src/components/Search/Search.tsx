@@ -9,7 +9,7 @@ interface SearchProps {}
 
 function Search() {
   const router = useRouter()
-  
+
   const ref = useRef<HTMLInputElement>(null)
 
   const onSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {

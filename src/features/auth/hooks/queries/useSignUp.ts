@@ -15,12 +15,12 @@ interface UseSignUpParams {
 }
 
 function useSignUp({ setError }: UseSignUpParams) {
-  const router = useRouter();
+  const router = useRouter()
 
   return useMutation({
     mutationFn: signUpApi,
     onSuccess: (_) => {
-      const redirectUrl = redirectStorage.getRedirectUrl();
+      const redirectUrl = redirectStorage.getRedirectUrl()
 
       if (redirectUrl) {
         router.replace(redirectUrl)

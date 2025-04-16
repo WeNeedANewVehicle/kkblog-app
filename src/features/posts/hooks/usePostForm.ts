@@ -5,6 +5,7 @@ import { stripHtmlTags } from '@/common/regexps/regexps'
 import { WysiwygEditorProps } from '@/components/WysiwygEditor/WysiwygEditor'
 import { ChangeEvent, useCallback } from 'react'
 
+export type UsePostFormReturn = ReturnType<typeof usePostForm>
 function usePostForm() {
   const {
     control,
@@ -16,6 +17,7 @@ function usePostForm() {
     watch,
     getValues,
     setError,
+    reset,
     clearErrors,
   } = useForm<PostSchema>({
     resolver: zodResolver(postSchema),
@@ -87,6 +89,7 @@ function usePostForm() {
     setFocus,
     getValues,
     watch,
+    reset,
   }
 }
 

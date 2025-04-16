@@ -28,13 +28,15 @@ import './WysiwygEditor.css'
 
 export interface WysiwygEditorProps {
   onChange: (event: EventInfo, editor: ClassicEditor) => void
+  onReady?: (editor: ClassicEditor) => void
 }
 
-function WysiwygEditor({ onChange }: WysiwygEditorProps) {
+function WysiwygEditor({ onChange, onReady }: WysiwygEditorProps) {
   return (
     <div className={styles.wrapper}>
       <CKEditor
         onChange={onChange}
+        onReady={onReady}
         editor={ClassicEditor}
         config={{
           licenseKey: 'GPL',
