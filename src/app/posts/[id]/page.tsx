@@ -1,4 +1,4 @@
-import { HttpStatus } from '@/common/constant/constant'
+import { HttpStatus } from '@/common/enum/http-status.enum'
 import { DynamicParam } from '@/common/types/dynamicParams.type'
 import { DynamicSearchParams } from '@/common/types/searchParams.type'
 import { toReadableDate } from '@/common/util/time.util'
@@ -6,7 +6,7 @@ import Post from '@/components/Post/Post'
 import { getPostApi } from '@/features/posts/api/posts'
 import { notFound, redirect } from 'next/navigation'
 import { Metadata, ResolvingMetadata } from 'next'
-import { ErrorBaseResponse } from '@/common/dto/base-response.dto'
+import { ErrorBaseResponse } from '@/common/dto/baseResponse'
 import route from '@/routes/routes'
 
 interface PostPageMetadata {

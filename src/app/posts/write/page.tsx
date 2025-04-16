@@ -20,8 +20,8 @@ const DynamicWysiwygEditor = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div>
-        <Loading />
+      <div className='flex flex-col justify-center items-center gap-4 flex-1'>
+        <Loading width={75} height={75}/>
         <div>에디터를 불러오는 중입니다.</div>
       </div>
     ),
@@ -49,20 +49,22 @@ function PostWritePage() {
     const attachedFiles = values.attachedFiles?.item(0)
     const form = new FormData()
 
-    if (attachedFiles) {
-      form.append('file', attachedFiles, attachedFiles.name)
-    }
-
-    const result = await uploadFile(form)
-
-    await createPost({
+    const data = {
       content: values.content,
       tags: values?.tags ?? [],
       title: values.title,
       files: values.files,
-      thumbnail: result.data,
+      thumbnail: values.thumbnail,
       desc: values.desc,
-    })
+    }
+
+    if (attachedFiles) {
+      form.append('file', attachedFiles, attachedFiles.name);
+      const thumbnailResponse = await uploadFile(form)
+      data.thumbnail = thumbnailResponse.data;
+    }
+
+    await createPost(data)
   })
 
   const onSubmit = handleSubmit(
@@ -82,8 +84,8 @@ function PostWritePage() {
   return (
     <LoginGuard>
       <form className="flex flex-col flex-1 gap-4" onSubmit={onSubmit}>
-        <div>
-          <LabeledText label="제목">
+        <div className="flex flex-col gap-1">
+          <LabeledText required label="제목" className='flex flex-col gap-1'>
             <Input
               {...register('title')}
               placeholder="여기에 제목을 입력하세요"
@@ -97,6 +99,7 @@ function PostWritePage() {
           <TagsInput
             //
             isEdit
+            className='border-2'
             fields={tagFields.fields}
             remove={tagFields.remove}
             append={tagFields.append}
@@ -113,23 +116,23 @@ function PostWritePage() {
           />
         </div>
 
-        <div className="flex flex-col flex-1 gap-4">
-          <h2>내용</h2>
+        <div className="flex flex-col flex-1 gap-1">
+          <LabeledText required label="내용"/>
           <DynamicWysiwygEditor onChange={onChangeEditor} />
           <ErrorMessage message={formState.errors.content?.message} />
         </div>
 
         <div className="flex gap-4">
           <Link
-            className="flex items-center bg-gray-100 color-gray-200"
+            className="flex items-center bg-gray-100 color-gray-200 px-3 py-2.5"
             href={route.posts.index}
           >
             돌아가기
           </Link>
-          <Button className="">임시 저장</Button>
+          <Button className="px-3 py-2.5">임시 저장</Button>
           <Button
             type="submit"
-            className="bg-black color-white"
+            className="btn-black px-3 py-2.5"
             disabled={formState.isLoading || formState.isSubmitting}
           >
             작성

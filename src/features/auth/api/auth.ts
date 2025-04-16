@@ -1,5 +1,5 @@
 import { METHODS } from '@/common/constant/constant'
-import { BaseResponse } from '@/common/dto/base-response.dto'
+import { BaseResponse } from '@/common/dto/baseResponse'
 import { messages } from '@/common/messages/messages'
 import tokenStorage from '@/common/storages/token-storage'
 import api from '@/common/util/api.util'
@@ -54,6 +54,18 @@ export async function signUpApi(params: SignUpDto) {
     url: '/auth/sign-up',
     method: METHODS.POST,
     body: params,
+    middleware: (res) => {
+      const authorization = res.headers.get('Authorization')
+      const [bearer, token] = authorization?.split(' ') ?? ['', '']
+
+      if (bearer !== 'Bearer') {
+        throw new Error(messages.validation.auth.invalid_bearer_token)
+      }
+
+      if (token) {
+        tokenStorage.setAccessToken(token)
+      }
+    },
   })
 }
 // 엑세스 토큰 재발급

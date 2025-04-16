@@ -23,9 +23,10 @@ export async function createPostApi(params: CreatePostDto) {
 }
 
 // 글 목록
-export async function getPostsApi() {
+export async function getPostsApi(params: GetPostsDto) {
   return await api<GetPostsDto, GetPostsResponseDto>({
     url: '/board/posts',
+    queries: params,
   })
 }
 

@@ -1,5 +1,9 @@
+import { OrderBy } from '@/common/types/orderBy.type'
+
 export interface Paging {
-  cursor: string
+  cursor?: string
+  pageSize?: number
+  orderBy?: OrderBy
 }
 
 export interface Meta {

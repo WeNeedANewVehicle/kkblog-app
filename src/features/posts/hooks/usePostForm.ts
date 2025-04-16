@@ -44,12 +44,6 @@ function usePostForm() {
   const onChangeEditor: WysiwygEditorProps['onChange'] = useCallback(
     (_, editor) => {
       setValue('content', editor.getData())
-      const text = editor
-        .getData()
-        .replace(stripHtmlTags, '')
-        .trim()
-        .slice(0, 300)
-      setValue('desc', text)
     },
     [setValue]
   )

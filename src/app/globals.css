@@ -1,7 +1,6 @@
 @import 'tailwindcss';
 
 @theme {
-
   --breakpoint-sm: 30rem;
   --breakpoint-md: 48rem;
   --color-burgundy-100: #f5dce0;
@@ -28,6 +27,8 @@
 
   --animate-scale: scale 0.3s both;
   --animate-collapse-x: collapse-x 0.3s forwards both;
+  --animate-swipe-bottom: swipe-bottom 0.3s forwards;
+  --animate-swipe-bottom-hidden: swipe-bottom-hidden 0.3s forwards;
 
   @keyframes scale {
     from {
@@ -44,6 +45,24 @@
     }
     to {
       transform: scaleY(100%);
+    }
+  }
+
+  @keyframes swipe-bottom {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 100dvh, 0);
+    }
+  }
+
+  @keyframes swipe-bottom-hidden {
+    from {
+      transform: translate3d(0, 100dvh, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
     }
   }
 }
@@ -94,24 +113,15 @@
     cursor: not-allowed;
   }
 
-  /* input {
-    width: 100%;
-    padding: 10px 12px;
-    font-size: 16px;
-    border: 2px solid var(--color-gray-800);
-    outline: none;
-    transition: all 0.2s ease-in-out;
-  } */
-
   body {
     margin: 0 auto;
     width: 100%;
   }
 
-  input[type="search"]::-webkit-search-decoration,
-  input[type="search"]::-webkit-search-cancel-button,
-  input[type="search"]::-webkit-search-results-button,
-  input[type="search"]::-webkit-search-results-decoration {
+  input[type='search']::-webkit-search-decoration,
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-results-button,
+  input[type='search']::-webkit-search-results-decoration {
     display: none;
   }
 }
@@ -140,6 +150,10 @@
   @apply bg-black text-white;
 }
 
+.btn-white {
+  @apply bg-white text-black;
+}
+
 .error-border {
   @apply border-2 border-red-500;
 }
@@ -157,7 +171,7 @@
 }
 
 .interact-gray-icon {
-  @apply stroke-gray-800 dark:stroke-gray-600
+  @apply stroke-gray-800 dark:stroke-gray-600;
 }
 
 #main {
@@ -167,8 +181,6 @@
   align-self: center;
   width: 100%;
   max-width: 1280px;
-
-  /** GNB가 65px 이므로 그만큼 감소 */
   min-height: 100dvh;
   padding: 1rem;
   transition: background-color 0.5s linear;

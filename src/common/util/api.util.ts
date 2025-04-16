@@ -1,12 +1,13 @@
-import { baseUrl, HttpStatus, METHODS } from '@/common/constant/constant'
-import { BaseResponse, ErrorBaseResponse } from '@/common/dto/base-response.dto'
+import { baseUrl, METHODS } from '@/common/constant/constant'
+import { HttpStatus } from '@/common/enum/http-status.enum'
+import { BaseResponse, ErrorBaseResponse } from '@/common/dto/baseResponse'
 import tokenStorage from '@/common/storages/token-storage'
 import { refreshAccessTokenApi } from '@/features/auth/api/auth'
 
 interface ApiParams<P> {
   url: string
   method?: METHODS
-  queries?: string
+  queries?: object
   body?: P
   credentials?: RequestInit['credentials']
   accessToken?: string | null
@@ -41,7 +42,7 @@ async function api<P, T>({
   }
 
   try {
-    const result = await fetch(baseUrl + url + (queries ?? ''), {
+    const result = await fetch(baseUrl + url + (queries ? `?${queries}` : ''), {
       method,
       body: isFile ? body : JSON.stringify(body),
       headers,

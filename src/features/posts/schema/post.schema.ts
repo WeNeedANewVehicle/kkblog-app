@@ -6,7 +6,7 @@ export const postSchema = z.object({
   id: z.string().uuid().optional(),
   title: z.string().min(3, { message: '게시물 제목은 3자 이상이어야 합니다' }),
   content: z.string().min(1, { message: '게시물 내용이 입력되지 않았습니다.' }),
-  desc: z.string().optional(),
+  desc: z.string().max(300).optional(),
   tagInput: z.string().optional(), // 태그를 추가할 때 입력 데이터
   thumbnail: z.string().url().optional(),
   tags: z

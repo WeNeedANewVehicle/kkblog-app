@@ -1,9 +1,12 @@
+'use client'
+
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { signUpApi } from '../../api/auth'
 import { SignUpSchema } from '../../schema/signUpSchema'
 import { UseFormSetError } from 'react-hook-form'
-import { ErrorBaseResponse } from '@/common/dto/base-response.dto'
-import { ErrorMessage, HttpStatus } from '@/common/constant/constant'
+import { ErrorMessage } from '@/common/enum/error-messages'
+import redirectStorage from '@/common/storages/redirect-storage'
+import { useRouter } from 'next/navigation'
 
 export const SIGN_UP = 'SIGN_UP'
 
@@ -12,10 +15,16 @@ interface UseSignUpParams {
 }
 
 function useSignUp({ setError }: UseSignUpParams) {
+  const router = useRouter();
+
   return useMutation({
     mutationFn: signUpApi,
-    onSuccess: (data) => {
-      console.log('onSuccess', data)
+    onSuccess: (_) => {
+      const redirectUrl = redirectStorage.getRedirectUrl();
+
+      if (redirectUrl) {
+        router.replace(redirectUrl)
+      }
     },
     onError: ({ error, meta }) => {
       switch (meta?.code) {

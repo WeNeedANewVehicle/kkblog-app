@@ -1,4 +1,4 @@
-import { ErrorBaseResponse } from '@/common/dto/base-response.dto'
+import { ErrorBaseResponse } from '@/common/dto/baseResponse'
 import '@tanstack/react-query'
 
 declare module '@tanstack/react-query' {
