@@ -7,7 +7,7 @@ import { refreshAccessTokenApi } from '@/features/auth/api/auth'
 interface ApiParams<P> {
   url: string
   method?: METHODS
-  queries?: object
+  queries?: string
   body?: P
   credentials?: RequestInit['credentials']
   accessToken?: string | null

@@ -11,6 +11,7 @@ import {
   GetPostsResponseDto,
 } from '@/features/posts/api/dto/get-post-list.dto'
 import { UpdatePostDto } from './dto/updatePost.dto'
+import objectToQueryString from '@/common/util/objectToQueryString'
 
 // 글 작성
 export async function createPostApi(params: CreatePostDto) {
@@ -27,7 +28,7 @@ export async function createPostApi(params: CreatePostDto) {
 export async function getPostsApi(params: GetPostsDto) {
   return await api<GetPostsDto, GetPostsResponseDto>({
     url: '/board/posts',
-    queries: params,
+    queries: objectToQueryString(params),
   })
 }
 
