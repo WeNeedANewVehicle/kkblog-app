@@ -1,13 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import React, { Fragment, Suspense, useEffect, useRef } from 'react'
+import React, { Fragment, Suspense } from 'react'
 import Search from '@/components/Search/Search'
 import route from '@/routes/routes'
 import useInfiniteGetPosts from '@/features/posts/hooks/useInfiniteGetPosts'
 import PostItem from '@/components/Post/PostItem/PostItem'
 import useMe from '@/features/auth/hooks/queries/useMe'
 import useInfiniteScroll from '@/common/hooks/useInfiniteScroll'
+import Loading from '@/../public/icons/loading.svg';
 
 function PostsPage() {
   const { data: posts, fetchNextPage, hasNextPage } = useInfiniteGetPosts();
@@ -26,7 +27,7 @@ function PostsPage() {
         )}
       </div>
 
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <ul
           className={`grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8`}
         >

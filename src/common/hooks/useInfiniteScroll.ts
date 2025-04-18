@@ -8,34 +8,22 @@ interface UseInfiniteScrollParams {
 }
 
 function useInfiniteScroll<T extends HTMLElement>({ hasNextPage, fetchNextPage }: UseInfiniteScrollParams) {
-
     const callback: IntersectionObserverCallback = useCallback((entries, observer) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 fetchNextPage();
             }
         })
-    }, [])
+    }, [fetchNextPage]);
 
-    const observer = useIntersectionObserver(callback);
     const ref = useRef<T>(null);
 
-    useEffect(() => {
-        if (!hasNextPage) {
-            return;
-        }
-
-        if (ref.current) {
-            observer.observe(ref.current);
-        }
-
-        return () => {
-            if (ref.current) {
-                observer.unobserve(ref.current);
-            }
-        }
-
-    }, [hasNextPage, fetchNextPage]);
+    useIntersectionObserver({
+        callback,
+        ref,
+        fetchNextPage,
+        hasNextPage,
+    });
 
     return ref;
 }
