@@ -11,6 +11,7 @@ function PostThumbnail({ thumbnail, title }: PostThumbnailProps) {
       {thumbnail ? (
         <Image
           fill
+          sizes='(max-width: 48rem) 100vw, 50vw'
           src={thumbnail}
           alt={`게시물 "${title}"의 썸네일 이미지가 보입니다.`}
           priority
