@@ -7,38 +7,13 @@ import route from '@/routes/routes'
 import useInfiniteGetPosts from '@/features/posts/hooks/useInfiniteGetPosts'
 import PostItem from '@/components/Post/PostItem/PostItem'
 import useMe from '@/features/auth/hooks/queries/useMe'
+import useInfiniteScroll from '@/common/hooks/useInfiniteScroll'
 
 function PostsPage() {
-  const ref = useRef<HTMLDivElement>(null)
-
   const { data: posts, fetchNextPage, hasNextPage } = useInfiniteGetPosts();
   const { data: me } = useMe()
-
-  useEffect(() => {
-    if (!hasNextPage) {
-      return;
-    }
-
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          fetchNextPage();
-        }
-      })
-    })
-
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
-      }
-    }
-
-  }, [hasNextPage, fetchNextPage]);
-
+  const ref = useInfiniteScroll<HTMLDivElement>({ hasNextPage, fetchNextPage });
+  
   return (
     <section className="flex flex-col items-center justify-center gap-8 pt-20">
       <Search />
@@ -55,11 +30,14 @@ function PostsPage() {
         <ul
           className={`grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8`}
         >
-          {posts?.pages.map((data) => (
-            <Fragment key={`${new Date().getTime()}-${data.meta.paging?.nextCursor}`} >
-              {data.data.map((post) => <PostItem key={post.id} {...post} />)}
-            </Fragment>
-            ))}
+          {posts?.pages.map((data) => {
+            const key = `${new Date().getTime()}-${data.meta.paging?.nextCursor}`
+            return (
+              <Fragment key={key} >
+                {data.data.map((post) => <PostItem key={post.id} {...post} />)}
+              </Fragment>
+            )
+          })}
         </ul>
         <div ref={ref} />
       </Suspense>
