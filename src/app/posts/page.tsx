@@ -12,7 +12,7 @@ import Loading from '@/../public/icons/loading.svg';
 import PostItemSkeleton from '@/components/Post/PostItem/PostItemSkeleton/PostItemSkeleton'
 
 function PostsPage() {
-  const { data: posts, fetchNextPage, hasNextPage, isLoading, isFetching, isPending } = useInfiniteGetPosts();
+  const { data: posts, fetchNextPage, hasNextPage, isFetching } = useInfiniteGetPosts();
   const { data: me } = useMe()
   const ref = useInfiniteScroll<HTMLDivElement>({ hasNextPage, fetchNextPage });
   
@@ -41,7 +41,7 @@ function PostsPage() {
               </Fragment>
             )
           })}
-          {isLoading && (Array.from({ length: INFINITE_POSTS_PAGE_SIZE }, (_, k) => <PostItemSkeleton key={k}/>))}
+          {isFetching && (Array.from({ length: INFINITE_POSTS_PAGE_SIZE }, (_, k) => <PostItemSkeleton key={k}/>))}
         </ul>
         <div ref={ref} />
       </Suspense>
