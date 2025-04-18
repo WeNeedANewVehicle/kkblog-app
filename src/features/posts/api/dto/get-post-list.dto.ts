@@ -1,8 +1,8 @@
-import { Paging } from '@/common/dto/baseResponse'
+import { PaginationDto } from '@/common/dto/pagination.dto'
 import { Author } from '@/features/auth/types/auth.type'
 import { Posts } from '@/features/posts/types/post.type'
 
-export interface GetPostsDto extends Paging {
+export class GetPostsDto extends PaginationDto {
   search?: string | string[]
 }
 

@@ -1,9 +1,10 @@
 import { OrderBy } from '@/common/types/orderBy.type'
 
-export interface Paging {
-  cursor?: string
-  pageSize?: number
-  orderBy?: OrderBy
+export class Paging {
+  nextCursor?: string
+  prevCursor?: string
+  pageSize?: number = 20
+  order?: OrderBy = 'desc'
 }
 
 export interface Meta {
