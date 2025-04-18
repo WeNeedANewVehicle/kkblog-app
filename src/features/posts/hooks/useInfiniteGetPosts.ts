@@ -4,7 +4,7 @@ import {
 } from '@tanstack/react-query'
 import { getPostsApi } from '@/features/posts/api/posts'
 
-const PAGE_SIZE = 2;
+const PAGE_SIZE = 10;
 export const GET_INFINITE_POSTS = 'GET_INFINITE_POSTS'
 
 function useInfiniteGetPostsQueryOptions() {
