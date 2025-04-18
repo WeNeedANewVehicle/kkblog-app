@@ -26,10 +26,13 @@ function MobileHeader({ menu, me, onClickLink }: MobileHeaderProps) {
     dispatch((state) => ({ ...state, isMenuOpen: false }))
   }, [dispatch])
 
-  const onClickMobileLink = useCallback((e: MouseEvent<HTMLAnchorElement>) => {
-    onCloseMobileHeader()
-    onClickLink()
-  }, [])
+  const onClickMobileLink = useCallback(
+    (e: MouseEvent<HTMLAnchorElement>) => {
+      onCloseMobileHeader()
+      onClickLink()
+    },
+    [onClickLink, onCloseMobileHeader]
+  )
 
   return (
     <div
