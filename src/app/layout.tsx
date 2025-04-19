@@ -22,6 +22,8 @@ export default function RootLayout({
     <html lang="en">
       <Head>
         <title>크크블로그</title>
+        <meta name="description" content="안녕하세요. 크크블로그입니다." />
+        
       </Head>
 
       <body className={kia.className}>

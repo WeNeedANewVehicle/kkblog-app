@@ -19,6 +19,7 @@ export const hideGnbPaths = [
   route.auth.signUp,
   route.auth.signIn,
   route.posts.write,
+  route.posts.edit('')
 ]
 
 export const allowedFileExtensions = []
