@@ -1,5 +1,4 @@
 import React, { LabelHTMLAttributes, ReactNode } from 'react'
-import styles from '@/components/Input/LabeledInput/LabledInput.module.css'
 
 interface LabeledTextProps extends LabelHTMLAttributes<HTMLLabelElement> {
   label: ReactNode
@@ -14,9 +13,9 @@ function LabeledText({
   ...rest
 }: LabeledTextProps) {
   return (
-    <label className={`flex flex-col gap-half ${className ?? ''}`} {...rest}>
-      <div className={styles.text}>
-        {label} {required && <b className={styles.required}>*</b>}
+    <label className={`flex flex-col gap-2 ${className ?? ''}`} {...rest}>
+      <div className="font-bold">
+        {label} {required && <b className="text-burgundy-500">*</b>}
       </div>
       {children}
     </label>
