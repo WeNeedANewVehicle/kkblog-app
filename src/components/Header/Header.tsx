@@ -39,7 +39,7 @@ function Header({ menu }: HeaderProps) {
   }, [dispatch])
 
   return (
-    <menu className="header header-border-b z-[9999]">
+    <menu className="header header-border-b z-[9999] h-[4rem]">
       <ul className="navigator">
         {menu.map(({ text, to }) => (
           <li key={to} className={`${active(to)} mobile-hidden`}>
@@ -51,7 +51,7 @@ function Header({ menu }: HeaderProps) {
       </ul>
 
       <Link href={route.index}>
-        <Logo className="logo" width={100} height="auto" />
+        <Logo className="logo" width={100} height={32} />
       </Link>
 
       <ul className="navigator">

@@ -40,7 +40,7 @@ function MobileHeader({ menu, me, onClickLink }: MobileHeaderProps) {
     >
       <div className="border-b header-border-b p-4 flex justify-between items-center">
         <Link href={route.index} onClick={onCloseMobileHeader}>
-          <LogoIcon className="logo" width={100} height="auto" />
+          <LogoIcon className="logo" width={100} height={32} />
         </Link>
 
         <Button className="icon-btn" onClick={onCloseMobileHeader}>

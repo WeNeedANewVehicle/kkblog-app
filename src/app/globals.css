@@ -116,6 +116,7 @@
   body {
     margin: 0 auto;
     width: 100%;
+    max-width: 1280px;
   }
 
   input[type='search']::-webkit-search-decoration,
@@ -131,7 +132,7 @@
 }
 
 .header {
-  @apply sticky m-auto w-full max-w-[1280px] flex justify-between top-0 p-4 text-white border-b bg-white dark:bg-gray-900 dark:text-gray-200;
+  @apply sticky m-auto w-full flex justify-between top-0 p-4 text-white border-b bg-white dark:bg-gray-900 dark:text-gray-200;
 }
 
 .icon {
@@ -184,8 +185,7 @@
   flex-flow: column;
   align-self: center;
   width: 100%;
-  max-width: 1280px;
-  min-height: 100dvh;
+  min-height: calc(100dvh - 4rem);
   padding: 1rem;
   transition: background-color 0.5s linear;
 }
