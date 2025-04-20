@@ -1,35 +1,38 @@
-import { FetchNextPageOptions } from "@tanstack/react-query";
-import { RefObject, useEffect, useRef } from "react";
+import { FetchNextPageOptions } from '@tanstack/react-query'
+import { RefObject, useEffect, useRef } from 'react'
 
 interface UseIntersectionObserverParams<T> {
   callback: IntersectionObserverCallback
   options?: IntersectionObserverInit
   ref: RefObject<T>
-  fetchNextPage: (options?: FetchNextPageOptions) => unknown;
-  hasNextPage: boolean;
+  fetchNextPage: (options?: FetchNextPageOptions) => unknown
+  hasNextPage: boolean
 }
-function useIntersectionObserver<T extends HTMLElement>({ callback, options, ref, hasNextPage, fetchNextPage }: UseIntersectionObserverParams<T>) {
-
+function useIntersectionObserver<T extends HTMLElement>({
+  callback,
+  options,
+  ref,
+  hasNextPage,
+  fetchNextPage,
+}: UseIntersectionObserverParams<T>) {
   useEffect(() => {
     const observer = new IntersectionObserver(callback, options)
 
-    const element = ref.current;
+    const element = ref.current
     if (!hasNextPage) {
-      return;
+      return
     }
 
     if (element) {
-      observer.observe(element);
+      observer.observe(element)
     }
 
     return () => {
       if (element) {
-        observer.unobserve(element);
+        observer.unobserve(element)
       }
     }
-
-  }, [hasNextPage, fetchNextPage]);
-
+  }, [hasNextPage, fetchNextPage])
 }
 
 export default useIntersectionObserver

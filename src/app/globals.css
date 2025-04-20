@@ -139,7 +139,7 @@
 }
 
 .icon-btn {
-  @apply p-1 rounded-4xl hover:bg-gray-200 dark:hover:bg-gray-800;
+  @apply flex justify-center items-center p-1 rounded-4xl hover:bg-gray-200 dark:hover:bg-gray-800;
 }
 
 .navigator {
@@ -172,6 +172,10 @@
 
 .interact-gray-icon {
   @apply stroke-gray-800 dark:stroke-gray-600;
+}
+
+.hover-desc {
+  @apply w-fit border bg-red-600;
 }
 
 #main {
