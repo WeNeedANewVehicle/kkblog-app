@@ -5,7 +5,8 @@ import Button from '../Button/Button'
 import Link from 'next/link'
 import route from '@/routes/routes'
 
-export interface PostProps extends Omit<GetPostResponseDto, 'updatedAt' | '_count'> {}
+export interface PostProps
+  extends Omit<GetPostResponseDto, 'updatedAt' | '_count'> {}
 
 function Post({ author, title, tags, content, createdAt, id }: PostProps) {
   return (
@@ -24,7 +25,7 @@ function Post({ author, title, tags, content, createdAt, id }: PostProps) {
           >
             수정
           </Link>
-          <Button className="text-base box-sm hover:bg-burgundy-100 text-burgundy-600">
+          <Button className="text-base box-sm hover:bg-burgundy-100 text-red-600">
             삭제
           </Button>
         </div>

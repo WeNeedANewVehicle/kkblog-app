@@ -4,21 +4,24 @@ import Link from 'next/link'
 import React, { Fragment, Suspense } from 'react'
 import Search from '@/components/Search/Search'
 import route from '@/routes/routes'
-import useInfiniteGetPosts, {
-  INFINITE_POSTS_PAGE_SIZE,
-} from '@/features/posts/hooks/useInfiniteGetPosts'
-import PostItem from '@/components/Post/PostItem/PostItem'
+import useInfiniteGetPosts from '@/features/posts/hooks/useInfiniteGetPosts'
+
 import useMe from '@/features/auth/hooks/queries/useMe'
 import useInfiniteScroll from '@/common/hooks/useInfiniteScroll'
 import Loading from '@/../public/icons/loading.svg'
-import PostItemSkeleton from '@/components/Post/PostItem/PostItemSkeleton/PostItemSkeleton'
+
+import PostList from '@/components/Post/PostList/PostList'
+import { useRouter } from 'next/navigation'
+import QueryError from '@/components/ErrorMessage/QueryError'
 
 function PostsPage() {
+  const router = useRouter()
   const {
     data: posts,
     fetchNextPage,
     hasNextPage,
     isFetching,
+    error,
   } = useInfiniteGetPosts()
   const { data: me } = useMe()
   const ref = useInfiniteScroll<HTMLDivElement>({ hasNextPage, fetchNextPage })
@@ -39,25 +42,8 @@ function PostsPage() {
       </div>
 
       <Suspense fallback={<Loading />}>
-        <ul
-          className={`grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8`}
-        >
-          {posts?.pages?.length === 0 && <li>아직 등록된 글이 없습니다.</li>}
-          {posts?.pages.map((data, index) => {
-            const key = `${index}-${data.meta.paging?.nextCursor}`
-            return (
-              <Fragment key={key}>
-                {data.data.map((post) => (
-                  <PostItem key={post.id} {...post} />
-                ))}
-              </Fragment>
-            )
-          })}
-          {isFetching &&
-            Array.from({ length: INFINITE_POSTS_PAGE_SIZE }, (_, k) => (
-              <PostItemSkeleton key={k} />
-            ))}
-        </ul>
+        {error && <QueryError message="글 목록을 가져오는데 실패했습니다." />}
+        {!error && <PostList posts={posts} isFetching={isFetching} />}
         <div ref={ref} />
       </Suspense>
     </section>

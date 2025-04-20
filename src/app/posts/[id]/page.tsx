@@ -8,6 +8,10 @@ import { notFound, redirect } from 'next/navigation'
 import { Metadata, ResolvingMetadata } from 'next'
 import { ErrorBaseResponse } from '@/common/dto/baseResponse'
 import route from '@/routes/routes'
+import CommentForm from '@/components/Comments/CommentForm'
+import CommentList from '@/components/Comments/CommentList'
+import { getCommentsApi } from '@/features/comments/api/comments.api'
+import ShareButton from '@/components/Button/ShareButton/ShareButton'
 
 interface PostPageMetadata {
   params: DynamicParam<'id'>['params']
@@ -49,13 +53,14 @@ export async function generateMetadata(
 async function Page({ params }: DynamicParam<'id'>) {
   const { id } = await params
   const { data: post, error, meta } = await getPostApi(id)
+  const { data: comments } = await getCommentsApi({ postId: id })
 
   if (meta.status === HttpStatus.NOT_FOUND && !post) {
     notFound()
   }
 
   if (meta.status === HttpStatus.INTERNAL_SERVER_ERROR) {
-    throw new Error('Server error occurred')
+    redirect(route.error)
   }
 
   return (
@@ -70,9 +75,25 @@ async function Page({ params }: DynamicParam<'id'>) {
           content={post.content}
           createdAt={toReadableDate(post.createdAt)}
         />
+
+        <div className="flex justify-end pt-10">
+          <ShareButton />
+        </div>
+
+        <hr className="my-4 border-t border-t-gray-400" />
       </section>
 
-      <section>{/* COMMENTS */}</section>
+      <section className="pt-8">
+        <h4 className="text-3xl py-8">
+          {' '}
+          {post._count?.comments
+            ? `${post._count.comments} 개의 댓글이 있습니다.`
+            : '아직 등록된 댓글이 없습니다.'}
+        </h4>
+        <CommentForm postId={id} />
+        <hr className="my-4 border-t border-t-gray-400" />
+        <CommentList comments={comments} />
+      </section>
     </div>
   )
 }

@@ -62,7 +62,7 @@ function PostEditPage() {
   // 에디터 초기화
   const onEditorReady = useCallback(
     (e: ClassicEditor) => {
-      if (data?.data) {
+      if (data?.data.content) {
         e.setData(data?.data.content)
       }
     },
