@@ -23,9 +23,7 @@ function useInfiniteGetPostsQueryOptions() {
 }
 
 function useInfiniteGetPosts() {
-  return useInfiniteQuery({
-    ...useInfiniteGetPostsQueryOptions(),
-  })
+  return useInfiniteQuery(useInfiniteGetPostsQueryOptions())
 }
 
 export default useInfiniteGetPosts
