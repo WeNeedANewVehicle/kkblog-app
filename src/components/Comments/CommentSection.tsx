@@ -9,7 +9,7 @@ import { GetPostResponseDto } from '@/features/posts/api/dto/get-post.dto'
 import useCommentForm from '@/features/comments/hooks/useCommentForm'
 import useCreateComment from '@/features/comments/hooks/useCreateComment'
 import CommentsPending from './CommentsPending'
-import useGetComments from '@/features/comments/hooks/useGetCommentsa'
+import useGetComments from '@/features/comments/hooks/useGetComments'
 
 interface CommentSectionProps {
   post: GetPostResponseDto
