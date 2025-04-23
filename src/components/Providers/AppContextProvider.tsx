@@ -10,6 +10,7 @@ import React, {
 const initialAppContext: AppContextType = {
   modal: [],
   isMenuOpen: false,
+  user: null,
 }
 
 export const AppContext = createContext(initialAppContext)

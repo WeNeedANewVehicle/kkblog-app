@@ -11,13 +11,14 @@ import { usePathname } from 'next/navigation'
 import MobileHeader from '@/components/Header/MobileHeader'
 import { useSetAppContext } from '@/components/Providers/hooks/useSetAppContext'
 import Button from '@/components/Button/Button'
+import { useAppContext } from '../Providers/hooks/useAppContext'
 
 interface HeaderProps {
   menu: HeaderMenuItem[]
 }
 
 function Header({ menu }: HeaderProps) {
-  const { data: me } = useMe()
+  const { user } = useAppContext()
   const pathname = usePathname()
 
   const onClickLink = useCallback(() => {
@@ -58,20 +59,20 @@ function Header({ menu }: HeaderProps) {
         <li className="mobile-hidden">
           <Link
             className="text-black dark:text-gray-200"
-            href={me ? route.auth.logout : route.auth.signIn}
+            href={user ? route.auth.logout : route.auth.signIn}
             onClick={onClickLink}
           >
-            {me ? '로그아웃' : '로그인'}
+            {user ? '로그아웃' : '로그인'}
           </Link>
         </li>
 
         <li className="mobile-hidden">
           <Link
             className="text-black dark:text-gray-200"
-            href={me ? route.users.profile : route.auth.signUp}
+            href={user ? route.users.profile : route.auth.signUp}
             onClick={onClickLink}
           >
-            {me ? '내 정보' : '회원가입'}
+            {user ? '내 정보' : '회원가입'}
           </Link>
         </li>
 
@@ -83,7 +84,7 @@ function Header({ menu }: HeaderProps) {
         </Button>
       </ul>
 
-      <MobileHeader menu={menu} me={me} onClickLink={onClickLink} />
+      <MobileHeader menu={menu} user={user} onClickLink={onClickLink} />
     </menu>
   )
 }

@@ -9,6 +9,7 @@ import Head from 'next/head'
 import { usePathname } from 'next/navigation'
 import './globals.css'
 import Footer from '@/components/Footer/Footer'
+import AuthUserGlobalEffect from '@/features/effects/AuthUserGlobalEffect'
 
 export default function RootLayout({
   children,
@@ -28,9 +29,11 @@ export default function RootLayout({
 
       <body className={kia.className}>
         <Providers>
-          {!isHideGnb && <GNB menu={menu} />}
-          <main id="main">{children}</main>
-          <ModalContainer />
+          <AuthUserGlobalEffect>
+            {!isHideGnb && <GNB menu={menu} />}
+            <main id="main">{children}</main>
+            <ModalContainer />
+          </AuthUserGlobalEffect>
         </Providers>
         <Footer />
       </body>

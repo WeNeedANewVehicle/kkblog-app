@@ -5,19 +5,19 @@ import LogoIcon from '@/../public/icons/logo.svg'
 import CloseIcon from '@/../public/icons/close.svg'
 import { HeaderMenuItem } from './data/header.data'
 import Link from 'next/link'
-import { MeResponseDto } from '@/features/auth/api/dto/signIn.dto'
 import Button from '@/components/Button/Button'
 import route from '@/routes/routes'
 import { useAppContext } from '@/components/Providers/hooks/useAppContext'
 import { useSetAppContext } from '@/components/Providers/hooks/useSetAppContext'
+import { Author } from '@/features/auth/types/auth.type'
 
 interface MobileHeaderProps {
   menu: HeaderMenuItem[]
-  me: MeResponseDto | undefined
+  user: Author | null
   onClickLink: () => void
 }
 
-function MobileHeader({ menu, me, onClickLink }: MobileHeaderProps) {
+function MobileHeader({ menu, user, onClickLink }: MobileHeaderProps) {
   const { isMenuOpen } = useAppContext()
 
   const dispatch = useSetAppContext()
@@ -64,20 +64,20 @@ function MobileHeader({ menu, me, onClickLink }: MobileHeaderProps) {
         <li className="flex flex-1">
           <Link
             className="text-black dark:text-gray-200 w-full py-2"
-            href={me ? route.auth.logout : route.auth.signIn}
+            href={user ? route.auth.logout : route.auth.signIn}
             onClick={onClickMobileLink}
           >
-            {me ? '로그아웃' : '로그인'}
+            {user ? '로그아웃' : '로그인'}
           </Link>
         </li>
 
         <li className="flex flex-1">
           <Link
             className="text-black dark:text-gray-200 w-full py-2"
-            href={me ? route.users.profile : route.auth.signUp}
+            href={user ? route.users.profile : route.auth.signUp}
             onClick={onClickMobileLink}
           >
-            {me ? '내 정보' : '회원가입'}
+            {user ? '내 정보' : '회원가입'}
           </Link>
         </li>
       </ul>
