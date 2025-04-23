@@ -12,6 +12,9 @@ import CommentForm from '@/components/Comments/CommentForm'
 import CommentList from '@/components/Comments/CommentList'
 import { getCommentsApi } from '@/features/comments/api/comments.api'
 import ShareButton from '@/components/Button/ShareButton/ShareButton'
+import HorizontalLine from '@/components/Line/Horizontal'
+import QueryError from '@/components/ErrorMessage/QueryError'
+import CommentSection from '@/components/Comments/CommentSection'
 
 interface PostPageMetadata {
   params: DynamicParam<'id'>['params']
@@ -46,6 +49,10 @@ export async function generateMetadata(
       return notFound()
     }
 
+    if (meta.status === HttpStatus.INTERNAL_SERVER_ERROR) {
+      redirect(route.error)
+    }
+
     redirect(route.error)
   }
 }
@@ -53,7 +60,6 @@ export async function generateMetadata(
 async function Page({ params }: DynamicParam<'id'>) {
   const { id } = await params
   const { data: post, error, meta } = await getPostApi(id)
-  const { data: comments } = await getCommentsApi({ postId: id })
 
   if (meta.status === HttpStatus.NOT_FOUND && !post) {
     notFound()
@@ -73,27 +79,17 @@ async function Page({ params }: DynamicParam<'id'>) {
           title={post.title}
           tags={post.tags}
           content={post.content}
+          thumbnail={post.thumbnail}
           createdAt={toReadableDate(post.createdAt)}
         />
 
         <div className="flex justify-end pt-10">
           <ShareButton />
         </div>
-
-        <hr className="my-4 border-t border-t-gray-400" />
+        <HorizontalLine className="border-t-gray-600" />
       </section>
 
-      <section className="pt-8">
-        <h4 className="text-3xl py-8">
-          {' '}
-          {post._count?.comments
-            ? `${post._count.comments} 개의 댓글이 있습니다.`
-            : '아직 등록된 댓글이 없습니다.'}
-        </h4>
-        <CommentForm postId={id} />
-        <hr className="my-4 border-t border-t-gray-400" />
-        <CommentList comments={comments} />
-      </section>
+      <CommentSection post={post} />
     </div>
   )
 }

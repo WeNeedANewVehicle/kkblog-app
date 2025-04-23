@@ -1,4 +1,5 @@
 import route from '@/routes/routes'
+import { OrderBy } from '../types/orderBy.type'
 
 export const isProd: boolean = process.env.NODE_ENV === 'production'
 
@@ -21,5 +22,10 @@ export const hideGnbPaths = [
   route.posts.write,
   route.posts.edit(''),
 ]
+
+export const ORDER_BY: Record<'ASC' | 'DESC', OrderBy> = {
+  ASC: 'asc',
+  DESC: 'desc',
+}
 
 export const allowedFileExtensions = []
