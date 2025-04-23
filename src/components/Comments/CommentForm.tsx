@@ -1,35 +1,39 @@
 'use client'
-import React, { useCallback } from 'react'
-import useCreateComment from '@/features/comments/hooks/useCreateComment'
-import useCommentForm from '@/features/comments/hooks/useCommentForm'
+import React, { FormEvent, useCallback } from 'react'
+
 import Button from '@/components/Button/Button'
+import { UseCommentFormReturn } from '@/features/comments/hooks/useCommentForm'
+import { SubmitHandler } from 'react-hook-form'
+import { CommentSchema } from '@/features/comments/schema/comment.schema'
 
 export interface CommentFormProps {
-  postId: string
-  parentCommentId?: string
+  register: UseCommentFormReturn['register']
+  onSubmit: (e: FormEvent) => void
+  isPending: boolean
+  isOpen: boolean
 }
 
-function CommentForm({ postId, parentCommentId }: CommentFormProps) {
-  const { register, handleSubmit } = useCommentForm()
-  const { mutateAsync: createComment } = useCreateComment()
-
-  const onSubmit = handleSubmit(async (values) => {
-    await createComment({
-      ...values,
-      postId,
-      ...(parentCommentId && { parentCommentId }),
-    })
-  })
+function CommentForm({
+  register,
+  isPending,
+  isOpen,
+  onSubmit,
+}: CommentFormProps) {
+  if (!isOpen) {
+    return
+  }
 
   return (
     <form className="flex flex-col gap-4 md:flex-row" onSubmit={onSubmit}>
       <textarea
         className="bg-white p-4 w-full border-2 border-black dark:border-none dark:bg-gray-700"
+        disabled={isPending}
         {...register('content')}
       />
       <Button
         className="btn-black box-sm md:w-fit whitespace-nowrap"
         type="submit"
+        isLoading={isPending}
       >
         전송
       </Button>

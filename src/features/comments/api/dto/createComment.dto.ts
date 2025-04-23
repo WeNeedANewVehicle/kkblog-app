@@ -7,4 +7,10 @@ export interface CreateCommentDto
 export interface CreateCommentResponseDto
   extends Pick<Comments, 'content' | 'createdAt' | 'depth' | 'id'> {
   author: Author
+  _count?: {
+    childs: number
+  }
+  parent?: {
+    author: Author
+  }
 }

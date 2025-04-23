@@ -8,12 +8,8 @@ import { notFound, redirect } from 'next/navigation'
 import { Metadata, ResolvingMetadata } from 'next'
 import { ErrorBaseResponse } from '@/common/dto/baseResponse'
 import route from '@/routes/routes'
-import CommentForm from '@/components/Comments/CommentForm'
-import CommentList from '@/components/Comments/CommentList'
-import { getCommentsApi } from '@/features/comments/api/comments.api'
 import ShareButton from '@/components/Button/ShareButton/ShareButton'
 import HorizontalLine from '@/components/Line/Horizontal'
-import QueryError from '@/components/ErrorMessage/QueryError'
 import CommentSection from '@/components/Comments/CommentSection'
 
 interface PostPageMetadata {

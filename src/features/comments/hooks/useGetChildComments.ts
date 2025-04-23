@@ -1,50 +1,31 @@
-import { infiniteQueryOptions, useInfiniteQuery } from '@tanstack/react-query'
+import useInfiniteScroll from '@/common/hooks/useInfiniteScroll'
 import React from 'react'
-import { getChildCommentsApi } from '@/features/comments/api/comments.api'
-import { ORDER_BY } from '@/common/constant/constant'
-
-const GET_CHILD_COMMENTS = 'GET_CHILD_COMMENTS'
-const GET_CHILD_COMMENTS_PAGE_SIZE = 12
+import useGetInfiniteChildComments from './useGetInfiniteChildComments'
 
 interface UseGetChildCommentsParams {
-  postId: string
   commentId: string
+  postId: string
   isEnabled: boolean
 }
 
-export type UseGetInfiniteChildCommentsOptionReturnType = ReturnType<
-  typeof useGetInfiniteChildComments
->
-
-function useGetInfiniteChildCommentsOption({
-  postId,
+function useGetChildComments({
   commentId,
+  postId,
   isEnabled,
 }: UseGetChildCommentsParams) {
-  return infiniteQueryOptions({
-    queryKey: [GET_CHILD_COMMENTS, { postId }, { commentId }],
-    queryFn: ({ pageParam }) =>
-      getChildCommentsApi({
-        commentId,
-        postId,
-        pageSize: GET_CHILD_COMMENTS_PAGE_SIZE,
-        order: ORDER_BY.ASC,
-        ...(pageParam && { cursor: pageParam }),
-      }),
-    getNextPageParam: (lastPage, _) => lastPage.meta.paging?.nextCursor,
-    initialPageParam: '',
-    enabled: isEnabled && !!postId && !!commentId,
-  })
+  const {
+    data: childComments,
+    isPending: isChildCommentsPending,
+    hasNextPage,
+    fetchNextPage,
+  } = useGetInfiniteChildComments({ commentId, postId, isEnabled })
+  const ref = useInfiniteScroll<HTMLDivElement>({ hasNextPage, fetchNextPage })
+
+  return {
+    ref,
+    childComments,
+    isChildCommentsPending,
+  }
 }
 
-function useGetInfiniteChildComments({
-  postId,
-  commentId,
-  isEnabled,
-}: UseGetChildCommentsParams) {
-  return useInfiniteQuery(
-    useGetInfiniteChildCommentsOption({ postId, commentId, isEnabled })
-  )
-}
-
-export default useGetInfiniteChildComments
+export default useGetChildComments

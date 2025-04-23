@@ -2,15 +2,21 @@
 import React, { Fragment, useRef } from 'react'
 import CommentItem from './CommentItem'
 import { timeAgo } from '@/common/util/time.util'
-import { UseGetInfiniteChildCommentsOptionReturnType } from '@/features/comments/hooks/useGetChildComments'
+import { UseGetInfiniteChildCommentsOptionReturnType } from '@/features/comments/hooks/useGetInfiniteChildComments'
 
 interface ChildCommentsProps {
   comments: UseGetInfiniteChildCommentsOptionReturnType['data']
   postId: string
+  isCollapsed: boolean
 }
 
-function ChildComments({ comments, postId }: ChildCommentsProps) {
+function ChildComments({ comments, postId, isCollapsed }: ChildCommentsProps) {
   const ref = useRef<HTMLUListElement>(null)
+
+  if (isCollapsed) {
+    return
+  }
+
   return (
     <ul
       className={`flex flex-col gap-2 transition-all animate-blink-bg `}

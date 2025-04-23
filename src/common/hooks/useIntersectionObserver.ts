@@ -32,7 +32,7 @@ function useIntersectionObserver<T extends HTMLElement>({
         observer.unobserve(element)
       }
     }
-  }, [hasNextPage, fetchNextPage])
+  }, [hasNextPage, fetchNextPage, callback, options, ref])
 }
 
 export default useIntersectionObserver

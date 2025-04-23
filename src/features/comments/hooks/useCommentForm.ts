@@ -6,6 +6,8 @@ import {
   commentSchema,
 } from '@/features/comments/schema/comment.schema'
 
+export type UseCommentFormReturn = ReturnType<typeof useCommentForm>
+
 function useCommentForm() {
   const { formState, register, setError, handleSubmit } =
     useForm<CommentSchema>({

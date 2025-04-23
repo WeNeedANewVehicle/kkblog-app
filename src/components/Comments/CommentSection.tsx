@@ -6,21 +6,38 @@ import HorizontalLine from '@/components/Line/Horizontal'
 import QueryError from '@/components/ErrorMessage/QueryError'
 import CommentList from '@/components/Comments/CommentList'
 import { GetPostResponseDto } from '@/features/posts/api/dto/get-post.dto'
-import useGetInfiniteComments from '@/features/comments/hooks/useGetComments'
-import useInfiniteScroll from '@/common/hooks/useInfiniteScroll'
+import useCommentForm from '@/features/comments/hooks/useCommentForm'
+import useCreateComment from '@/features/comments/hooks/useCreateComment'
+import CommentsPending from './CommentsPending'
+import useGetComments from '@/features/comments/hooks/useGetcomments'
 
 interface CommentSectionProps {
   post: GetPostResponseDto
 }
 
 function CommentSection({ post }: CommentSectionProps) {
+  const { ref, comments, commentsError, isCommentsPending } = useGetComments(
+    post.id
+  )
+
   const {
-    data: comments,
-    error,
-    hasNextPage,
-    fetchNextPage,
-  } = useGetInfiniteComments({ postId: post.id, isEnabled: true })
-  const ref = useInfiniteScroll<HTMLDivElement>({ hasNextPage, fetchNextPage })
+    mutateAsync: createComment,
+    isPending,
+    isError,
+  } = useCreateComment({ postId: post.id })
+
+  const { register, handleSubmit } = useCommentForm()
+  const onSubmit = handleSubmit(async (values) => {
+    await createComment(
+      {
+        ...values,
+        postId: post.id,
+      },
+      {
+        onSuccess: () => {},
+      }
+    )
+  })
 
   return (
     <section className="pt-8">
@@ -32,13 +49,21 @@ function CommentSection({ post }: CommentSectionProps) {
 
       <div className="flex flex-col gap-4 py-4">
         <h2>댓글 작성</h2>
-        <CommentForm postId={post.id} />
+        <CommentForm
+          isOpen={true}
+          register={register}
+          onSubmit={onSubmit}
+          isPending={isPending}
+        />
       </div>
 
       <HorizontalLine className="border-t-gray-600 mb-16" />
-
-      {error && <QueryError message="댓글 목록을 가져오지 못했습니다." />}
-      {!error && <CommentList comments={comments} postId={post.id} />}
+      <CommentsPending isPending={isCommentsPending} />
+      <QueryError
+        message="댓글 목록을 가져오지 못했습니다."
+        error={commentsError}
+      />
+      {!commentsError && <CommentList comments={comments} postId={post.id} />}
       <div ref={ref} />
     </section>
   )

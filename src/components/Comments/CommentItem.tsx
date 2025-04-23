@@ -1,15 +1,18 @@
 'use client'
 
-import React, { Fragment, useCallback, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import Button from '@/components/Button/Button'
 import CommentForm from '@/components/Comments/CommentForm'
 import { GetCommentsItemDto } from '@/features/comments/api/dto/getComments.dto'
 import CloseIcon from '@/../public/icons/close.svg'
 import CommentIcon from '@/../public/icons/comment.svg'
-import useGetInfiniteChildComments from '@/features/comments/hooks/useGetChildComments'
 import ChildComments from './ChildComments'
 import CommentsControl from './CommentsControl'
-import useInfiniteScroll from '@/common/hooks/useInfiniteScroll'
+import useCreateComment from '@/features/comments/hooks/useCreateComment'
+import useCommentForm from '@/features/comments/hooks/useCommentForm'
+import LoadingIcon from '@/../public/icons/loading.svg'
+import useGetChildComments from '@/features/comments/hooks/useGetChildComments'
+import CommentTargetAuthorNickName from './CommentTargetAuthorNickName'
 
 interface CommentItemProps extends GetCommentsItemDto {
   postId: string
@@ -30,19 +33,28 @@ function CommentItem({
   const [isOpen, setIsOpen] = useState(false)
   const [isCollapsed, setIsCollapsed] = useState(true)
 
-  const {
-    data: childComments,
-    hasNextPage,
-    fetchNextPage,
-  } = useGetInfiniteChildComments({
+  const { ref, childComments, isChildCommentsPending } = useGetChildComments({
     commentId: id,
     postId,
-    isEnabled: !isCollapsed, // 댓글 창이 펼쳐져 있을 때 추가 데이터 가져오기
+    isEnabled: !isCollapsed,
+  })
+  const { register, handleSubmit } = useCommentForm()
+
+  const {
+    mutateAsync: createComment,
+    isPending,
+    isError,
+  } = useCreateComment({ postId, parentCommentId: id, setIsCollapsed })
+
+  const onSubmit = handleSubmit(async (values) => {
+    await createComment({
+      ...values,
+      postId,
+      ...(id && { parentCommentId: id }),
+    })
   })
 
-  const ref = useInfiniteScroll<HTMLDivElement>({ hasNextPage, fetchNextPage })
-
-  const hasReply = useMemo(() => _count && _count?.childs > 0, [_count?.childs])
+  const hasReply = useMemo(() => _count && _count?.childs > 0, [_count])
   const replyText = useMemo(
     () => _count && _count?.childs > 0 && `${_count.childs}개의 답글 펼치기`,
     [_count]
@@ -64,9 +76,7 @@ function CommentItem({
       </div>
       <div className="flex flex-col whitespace-break-spaces">
         <p>
-          <span className="text-hyundai-gold dark:text-blink">
-            {depth > 0 && `@${parent?.author.nickname} `}
-          </span>
+          <CommentTargetAuthorNickName depth={depth} parent={parent}/>
           {content}
         </p>
 
@@ -79,7 +89,12 @@ function CommentItem({
         </Button>
       </div>
 
-      {isOpen && <CommentForm postId={postId} parentCommentId={id} />}
+      <CommentForm
+        isOpen={isOpen}
+        onSubmit={onSubmit}
+        register={register}
+        isPending={isPending}
+      />
 
       {hasReply && (
         <Button
@@ -96,9 +111,12 @@ function CommentItem({
         </Button>
       )}
 
-      {!isCollapsed && (
-        <ChildComments comments={childComments} postId={postId} />
-      )}
+      <ChildComments
+        comments={childComments}
+        postId={postId}
+        isCollapsed={isCollapsed}
+      />
+
       <div ref={ref} />
     </li>
   )
