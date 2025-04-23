@@ -42,7 +42,7 @@ function PostsPage() {
       </div>
 
       <Suspense fallback={<Loading />}>
-        {error && <QueryError message="글 목록을 가져오는데 실패했습니다." />}
+        <QueryError error={error}  message="글 목록을 가져오는데 실패했습니다." />
         {!error && <PostList posts={posts} isFetching={isFetching} />}
         <div ref={ref} />
       </Suspense>
