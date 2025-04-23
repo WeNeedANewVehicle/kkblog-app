@@ -7,6 +7,7 @@ import {
   CreateCommentResponseDto,
 } from '@/features/comments/api/dto/createComment.dto'
 import {
+  GetChildCommentsDto,
   GetCommentsDto,
   GetCommentsResponseDto,
 } from '@/features/comments/api/dto/getComments.dto'
@@ -31,6 +32,17 @@ export function createCommentApi({
 export function getCommentsApi({ postId, ...rest }: GetCommentsDto) {
   return api<Omit<GetCommentsDto, 'postId'>, GetCommentsResponseDto>({
     url: `/board/posts/${postId}/comments`,
+    queries: objectToQueryString(rest),
+  })
+}
+
+export function getChildCommentsApi({
+  postId,
+  commentId,
+  ...rest
+}: GetChildCommentsDto) {
+  return api<Omit<GetCommentsDto, 'postId'>, GetCommentsResponseDto>({
+    url: `/board/posts/${postId}/comments/${commentId}`,
     queries: objectToQueryString(rest),
   })
 }

@@ -6,7 +6,7 @@ export interface Comments {
   updatedAt: string
   deletedAt: string
   content: string
-  depth: string
+  depth: number
   postId: Posts['id']
   parentCommentId?: string
 }

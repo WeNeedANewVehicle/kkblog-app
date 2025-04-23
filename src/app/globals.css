@@ -13,6 +13,8 @@
   --color-burgundy-800: #540015;
   --color-burgundy-900: #3d000f;
 
+  --color-hyundai-gold: #a36b4f;
+
   --color-white: #fff;
   --color-gray-100: #f8f9fa;
   --color-gray-200: #e9ecef;
@@ -25,10 +27,15 @@
   --color-gray-900: #212529;
   --color-black: #000;
 
+  --color-blink: #ffa500;
+
   --animate-scale: scale 0.3s both;
   --animate-collapse-x: collapse-x 0.3s forwards both;
   --animate-swipe-bottom: swipe-bottom 0.3s forwards;
   --animate-swipe-bottom-hidden: swipe-bottom-hidden 0.3s forwards;
+  --animate-blink-text: blink-text 3 1s both;
+  --animate-blink-border: blink-border 3 1s both;
+  --animate-blink-bg: blink-bg 3 1s both;
 
   @keyframes scale {
     from {
@@ -63,6 +70,46 @@
     }
     to {
       transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes blink-text {
+    0% {
+      color: var(--color-blink);
+    }
+    50% {
+      color: var(--color-white);
+    }
+    100% {
+      color: var(--color-blink);
+    }
+  }
+
+  @keyframes blink-border {
+    0% {
+      border: 1px solid var(--color-blink);
+    }
+
+    50% {
+      border: 1px solid var(--color-white);
+    }
+
+    100% {
+      border: 1px solid var(--color-blink);
+    }
+  }
+
+  @keyframes blink-bg {
+    0% {
+      background-color: transparent;
+    }
+
+    50% {
+      background-color: var(--color-blink);
+    }
+
+    100% {
+      background-color: transparent;
     }
   }
 }

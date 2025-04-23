@@ -19,7 +19,7 @@ function CommentList({ comments, postId }: CommentListProps) {
           <Fragment key={key}>
             {page.data.map((comment) => (
               <CommentItem
-                className='bg-gray-200 dark:bg-gray-800'
+                className="bg-gray-200 dark:bg-gray-800"
                 depth={comment.depth}
                 key={comment.id}
                 id={comment.id}

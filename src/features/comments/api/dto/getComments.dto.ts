@@ -6,10 +6,19 @@ export interface GetCommentsDto extends PaginationDto {
   postId: string
 }
 
+export interface GetChildCommentsDto extends GetCommentsDto {
+  commentId: string
+}
+
 export interface GetCommentsItemDto
-  extends Pick<Comments, 'id' | 'content' | 'createdAt'> {
+  extends Pick<Comments, 'id' | 'content' | 'createdAt' | 'depth'> {
   author: Author
-  _count: number
+  _count?: {
+    childs: number
+  }
+  parent?: {
+    author: Author
+  }
 }
 
 export type GetCommentsResponseDto = GetCommentsItemDto[]

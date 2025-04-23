@@ -10,9 +10,10 @@ interface ChildCommentsProps {
 }
 
 function ChildComments({ comments, postId }: ChildCommentsProps) {
-  const ref = useRef<HTMLUListElement>(null);
+  const ref = useRef<HTMLUListElement>(null)
   return (
-    <ul className={`flex flex-col gap-2 transition-all animate-blink-bg `}
+    <ul
+      className={`flex flex-col gap-2 transition-all animate-blink-bg `}
       ref={ref}
       onAnimationEnd={() => ref.current?.classList.remove('animate-blink-bg')}
     >
@@ -24,7 +25,7 @@ function ChildComments({ comments, postId }: ChildCommentsProps) {
             {page.data.map((comment) => (
               <CommentItem
                 depth={comment.depth}
-                // UI Nesting은 1뎁스까지만, 2뎁스부터는 1뎁스와 동일,  
+                // UI Nesting은 1뎁스까지만, 2뎁스부터는 1뎁스와 동일,
                 className={`${comment.depth > 0 ? 'w-full pr-0' : ''} ${comment.depth > 1 ? 'pl-0 pb-0' : ''}`}
                 key={comment.id}
                 postId={postId}
@@ -43,4 +44,4 @@ function ChildComments({ comments, postId }: ChildCommentsProps) {
   )
 }
 
-export default React.memo(ChildComments);
+export default React.memo(ChildComments)
