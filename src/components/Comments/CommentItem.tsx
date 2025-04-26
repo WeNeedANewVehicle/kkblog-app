@@ -76,7 +76,7 @@ function CommentItem({
       </div>
       <div className="flex flex-col whitespace-break-spaces">
         <p>
-          <CommentTargetAuthorNickName depth={depth} parent={parent}/>
+          <CommentTargetAuthorNickName depth={depth} parent={parent} />
           {content}
         </p>
 

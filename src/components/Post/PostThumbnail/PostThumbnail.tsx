@@ -3,7 +3,8 @@ import { PostItemProps } from '@/components/Post/PostItem/PostItem'
 import Image from 'next/image'
 import ImageIcon from '@/../public/icons/image.svg'
 
-type PostThumbnailProps = Pick<PostItemProps, 'thumbnail' | 'title'>
+interface PostThumbnailProps
+  extends Pick<PostItemProps, 'thumbnail' | 'title'> {}
 
 function PostThumbnail({ thumbnail, title }: PostThumbnailProps) {
   return (

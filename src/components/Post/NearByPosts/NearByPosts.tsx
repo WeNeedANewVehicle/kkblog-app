@@ -47,7 +47,9 @@ function NearByPostMobile({ onClick, post, type }: NearByPostProps) {
         </div>
         <div className="flex flex-col flex-1 h-16 justify-between overflow-hidden">
           <h4 className="flex gap-2"> {text}</h4>
-          <h4 className="font-black text-ellipsis overflow-hidden whitespace-nowrap max-w-full">{title}</h4>
+          <h4 className="font-black text-ellipsis overflow-hidden whitespace-nowrap max-w-full">
+            {title}
+          </h4>
         </div>
       </Link>
     </li>
@@ -64,7 +66,7 @@ function NearByPost({ onClick, post, type }: NearByPostProps) {
   return (
     <li className="flex flex-1 max-w-full overflow-hidden">
       <Link
-        className='pointer relative flex flex-1 items-center justify-center aspect-[21/9] max-md:hidden bg-gray-200 dark:bg-gray-700 hover:animate-blink-bg'
+        className="pointer relative flex flex-1 items-center justify-center aspect-[21/9] max-md:hidden bg-gray-200 dark:bg-gray-700 hover:animate-blink-bg"
         onClick={onClick}
         href={route.posts.detail(post?.id!)}
       >
@@ -78,7 +80,6 @@ function NearByPost({ onClick, post, type }: NearByPostProps) {
           />
         )}
         {!hasThumbnail && (
-            
           <LogoIcon
             //
             className="max-md:hidden z-10 flex self-center opacity-40  "
@@ -87,10 +88,11 @@ function NearByPost({ onClick, post, type }: NearByPostProps) {
           />
         )}
         <div className="absolute bottom-8 flex flex-col px-4 gap-2 z-20 overflow-hidden w-full">
-            <h4> {text}</h4>
-            <h4 className="text-3xl text-ellipsis overflow-hidden whitespace-nowrap max-w-[600px]">{title}</h4>
+          <h4> {text}</h4>
+          <h4 className="text-3xl text-ellipsis overflow-hidden whitespace-nowrap max-w-[600px]">
+            {title}
+          </h4>
         </div>
-       
       </Link>
     </li>
   )
@@ -128,35 +130,34 @@ function NearByPosts({ postId }: NearByPostsProps) {
 
   return (
     <>
-    {/** tablet ~ */}
-    <ul className="flex flex-row gap-4 max-md:hidden">
+      {/** tablet ~ */}
+      <ul className="flex flex-row gap-4 max-md:hidden">
         <NearByPost
-            post={prev}
-            onClick={preventNoPrevPostRedirect}
-            type={'prev'}
+          post={prev}
+          onClick={preventNoPrevPostRedirect}
+          type={'prev'}
         />
-         <NearByPost
-        post={next}
-        onClick={preventNoNextPostRedirect}
-        type={'next'}
-      />
-    </ul>
+        <NearByPost
+          post={next}
+          onClick={preventNoNextPostRedirect}
+          type={'next'}
+        />
+      </ul>
 
-    {/** ~ tablet */}
-    <ul className="flex flex-col gap-4 md:hidden">
-      <NearByPostMobile
-        post={prev}
-        onClick={preventNoPrevPostRedirect}
-        type={'prev'}
-      />
+      {/** ~ tablet */}
+      <ul className="flex flex-col gap-4 md:hidden">
+        <NearByPostMobile
+          post={prev}
+          onClick={preventNoPrevPostRedirect}
+          type={'prev'}
+        />
 
-     
-      <NearByPostMobile
-        post={next}
-        onClick={preventNoNextPostRedirect}
-        type={'next'}
-      />
-    </ul>
+        <NearByPostMobile
+          post={next}
+          onClick={preventNoNextPostRedirect}
+          type={'next'}
+        />
+      </ul>
     </>
   )
 }

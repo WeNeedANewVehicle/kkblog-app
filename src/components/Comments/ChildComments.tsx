@@ -1,5 +1,5 @@
 'use client'
-import React, { Fragment, useRef } from 'react'
+import React, { Fragment, useEffect, useRef } from 'react'
 import CommentItem from './CommentItem'
 import { timeAgo } from '@/common/util/time.util'
 import { UseGetInfiniteChildCommentsOptionReturnType } from '@/features/comments/hooks/useGetInfiniteChildComments'
@@ -12,6 +12,7 @@ interface ChildCommentsProps {
 
 function ChildComments({ comments, postId, isCollapsed }: ChildCommentsProps) {
   const ref = useRef<HTMLUListElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   if (isCollapsed) {
     return
@@ -43,6 +44,7 @@ function ChildComments({ comments, postId, isCollapsed }: ChildCommentsProps) {
                 parent={comment.parent}
               />
             ))}
+            <div ref={scrollRef} />
           </Fragment>
         )
       })}

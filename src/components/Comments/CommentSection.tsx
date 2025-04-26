@@ -10,15 +10,23 @@ import useCommentForm from '@/features/comments/hooks/useCommentForm'
 import useCreateComment from '@/features/comments/hooks/useCreateComment'
 import CommentsPending from './CommentsPending'
 import useGetComments from '@/features/comments/hooks/useGetComments'
+import CommentsOrderOption from './CommentsOrderOption'
+import Button from '../Button/Button'
+import CursorPagingButton from '../Button/CursorPagingButton'
+import CommentCount from './CommentCount'
 
 interface CommentSectionProps {
   post: GetPostResponseDto
 }
 
 function CommentSection({ post }: CommentSectionProps) {
-  const { ref, comments, commentsError, isCommentsPending } = useGetComments(
-    post.id
-  )
+  const {
+    comments,
+    commentsError,
+    isCommentsPending,
+    hasNextPage,
+    fetchNextPage,
+  } = useGetComments(post.id)
 
   const {
     mutateAsync: createComment,
@@ -28,27 +36,16 @@ function CommentSection({ post }: CommentSectionProps) {
 
   const { register, handleSubmit } = useCommentForm()
   const onSubmit = handleSubmit(async (values) => {
-    await createComment(
-      {
-        ...values,
-        postId: post.id,
-      },
-      {
-        onSuccess: () => {},
-      }
-    )
+    await createComment({
+      ...values,
+      postId: post.id,
+    })
   })
 
   return (
-    <section className="pt-8">
-      <h4 className="text-3xl py-8">
-        {post._count?.comments
-          ? `${post._count.comments} 개의 댓글이 있습니다.`
-          : '아직 등록된 댓글이 없습니다.'}
-      </h4>
-
-      <div className="flex flex-col gap-4 py-4">
-        <h2>댓글 작성</h2>
+    <section className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 py-8">
+        <h2 className="text-2xl">댓글 작성</h2>
         <CommentForm
           isOpen={true}
           register={register}
@@ -57,14 +54,26 @@ function CommentSection({ post }: CommentSectionProps) {
         />
       </div>
 
-      <HorizontalLine className="border-t-gray-600 mb-16" />
+      <div className="flex justify-between items-center">
+        <CommentCount count={post._count.comments} />
+        <CommentsOrderOption />
+      </div>
+
       <CommentsPending isPending={isCommentsPending} />
       <QueryError
         message="댓글 목록을 가져오지 못했습니다."
         error={commentsError}
       />
+
       {!commentsError && <CommentList comments={comments} postId={post.id} />}
-      <div ref={ref} />
+
+      <CursorPagingButton
+        fetchNextPage={fetchNextPage}
+        isLoading={isCommentsPending}
+        hasNextPage={hasNextPage}
+      >
+        {!hasNextPage && !isPending ? '모든 댓글을 확인했습니다' : '더 보기'}
+      </CursorPagingButton>
     </section>
   )
 }

@@ -11,6 +11,7 @@ import route from '@/routes/routes'
 import ShareButton from '@/components/Button/ShareButton/ShareButton'
 import HorizontalLine from '@/components/Line/Horizontal'
 import CommentSection from '@/components/Comments/CommentSection'
+import NearByPosts from '@/components/Post/NearByPosts/NearByPosts'
 
 interface PostPageMetadata {
   params: DynamicParam<'id'>['params']
@@ -81,6 +82,12 @@ async function Page({ params }: DynamicParam<'id'>) {
 
         <div className="flex justify-end pt-10">
           <ShareButton />
+        </div>
+        <HorizontalLine className="border-t-gray-600" />
+
+        <div className="flex flex-col gap-4 py-8">
+          <h4 className="text-2xl">이전/다음 글</h4>
+          <NearByPosts postId={id} />
         </div>
         <HorizontalLine className="border-t-gray-600" />
       </section>

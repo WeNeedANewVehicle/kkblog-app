@@ -1,9 +1,9 @@
 'use client'
-import React, { Fragment } from 'react'
+import React, { Fragment, useRef } from 'react'
 import CommentItem from './CommentItem'
 import { timeAgo } from '@/common/util/time.util'
 import { UseGetInfiniteCommentsReturnType } from '@/features/comments/hooks/useGetInfiniteComents'
-import useDomMutation from '@/common/hooks/useDomMutation'
+import useOrder from '@/common/hooks/useOrder'
 
 interface CommentListProps {
   comments: UseGetInfiniteCommentsReturnType['data']
@@ -11,12 +11,11 @@ interface CommentListProps {
 }
 
 function CommentList({ comments, postId }: CommentListProps) {
-  const ref = useDomMutation<HTMLUListElement>({
-    childList: true,
-  })
+  const ref = useRef<HTMLUListElement>(null)
+  const order = useOrder()
 
   return (
-    <ul className="flex flex-col gap-4 pb-8" ref={ref}>
+    <ul className="flex flex-col gap-4 " ref={ref}>
       {comments?.pages.map((page, index) => {
         const key = `${index}-${page.meta.paging?.nextCursor}`
 

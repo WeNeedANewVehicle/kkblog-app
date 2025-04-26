@@ -31,7 +31,7 @@ function PostItem({
           </div>
 
           <div className={`flex justify-between text-gray-600`}>
-            <div>{author.nickname}</div>
+            <div>{author?.nickname}</div>
             <div>{timeAgo(createdAt)}</div>
           </div>
         </div>
