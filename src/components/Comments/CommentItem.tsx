@@ -38,12 +38,11 @@ function CommentItem({
     postId,
     isEnabled: !isCollapsed,
   })
-  const { register, handleSubmit } = useCommentForm()
+  const { register, handleSubmit, setValue } = useCommentForm()
 
   const {
     mutateAsync: createComment,
     isPending,
-    isError,
   } = useCreateComment({ postId, parentCommentId: id, setIsCollapsed })
 
   const onSubmit = handleSubmit(async (values) => {
@@ -51,6 +50,11 @@ function CommentItem({
       ...values,
       postId,
       ...(id && { parentCommentId: id }),
+    }, { 
+      onSuccess: () => {
+        setValue('content', '');
+        setIsOpen(false)
+      }
     })
   })
 

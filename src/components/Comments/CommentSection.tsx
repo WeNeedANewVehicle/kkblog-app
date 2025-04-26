@@ -1,8 +1,7 @@
 'use client'
 
-import React from 'react'
+import React, { useMemo } from 'react'
 import CommentForm from '@/components/Comments/CommentForm'
-import HorizontalLine from '@/components/Line/Horizontal'
 import QueryError from '@/components/ErrorMessage/QueryError'
 import CommentList from '@/components/Comments/CommentList'
 import { GetPostResponseDto } from '@/features/posts/api/dto/get-post.dto'
@@ -11,7 +10,6 @@ import useCreateComment from '@/features/comments/hooks/useCreateComment'
 import CommentsPending from './CommentsPending'
 import useGetComments from '@/features/comments/hooks/useGetComments'
 import CommentsOrderOption from './CommentsOrderOption'
-import Button from '../Button/Button'
 import CursorPagingButton from '../Button/CursorPagingButton'
 import CommentCount from './CommentCount'
 
@@ -34,13 +32,23 @@ function CommentSection({ post }: CommentSectionProps) {
     isError,
   } = useCreateComment({ postId: post.id })
 
-  const { register, handleSubmit } = useCommentForm()
+  const { register, handleSubmit, setValue, formState } = useCommentForm()
+
   const onSubmit = handleSubmit(async (values) => {
     await createComment({
       ...values,
       postId: post.id,
+    }, {
+      onSuccess: () => {
+        setValue('content', '')
+      },
+      onError: (err) => {
+        alert(err);
+      }
     })
   })
+
+  const isCommentPending = useMemo(() => isPending || formState.isSubmitting,[isPending, formState.isSubmitting])
 
   return (
     <section className="flex flex-col gap-4">
@@ -50,7 +58,7 @@ function CommentSection({ post }: CommentSectionProps) {
           isOpen={true}
           register={register}
           onSubmit={onSubmit}
-          isPending={isPending}
+          isPending={isCommentPending}
         />
       </div>
 

@@ -1,10 +1,8 @@
 'use client'
-import React, { FormEvent, useCallback } from 'react'
+import React, { FormEvent } from 'react'
 
 import Button from '@/components/Button/Button'
 import { UseCommentFormReturn } from '@/features/comments/hooks/useCommentForm'
-import { SubmitHandler } from 'react-hook-form'
-import { CommentSchema } from '@/features/comments/schema/comment.schema'
 
 export interface CommentFormProps {
   register: UseCommentFormReturn['register']

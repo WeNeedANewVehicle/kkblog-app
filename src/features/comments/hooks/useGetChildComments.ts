@@ -1,5 +1,4 @@
 import useInfiniteScroll from '@/common/hooks/useInfiniteScroll'
-import React from 'react'
 import useGetInfiniteChildComments from './useGetInfiniteChildComments'
 
 interface UseGetChildCommentsParams {

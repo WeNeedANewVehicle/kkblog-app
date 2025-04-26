@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
 import { useForm } from 'react-hook-form'
 import {
   CommentSchema,
@@ -9,7 +8,7 @@ import {
 export type UseCommentFormReturn = ReturnType<typeof useCommentForm>
 
 function useCommentForm() {
-  const { formState, register, setError, handleSubmit } =
+  const { formState, register, setError, handleSubmit, setValue } =
     useForm<CommentSchema>({
       resolver: zodResolver(commentSchema),
     })
@@ -18,6 +17,7 @@ function useCommentForm() {
     formState,
     register,
     setError,
+    setValue,
     handleSubmit,
   }
 }

@@ -11,7 +11,6 @@ function CommentsOrderOption() {
       //
       options={commentOrder}
       onChange={onChange}
-      defaultValue={commentOrder[1].value}
       value={commentOrder.find((opt) => opt.value === order)?.value ?? ''}
     />
   )

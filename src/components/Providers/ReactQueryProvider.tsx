@@ -1,4 +1,5 @@
 'use client'
+import { HttpStatus } from '@/common/enum/http-status.enum'
 import { isServer, QueryClient } from '@tanstack/react-query'
 
 function makeQueryClient() {
@@ -8,6 +9,18 @@ function makeQueryClient() {
         // SSR 에선 데이터를 가져온 뒤 일정 시간이 지났을 때 신선하지 않다고 판단할 기본 값을 0 이상으로 설정한다.
         // 클라이언트가 데이터를 다시 가져오는 작업을 피하기 위해서이다.
         staleTime: 60 * 1000,
+        retryDelay: 500,
+        retry: (failureCount, error) => {
+          switch (error.meta.status) {
+            case HttpStatus.NOT_FOUND:
+              return false;
+            case HttpStatus.FORBIDDEN:
+              return false;
+          }
+
+          return failureCount <= 5;
+        }
+
       },
     },
   })
