@@ -7,6 +7,7 @@ import {
 } from '@/features/posts/api/dto/createPost.dto'
 import { GetPostResponseDto } from '@/features/posts/api/dto/get-post.dto'
 import {
+  GetNearByPostsDto,
   GetPostsDto,
   GetPostsResponseDto,
 } from '@/features/posts/api/dto/get-post-list.dto'
@@ -32,9 +33,17 @@ export async function getPostsApi(params: GetPostsDto) {
   })
 }
 
+// 글 상세
 export async function getPostApi(id: string) {
   return await api<string, GetPostResponseDto>({
     url: `/board/posts/${id}`,
+  })
+}
+
+// 인접한 글 (이전 / 다음 글)
+export async function getNearByPosts(id: string) {
+  return await api<string, GetNearByPostsDto>({
+    url: `/board/posts/${id}/nearby`,
   })
 }
 

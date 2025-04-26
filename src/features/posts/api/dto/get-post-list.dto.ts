@@ -11,3 +11,8 @@ export interface GetPostsItemResponseDto extends Omit<Posts, 'files'> {
 }
 
 export type GetPostsResponseDto = GetPostsItemResponseDto[]
+
+export type GetNearByPostsDto = {
+  prev: GetPostsItemResponseDto
+  next: GetPostsItemResponseDto
+}
