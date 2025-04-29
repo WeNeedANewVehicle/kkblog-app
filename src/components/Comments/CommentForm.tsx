@@ -39,4 +39,4 @@ function CommentForm({
   )
 }
 
-export default React.memo(CommentForm);
+export default React.memo(CommentForm)

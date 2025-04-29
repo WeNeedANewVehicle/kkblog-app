@@ -15,7 +15,7 @@ import { Posts } from '@/features/posts/types/post.type'
 
 interface CommentSectionProps {
   postId: Posts['id']
-  commentCounts: number;
+  commentCounts: number
 }
 
 function CommentSection({ postId, commentCounts }: CommentSectionProps) {

@@ -92,7 +92,7 @@ async function Page({ params }: DynamicParam<'id'>) {
         <HorizontalLine className="border-t-gray-600" />
       </section>
 
-      <CommentSection postId={post.id} commentCounts={post._count.comments}/>
+      <CommentSection postId={post.id} commentCounts={post._count.comments} />
     </div>
   )
 }
