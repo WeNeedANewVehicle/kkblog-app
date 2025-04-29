@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Modal, { ModalProps } from '@/components/Modal/Modal'
 import CloseIcon from '@/../public/icons/close.svg'
 import Button from '@/components/Button/Button'
@@ -26,12 +26,6 @@ function ConfirmModal({
   if (!isOpen) {
     return
   }
-
-  useEffect(() => {
-    window.addEventListener('scroll', (e) => {
-      e.preventDefault()
-    })
-  }, [])
 
   return (
     <>
