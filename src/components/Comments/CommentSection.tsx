@@ -4,7 +4,6 @@ import React, { useMemo } from 'react'
 import CommentForm from '@/components/Comments/CommentForm'
 import QueryError from '@/components/ErrorMessage/QueryError'
 import CommentList from '@/components/Comments/CommentList'
-import { GetPostResponseDto } from '@/features/posts/api/dto/get-post.dto'
 import useCommentForm from '@/features/comments/hooks/useCommentForm'
 import useCreateComment from '@/features/comments/hooks/useCreateComment'
 import CommentsPending from './CommentsPending'
@@ -12,43 +11,41 @@ import useGetComments from '@/features/comments/hooks/useGetComments'
 import CommentsOrderOption from './CommentsOrderOption'
 import CursorPagingButton from '../Button/CursorPagingButton'
 import CommentCount from './CommentCount'
+import { Posts } from '@/features/posts/types/post.type'
 
 interface CommentSectionProps {
-  post: GetPostResponseDto
+  postId: Posts['id']
+  commentCounts: number;
 }
 
-function CommentSection({ post }: CommentSectionProps) {
+function CommentSection({ postId, commentCounts }: CommentSectionProps) {
   const {
     comments,
     commentsError,
     isCommentsPending,
     hasNextPage,
     fetchNextPage,
-  } = useGetComments(post.id)
+  } = useGetComments(postId)
 
   const {
     mutateAsync: createComment,
     isPending,
     isError,
-  } = useCreateComment({ postId: post.id })
+  } = useCreateComment({ postId })
 
   const { register, handleSubmit, setValue, formState } = useCommentForm()
 
   const onSubmit = handleSubmit(async (values) => {
-    await createComment({
-      ...values,
-      postId: post.id,
-    }, {
-      onSuccess: () => {
-        setValue('content', '')
-      },
-      onError: (err) => {
-        alert(err);
-      }
-    })
+    await createComment(
+      { ...values, postId },
+      { onSuccess: () => setValue('content', '') }
+    )
   })
 
-  const isCommentPending = useMemo(() => isPending || formState.isSubmitting,[isPending, formState.isSubmitting])
+  const isCommentPending = useMemo(
+    () => isPending || formState.isSubmitting,
+    [isPending, formState.isSubmitting]
+  )
 
   return (
     <section className="flex flex-col gap-4">
@@ -63,7 +60,7 @@ function CommentSection({ post }: CommentSectionProps) {
       </div>
 
       <div className="flex justify-between items-center">
-        <CommentCount count={post._count.comments} />
+        <CommentCount count={commentCounts} />
         <CommentsOrderOption />
       </div>
 
@@ -73,7 +70,7 @@ function CommentSection({ post }: CommentSectionProps) {
         error={commentsError}
       />
 
-      {!commentsError && <CommentList comments={comments} postId={post.id} />}
+      {!commentsError && <CommentList comments={comments} postId={postId} />}
 
       <CursorPagingButton
         fetchNextPage={fetchNextPage}
