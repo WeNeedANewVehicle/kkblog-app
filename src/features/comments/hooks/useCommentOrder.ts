@@ -1,11 +1,12 @@
 import { commentOrder } from '@/common/constant/commentOrder'
+import { ORDER_BY } from '@/common/constant/constant'
 import useOrder from '@/common/hooks/useOrder'
 import { useRouter } from 'next/navigation'
 import { ChangeEvent, useCallback, useEffect } from 'react'
 
 function useCommentOrder() {
   const router = useRouter()
-  const order = useOrder()
+  const order = useOrder(ORDER_BY.ASC)
 
   const changeUrl = useCallback(
     (value: string) => {
