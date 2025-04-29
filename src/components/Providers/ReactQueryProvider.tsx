@@ -13,14 +13,17 @@ function makeQueryClient() {
         retry: (failureCount, error) => {
           switch (error.meta.status) {
             case HttpStatus.NOT_FOUND:
-              return false;
+              return false
             case HttpStatus.FORBIDDEN:
-              return false;
+              return false
           }
 
-          return failureCount <= 5;
-        }
+          if (error.meta.status === HttpStatus.UNAUTHORIZED && error.meta.code === 'ACCESS TOKEN EXPIRED') {
+            return true;  
+          }
 
+          return failureCount <= 5
+        },
       },
     },
   })
