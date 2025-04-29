@@ -3,6 +3,7 @@ import React, { Fragment, useRef } from 'react'
 import CommentItem from './CommentItem'
 import { timeAgo } from '@/common/util/time.util'
 import { UseGetInfiniteChildCommentsOptionReturnType } from '@/features/comments/hooks/useGetInfiniteChildComments'
+import useDeleteCommentModal from '@/features/comments/hooks/useDeleteCommentModal'
 
 interface ChildCommentsProps {
   comments: UseGetInfiniteChildCommentsOptionReturnType['data']
@@ -13,6 +14,7 @@ interface ChildCommentsProps {
 function ChildComments({ comments, postId, isCollapsed }: ChildCommentsProps) {
   const ref = useRef<HTMLUListElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const { onOpenDeleteCommentModal } = useDeleteCommentModal()
 
   if (isCollapsed) {
     return
@@ -29,7 +31,7 @@ function ChildComments({ comments, postId, isCollapsed }: ChildCommentsProps) {
 
         return (
           <Fragment key={key}>
-            {page.data.map(({ depth, createdAt, id, ...rest }) => (
+            {page.data.map(({ depth, createdAt, id, parentCommentId, ...rest }) => (
               <CommentItem
                 key={id}
                 id={id}
@@ -38,6 +40,7 @@ function ChildComments({ comments, postId, isCollapsed }: ChildCommentsProps) {
                 depth={depth}
                 postId={postId}
                 createdAt={timeAgo(createdAt)}
+                onOpenDeleteModal={() => onOpenDeleteCommentModal({id, postId, parentCommentId })}
                 {...rest}
               />
             ))}

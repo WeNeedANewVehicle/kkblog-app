@@ -15,10 +15,12 @@ import useGetChildComments from '@/features/comments/hooks/useGetChildComments'
 import CommentTargetAuthorNickName from './CommentTargetAuthorNickName'
 import useUpdateComment from '@/features/comments/hooks/useUpdateComment'
 import { useAppContext } from '../Providers/hooks/useAppContext'
+import CommentCollapse from './CommentCollapse'
 
 interface CommentItemProps extends GetCommentsItemDto {
   postId: string
   className?: string
+  onOpenDeleteModal: () => void
 }
 
 function CommentItem({
@@ -32,6 +34,7 @@ function CommentItem({
   depth,
   parent,
   parentCommentId,
+  onOpenDeleteModal,
 }: CommentItemProps) {
   // 댓글 수정 시  폼 편집 모드 활성화 여부
   const [isEdit, setIsEdit] = useState(false)
@@ -39,6 +42,7 @@ function CommentItem({
   const [isCommentFormOpen, setIsCommentFormOpen] = useState(false)
   // 답글 목록 접힙/열림 여부
   const [isCollapsed, setIsCollapsed] = useState(true)
+
   const { user } = useAppContext()
 
   const { ref, childComments, isChildCommentsPending } = useGetChildComments({
@@ -75,6 +79,9 @@ function CommentItem({
 
   // 작성된 댓글 편집 폼 열기
   const onOpenCommentEditForm = useCallback(() => {
+    if (author.id && user && author.id !== user?.id) {
+      return
+    }
     setIsEdit(true)
     setValue('id', id)
     setValue('content', content)
@@ -100,12 +107,6 @@ function CommentItem({
     )
   })
 
-  const hasReply = useMemo(() => _count && _count?.childs > 0, [_count])
-  const replyText = useMemo(
-    () => _count && _count?.childs > 0 && `${_count.childs}개의 답글 펼치기`,
-    [_count]
-  )
-
   const collapseReplyArea = useCallback(
     () => setIsCollapsed((state) => !state),
     []
@@ -122,7 +123,7 @@ function CommentItem({
           author={author}
           isEdit={isEdit}
           onEdit={isEdit ? onCloseCommentEditForm : onOpenCommentEditForm}
-          onDelete={() => {}}
+          onDelete={onOpenDeleteModal}
         />
       </div>
       <div className="flex flex-col whitespace-break-spaces">
@@ -147,7 +148,11 @@ function CommentItem({
             <span className="hidden sm:inline">
               {isCommentFormOpen ? '취소' : '답글'}
             </span>
-            <CommentIcon className="sm:hidden" />
+            {isCommentFormOpen ? (
+              <CloseIcon className="[&>path]:stroke-2 sm:hidden" />
+            ) : (
+              <CommentIcon className="[&>path]:stroke-2 sm:hidden" />
+            )}
           </Button>
         )}
       </div>
@@ -161,20 +166,11 @@ function CommentItem({
       />
 
       {/** 답글 펼치기 & 접기 */}
-      {hasReply && (
-        <Button
-          //
-          className="flex gap-2 w-fit text-hyundai-gold dark:text-blink"
-          onClick={collapseReplyArea}
-        >
-          <span className="p-1 border-2">
-            <CloseIcon
-              className={`transition-transform ${isCollapsed && 'transform-[rotate(45deg)]'} stroke-2`}
-            />
-          </span>
-          {isCollapsed ? replyText : '접기'}
-        </Button>
-      )}
+      <CommentCollapse
+        commentCount={_count?.childs ?? 0}
+        onClick={collapseReplyArea}
+        isCollapsed={isCollapsed}
+      />
 
       <ChildComments
         comments={childComments}

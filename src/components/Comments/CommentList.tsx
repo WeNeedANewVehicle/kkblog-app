@@ -4,6 +4,7 @@ import CommentItem from './CommentItem'
 import { timeAgo } from '@/common/util/time.util'
 import { UseGetInfiniteCommentsReturnType } from '@/features/comments/hooks/useGetInfiniteComents'
 import useOrder from '@/common/hooks/useOrder'
+import useDeleteCommentModal from '@/features/comments/hooks/useDeleteCommentModal'
 
 interface CommentListProps {
   comments: UseGetInfiniteCommentsReturnType['data']
@@ -13,6 +14,7 @@ interface CommentListProps {
 function CommentList({ comments, postId }: CommentListProps) {
   const ref = useRef<HTMLUListElement>(null)
   const order = useOrder()
+  const { onOpenDeleteCommentModal } = useDeleteCommentModal()
 
   return (
     <ul className="flex flex-col gap-4 " ref={ref}>
@@ -28,6 +30,7 @@ function CommentList({ comments, postId }: CommentListProps) {
                 id={id}
                 postId={postId}
                 createdAt={timeAgo(createdAt)}
+                onOpenDeleteModal={() => onOpenDeleteCommentModal({id, postId })}
                 {...rest}
               />
             ))}

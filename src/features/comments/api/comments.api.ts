@@ -15,6 +15,7 @@ import {
   UpdateCommentDto,
   UpdateCommentResponseDto,
 } from '@/features/comments/api/dto/updateComment.dto'
+import { DeleteCommentDto } from '@/features/comments/api/dto/deleteComment.dto'
 
 export function createCommentApi({
   postId,
@@ -58,5 +59,14 @@ export function updateCommentApi({ postId, id, content }: UpdateCommentDto) {
     accessToken,
     method: METHODS.PATCH,
     body: { content },
+  })
+}
+
+export function deleteCommentApi({ id, postId }: DeleteCommentDto) {
+  const accessToken = tokenStorage.getAccessToken()
+  return api<string, null>({
+    url: `/board/posts/${postId}/comments/${id}`,
+    accessToken,
+    method: METHODS.DELETE,
   })
 }
