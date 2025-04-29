@@ -1,5 +1,6 @@
 import { Files } from '@/features/files/types/file.type'
 import { Tag } from '@/features/tags/types/tag.type'
+
 export interface Posts {
   id: string
   title: string

@@ -1,5 +1,5 @@
 'use client'
-import React, { Fragment, useRef } from 'react'
+import React, { Fragment, useCallback, useRef, useState } from 'react'
 import CommentItem from './CommentItem'
 import { timeAgo } from '@/common/util/time.util'
 import { UseGetInfiniteCommentsReturnType } from '@/features/comments/hooks/useGetInfiniteComents'
@@ -21,17 +21,14 @@ function CommentList({ comments, postId }: CommentListProps) {
 
         return (
           <Fragment key={key}>
-            {page.data.map((comment) => (
+            {page.data.map(({ id, createdAt, ...rest }) => (
               <CommentItem
                 className="bg-gray-200 dark:bg-gray-800"
-                depth={comment.depth}
-                key={comment.id}
-                id={comment.id}
-                author={comment.author}
-                content={comment.content}
-                createdAt={timeAgo(comment.createdAt)}
-                _count={comment?._count}
+                key={id}
+                id={id}
                 postId={postId}
+                createdAt={timeAgo(createdAt)}
+                {...rest}
               />
             ))}
           </Fragment>

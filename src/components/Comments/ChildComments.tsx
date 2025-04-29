@@ -1,5 +1,5 @@
 'use client'
-import React, { Fragment, useEffect, useRef } from 'react'
+import React, { Fragment, useRef } from 'react'
 import CommentItem from './CommentItem'
 import { timeAgo } from '@/common/util/time.util'
 import { UseGetInfiniteChildCommentsOptionReturnType } from '@/features/comments/hooks/useGetInfiniteChildComments'
@@ -29,19 +29,16 @@ function ChildComments({ comments, postId, isCollapsed }: ChildCommentsProps) {
 
         return (
           <Fragment key={key}>
-            {page.data.map((comment) => (
+            {page.data.map(({ depth, createdAt, id, ...rest }) => (
               <CommentItem
-                depth={comment.depth}
+                key={id}
+                id={id}
                 // UI Nesting은 1뎁스까지만, 2뎁스부터는 1뎁스와 동일,
-                className={`${comment.depth > 0 ? 'w-full pr-0' : ''} ${comment.depth > 1 ? 'pl-0 pb-0' : ''}`}
-                key={comment.id}
+                className={`${depth > 0 ? 'w-full pr-0' : ''} ${depth > 1 ? 'pl-0 pb-0' : ''}`}
+                depth={depth}
                 postId={postId}
-                createdAt={timeAgo(comment.createdAt)}
-                _count={comment._count}
-                author={comment.author}
-                content={comment.content}
-                id={comment.id}
-                parent={comment.parent}
+                createdAt={timeAgo(createdAt)}
+                {...rest}
               />
             ))}
             <div ref={scrollRef} />
