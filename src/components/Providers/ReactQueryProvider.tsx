@@ -10,15 +10,18 @@ function retry(failureCount: number, error: ErrorBaseResponse) {
     case HttpStatus.FORBIDDEN:
       return false
     default:
-      break;
+      break
   }
 
-  if (error.meta.status === HttpStatus.UNAUTHORIZED && error.meta.code === 'ACCESS TOKEN EXPIRED') {
-    return true;  
+  if (
+    error.meta.status === HttpStatus.UNAUTHORIZED &&
+    error.meta.code === 'ACCESS TOKEN EXPIRED'
+  ) {
+    return true
   }
 
   return failureCount <= 5
-};
+}
 
 function makeQueryClient() {
   return new QueryClient({
@@ -29,7 +32,7 @@ function makeQueryClient() {
         // 클라이언트가 데이터를 다시 가져오는 작업을 피하기 위해서이다.
         staleTime: 60 * 1000,
         retryDelay: 500,
-        retry
+        retry,
       },
     },
   })
