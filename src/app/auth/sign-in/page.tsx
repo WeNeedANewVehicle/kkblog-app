@@ -42,7 +42,7 @@ function Page() {
             </LabeledText>
 
             <Button
-              className="btn-black px-3 py-2.5 "
+              className="btn-black box-sm"
               type="submit"
               isLoading={isPending}
               disabled={isPending}

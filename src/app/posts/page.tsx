@@ -32,10 +32,7 @@ function PostsPage() {
 
       <div className="flex w-full h-[4rem] justify-end">
         {me && (
-          <Link
-            href={route.posts.write}
-            className="btn-black px-3 py-2.5 h-fit"
-          >
+          <Link href={route.posts.write} className="btn-black box-sm h-fit">
             글쓰기
           </Link>
         )}

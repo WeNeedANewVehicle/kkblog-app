@@ -198,6 +198,10 @@
   @apply bg-black text-white;
 }
 
+.btn-warning {
+  @apply bg-red-600 text-white disabled:bg-red-400;
+}
+
 .btn-white {
   @apply bg-white text-black;
 }
@@ -208,6 +212,10 @@
 
 .box-sm {
   @apply px-3 py-2.5;
+}
+
+.box-sm-wide {
+  @apply px-4 py-2;
 }
 
 .mobile-hidden {
@@ -224,6 +232,18 @@
 
 .hover-desc {
   @apply w-fit border bg-red-600;
+}
+
+.overlay {
+  @apply z-9999 fixed top-0 left-0 bg-black w-full h-dvh opacity-50;
+}
+
+.screen-center {
+  @apply top-[50dvh] left-[50vw] translate-x-[-50%] translate-y-[-50%];
+}
+
+.modal {
+  @apply min-w-[20rem] max-w-sm p-4 flex flex-col flex-1 gap-4 dark:bg-gray-800;
 }
 
 #main {

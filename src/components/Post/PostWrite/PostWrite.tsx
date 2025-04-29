@@ -83,15 +83,15 @@ function PostWrite({
 
       <div className="flex gap-4">
         <Link
-          className="flex items-center bg-gray-100 color-gray-200 px-3 py-2.5"
+          className="flex items-center bg-gray-100 color-gray-200 box-sm"
           href={route.posts.index}
         >
           돌아가기
         </Link>
-        <Button className="px-3 py-2.5">임시 저장</Button>
+        <Button className="box-sm">임시 저장</Button>
         <Button
           type="submit"
-          className="btn-black px-3 py-2.5"
+          className="btn-black box-sm"
           disabled={formState.isLoading || formState.isSubmitting}
         >
           작성
