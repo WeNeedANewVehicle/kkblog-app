@@ -11,7 +11,10 @@ export interface GetChildCommentsDto extends GetCommentsDto {
 }
 
 export interface GetCommentsItemDto
-  extends Pick<Comments, 'id' | 'content' | 'createdAt' | 'depth'> {
+  extends Pick<
+    Comments,
+    'id' | 'content' | 'createdAt' | 'depth' | 'parentCommentId'
+  > {
   author: Author
   _count?: {
     childs: number

@@ -11,4 +11,4 @@ function CommentCount({ count }: CommentCountProps) {
   )
 }
 
-export default CommentCount
+export default React.memo(CommentCount)

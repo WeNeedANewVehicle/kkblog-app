@@ -16,4 +16,4 @@ function CommentsOrderOption() {
   )
 }
 
-export default CommentsOrderOption
+export default React.memo(CommentsOrderOption)

@@ -13,6 +13,8 @@ import useCommentForm from '@/features/comments/hooks/useCommentForm'
 import LoadingIcon from '@/../public/icons/loading.svg'
 import useGetChildComments from '@/features/comments/hooks/useGetChildComments'
 import CommentTargetAuthorNickName from './CommentTargetAuthorNickName'
+import useUpdateComment from '@/features/comments/hooks/useUpdateComment'
+import { useAppContext } from '../Providers/hooks/useAppContext'
 
 interface CommentItemProps extends GetCommentsItemDto {
   postId: string
@@ -29,9 +31,15 @@ function CommentItem({
   className,
   depth,
   parent,
+  parentCommentId,
 }: CommentItemProps) {
-  const [isOpen, setIsOpen] = useState(false)
+  // 댓글 수정 시  폼 편집 모드 활성화 여부
+  const [isEdit, setIsEdit] = useState(false)
+  // 답글 영역 폼 열림 여부
+  const [isCommentFormOpen, setIsCommentFormOpen] = useState(false)
+  // 답글 목록 접힙/열림 여부
   const [isCollapsed, setIsCollapsed] = useState(true)
+  const { user } = useAppContext()
 
   const { ref, childComments, isChildCommentsPending } = useGetChildComments({
     commentId: id,
@@ -40,22 +48,56 @@ function CommentItem({
   })
   const { register, handleSubmit, setValue } = useCommentForm()
 
-  const {
-    mutateAsync: createComment,
-    isPending,
-  } = useCreateComment({ postId, parentCommentId: id, setIsCollapsed })
+  const { mutateAsync: createComment, isPending } = useCreateComment({
+    postId,
+    parentCommentId: id,
+    setIsCollapsed,
+  })
 
+  const { mutateAsync: updateComment } = useUpdateComment()
+
+  // 답글 생성
   const onSubmit = handleSubmit(async (values) => {
-    await createComment({
-      ...values,
-      postId,
-      ...(id && { parentCommentId: id }),
-    }, { 
-      onSuccess: () => {
-        setValue('content', '');
-        setIsOpen(false)
+    await createComment(
+      {
+        ...values,
+        postId,
+        ...(id && { parentCommentId: id }), // 댓글 id 가 존재할 경우는 답글을 다는 경우
+      },
+      {
+        onSuccess: () => {
+          setValue('content', '')
+          setIsCommentFormOpen(false)
+        },
       }
-    })
+    )
+  })
+
+  // 작성된 댓글 편집 폼 열기
+  const onOpenCommentEditForm = useCallback(() => {
+    setIsEdit(true)
+    setValue('id', id)
+    setValue('content', content)
+    setValue('parentCommentId', parentCommentId)
+  }, [id, content, parentCommentId, setValue])
+
+  const onCloseCommentEditForm = useCallback(() => setIsEdit(false), [])
+
+  // 댓글 수정 후 제출
+  const onEditComment = handleSubmit(async (values) => {
+    await updateComment(
+      {
+        id: values.id!,
+        postId,
+        content: values.content,
+        parentCommentId: values.parentCommentId,
+      },
+      {
+        onSuccess: () => {
+          setIsEdit(false)
+        },
+      }
+    )
   })
 
   const hasReply = useMemo(() => _count && _count?.childs > 0, [_count])
@@ -76,30 +118,49 @@ function CommentItem({
           {author.nickname} <div className="text-gray-600">{createdAt}</div>
         </div>
 
-        <CommentsControl author={author} />
+        <CommentsControl
+          author={author}
+          isEdit={isEdit}
+          onEdit={isEdit ? onCloseCommentEditForm : onOpenCommentEditForm}
+          onDelete={() => {}}
+        />
       </div>
       <div className="flex flex-col whitespace-break-spaces">
         <p>
           <CommentTargetAuthorNickName depth={depth} parent={parent} />
-          {content}
+          {!isEdit && content}
         </p>
+        {/* 댓글 수정 폼 */}
+        <CommentForm
+          //
+          isOpen={isEdit}
+          onSubmit={onEditComment}
+          register={register}
+          isPending={isPending}
+        />
 
-        <Button
-          className="btn-black w-fit self-end px-3 py-1 rounded-none!"
-          onClick={() => setIsOpen((state) => !state)}
-        >
-          <span className="hidden sm:inline">{isOpen ? '취소' : '답글'}</span>
-          <CommentIcon className="sm:hidden" />
-        </Button>
+        {!isEdit && (
+          <Button
+            className="btn-black w-fit self-end px-3 py-1 rounded-none!"
+            onClick={() => setIsCommentFormOpen((state) => !state)}
+          >
+            <span className="hidden sm:inline">
+              {isCommentFormOpen ? '취소' : '답글'}
+            </span>
+            <CommentIcon className="sm:hidden" />
+          </Button>
+        )}
       </div>
 
+      {/** 답글 작성 폼 */}
       <CommentForm
-        isOpen={isOpen}
+        isOpen={isCommentFormOpen}
         onSubmit={onSubmit}
         register={register}
         isPending={isPending}
       />
 
+      {/** 답글 펼치기 & 접기 */}
       {hasReply && (
         <Button
           //

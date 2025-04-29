@@ -11,6 +11,10 @@ import {
   GetCommentsDto,
   GetCommentsResponseDto,
 } from '@/features/comments/api/dto/getComments.dto'
+import {
+  UpdateCommentDto,
+  UpdateCommentResponseDto,
+} from '@/features/comments/api/dto/updateComment.dto'
 
 export function createCommentApi({
   postId,
@@ -44,5 +48,15 @@ export function getChildCommentsApi({
   return api<Omit<GetCommentsDto, 'postId'>, GetCommentsResponseDto>({
     url: `/board/posts/${postId}/comments/${commentId}`,
     queries: objectToQueryString(rest),
+  })
+}
+
+export function updateCommentApi({ postId, id, content }: UpdateCommentDto) {
+  const accessToken = tokenStorage.getAccessToken()
+  return api<Pick<UpdateCommentDto, 'content'>, UpdateCommentResponseDto>({
+    url: `/board/posts/${postId}/comments/${id}`,
+    accessToken,
+    method: METHODS.PATCH,
+    body: { content },
   })
 }

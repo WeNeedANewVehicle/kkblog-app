@@ -26,7 +26,7 @@ function CommentForm({
       <textarea
         className="bg-white p-4 w-full border-2 border-black dark:border-none dark:bg-gray-700"
         disabled={isPending}
-        {...register('content')}
+        {...register('content', { shouldUnregister: true })}
       />
       <Button
         className="btn-black box-sm md:w-fit whitespace-nowrap"
@@ -39,4 +39,4 @@ function CommentForm({
   )
 }
 
-export default CommentForm
+export default React.memo(CommentForm);
