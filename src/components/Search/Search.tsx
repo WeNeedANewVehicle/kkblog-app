@@ -1,3 +1,5 @@
+'use client'
+
 import React, { FormEvent } from 'react'
 import SearchIcon from '@/../public/icons/search.svg'
 import CloseIcon from '@/../public/icons/close.svg'

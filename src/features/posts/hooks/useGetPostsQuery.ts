@@ -1,4 +1,3 @@
-'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import {
@@ -47,9 +46,7 @@ function useGetPostsQuery() {
       defaultValue: null,
       keepError: false,
     })
-  }, [])
-
-  console.log('err: ', formState.errors)
+  }, [resetField, router])
 
   return { formState, register, onSubmit, onClear, search }
 }
