@@ -66,19 +66,11 @@ async function api<P, T>({
       error?.meta?.code === 'ACCESS TOKEN EXPIRED'
     ) {
       await refreshAccessTokenApi()
-      // .then(() => {
-      //   const accessToken = tokenStorage.getAccessToken()
-      //   return api<P, T>({
-      //     url,
-      //     method,
-      //     queries,
-      //     body,
-      //     credentials,
-      //     accessToken,
-      //     middleware,
-      //   })
+      // .then((res) => {
+      //   if (res.data.meta.status === HttpStatus.NOT_FOUND) {
+      //     tokenStorage.clearAccessToken();
+      //   }
       // })
-      // .catch((err) => alert(JSON.stringify(err)))
     }
 
     throw error
