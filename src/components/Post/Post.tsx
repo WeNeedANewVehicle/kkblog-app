@@ -26,7 +26,7 @@ function Post({ author, title, tags, content, createdAt, id }: PostProps) {
       <hr className="my-4 border-t border-t-gray-600" />
 
       <div
-        className="pt-4 min-h-dvh"
+        className="pt-4 min-h-dvh max-w-7xl"
         dangerouslySetInnerHTML={{ __html: content }}
       />
     </article>

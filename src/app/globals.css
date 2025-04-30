@@ -28,7 +28,6 @@
   --color-black: #000;
 
   --color-blink: #ffa500;
-
   --animate-scale: scale 0.3s both;
   --animate-collapse-x: collapse-x 0.3s forwards both;
   --animate-swipe-bottom: swipe-bottom 0.3s forwards;
@@ -259,12 +258,6 @@
 
 .pointer {
   cursor: pointer;
-}
-
-@media screen and (min-width: 768px) {
-  #main {
-    padding: 1rem;
-  }
 }
 
 @media (prefers-color-scheme: dark) {

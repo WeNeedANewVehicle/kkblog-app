@@ -12,6 +12,7 @@ import ShareButton from '@/components/Button/ShareButton/ShareButton'
 import HorizontalLine from '@/components/Line/Horizontal'
 import CommentSection from '@/components/Comments/CommentSection'
 import NearByPosts from '@/components/Post/NearByPosts/NearByPosts'
+import ProgressBar from '@/components/ProgressBar/ProgressBar'
 
 interface PostPageMetadata {
   params: DynamicParam<'id'>['params']
@@ -68,6 +69,7 @@ async function Page({ params }: DynamicParam<'id'>) {
 
   return (
     <div>
+      <ProgressBar />
       <section>
         <Post
           //
