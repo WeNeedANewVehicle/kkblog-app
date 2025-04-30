@@ -9,6 +9,8 @@ function retry(failureCount: number, error: ErrorBaseResponse) {
       return false
     case HttpStatus.FORBIDDEN:
       return false
+    case HttpStatus.BAD_REQUEST:
+      return false;
     default:
       break
   }

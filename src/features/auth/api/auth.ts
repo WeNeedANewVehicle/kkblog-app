@@ -1,6 +1,5 @@
 import { METHODS } from '@/common/constant/constant'
 import { BaseResponse } from '@/common/dto/baseResponse'
-import { messages } from '@/common/messages/messages'
 import tokenStorage from '@/common/storages/token-storage'
 import api from '@/common/util/api.util'
 import {
@@ -11,6 +10,15 @@ import {
   SignUpResponseDto,
 } from '@/features/auth/api/dto/signIn.dto'
 
+function authMiddleWare(response: Response) {
+  const authorization = response.headers.get('Authorization')
+  const [bearer, token] = authorization?.split(' ') ?? ['', '']
+
+  if (bearer === 'Bearer' && token) {
+    tokenStorage.setAccessToken(token)
+  }
+}
+
 // 로그인
 export async function signInApi(params: SignInDto) {
   return await api<SignInDto, SignInResponseDto>({
@@ -18,22 +26,7 @@ export async function signInApi(params: SignInDto) {
     method: METHODS.POST,
     body: params,
     credentials: 'include',
-    middleware: (res) => {
-      const authorization = res.headers.get('Authorization')
-      const [bearer, token] = authorization?.split(' ') ?? ['', '']
-
-      if (res.status >= 400 && res.status < 500) {
-        return res
-      }
-
-      if (bearer !== 'Bearer') {
-        throw new Error(messages.validation.auth.invalid_bearer_token)
-      }
-
-      if (token) {
-        tokenStorage.setAccessToken(token)
-      }
-    },
+    middleware: authMiddleWare
   })
 }
 
@@ -54,36 +47,15 @@ export async function signUpApi(params: SignUpDto) {
     url: '/auth/sign-up',
     method: METHODS.POST,
     body: params,
-    middleware: (res) => {
-      const authorization = res.headers.get('Authorization')
-      const [bearer, token] = authorization?.split(' ') ?? ['', '']
-
-      if (bearer !== 'Bearer') {
-        throw new Error(messages.validation.auth.invalid_bearer_token)
-      }
-
-      if (token) {
-        tokenStorage.setAccessToken(token)
-      }
-    },
+    middleware: authMiddleWare
   })
 }
+
 // 엑세스 토큰 재발급
 export async function refreshAccessTokenApi() {
   return await api<undefined, BaseResponse<undefined>>({
     url: '/auth/refresh/token',
     credentials: 'include',
-    middleware: (res) => {
-      const accessToken = res.headers.get('Authorization')
-      const [bearer, token] = accessToken?.split(' ') ?? ['', '']
-
-      if (bearer !== 'Bearer') {
-        throw new Error(messages.validation.auth.invalid_bearer_token)
-      }
-
-      if (token) {
-        tokenStorage.setAccessToken(token)
-      }
-    },
+    middleware: authMiddleWare
   })
 }
