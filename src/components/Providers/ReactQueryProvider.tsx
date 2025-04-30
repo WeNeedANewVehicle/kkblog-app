@@ -1,9 +1,15 @@
 'use client'
 import { ErrorBaseResponse } from '@/common/dto/baseResponse'
 import { HttpStatus } from '@/common/enum/http-status.enum'
+import tokenStorage from '@/common/storages/token-storage'
 import { isServer, QueryClient } from '@tanstack/react-query'
 
 function retry(failureCount: number, error: ErrorBaseResponse) {
+  
+  if (error.error.path === '/auth/refresh/token' && error.meta.status === HttpStatus.NOT_FOUND) {
+    tokenStorage.clearAccessToken();
+  }
+
   switch (error.meta.status) {
     case HttpStatus.NOT_FOUND:
       return false
