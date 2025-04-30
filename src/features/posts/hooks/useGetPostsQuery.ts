@@ -18,7 +18,7 @@ function useGetPostsQuery() {
     useForm<PostSearchSchema>({
       resolver: zodResolver(postSearchSchema),
       defaultValues: {
-        search: null,
+        search,
       },
     })
 

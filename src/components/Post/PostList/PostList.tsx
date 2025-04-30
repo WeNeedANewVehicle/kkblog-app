@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useMemo } from 'react'
 import PostItem from '../PostItem/PostItem'
 import PostItemSkeleton from '../PostItem/PostItemSkeleton/PostItemSkeleton'
 import {
@@ -12,11 +12,12 @@ interface PostListProps {
 }
 
 function PostList({ posts, isFetching }: PostListProps) {
+
+
   return (
     <ul
       className={`grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8`}
     >
-      {posts?.pages?.length === 0 && <li>아직 등록된 글이 없습니다.</li>}
       {posts?.pages.map((data, index) => {
         const key = `${index}-${data.meta.paging?.nextCursor}`
         return (
