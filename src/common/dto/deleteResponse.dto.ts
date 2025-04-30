@@ -1,4 +1,4 @@
 export interface DeleteResponse {
-    success: boolean;
-    id: string;
+  success: boolean
+  id: string
 }

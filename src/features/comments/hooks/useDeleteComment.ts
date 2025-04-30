@@ -1,7 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { deleteCommentApi } from '@/features/comments/api/comments.api'
 import { GET_CHILD_COMMENTS } from './useGetInfiniteChildComments'
-import { GET_COMMENTS, UseGetInfiniteCommentsReturnType } from './useGetInfiniteComents'
+import {
+  GET_COMMENTS,
+  UseGetInfiniteCommentsReturnType,
+} from './useGetInfiniteComents'
 import useOrder from '@/common/hooks/useOrder'
 
 const DELETE_COMMENT = 'DELETE_COMMENT'
@@ -45,8 +48,7 @@ function useDeleteComment() {
           }
         }
       )
-
-    }
+    },
   })
 }
 

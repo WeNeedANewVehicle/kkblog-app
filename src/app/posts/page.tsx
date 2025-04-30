@@ -1,34 +1,39 @@
 'use client'
 
 import Link from 'next/link'
-import React, { Fragment, Suspense } from 'react'
+import React, { Suspense } from 'react'
 import Search from '@/components/Search/Search'
 import route from '@/routes/routes'
 import useInfiniteGetPosts from '@/features/posts/hooks/useInfiniteGetPosts'
-
 import useMe from '@/features/auth/hooks/queries/useMe'
 import useInfiniteScroll from '@/common/hooks/useInfiniteScroll'
 import Loading from '@/../public/icons/loading.svg'
-
 import PostList from '@/components/Post/PostList/PostList'
-import { useRouter } from 'next/navigation'
 import QueryError from '@/components/ErrorMessage/QueryError'
+import useGetPostsQuery from '@/features/posts/hooks/useGetPostsQuery'
 
 function PostsPage() {
-  const router = useRouter()
+  const { register, onSubmit, onClear, formState, search } = useGetPostsQuery()
+
   const {
     data: posts,
     fetchNextPage,
     hasNextPage,
     isFetching,
     error,
-  } = useInfiniteGetPosts()
+  } = useInfiniteGetPosts(search)
   const { data: me } = useMe()
   const ref = useInfiniteScroll<HTMLDivElement>({ hasNextPage, fetchNextPage })
 
   return (
     <section className="flex flex-col items-center justify-center gap-8 pt-20">
-      <Search />
+      <title>글 목록 | 크크블로그</title>
+      <Search
+        register={register}
+        onSubmit={onSubmit}
+        formState={formState}
+        onClear={onClear}
+      />
 
       <div className="flex w-full h-[4rem] justify-end">
         {me && (

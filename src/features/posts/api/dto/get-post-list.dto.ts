@@ -3,7 +3,7 @@ import { Author } from '@/features/auth/types/auth.type'
 import { Posts } from '@/features/posts/types/post.type'
 
 export class GetPostsDto extends PaginationDto {
-  search?: string | string[]
+  search?: string | null
 }
 
 export interface GetPostsItemResponseDto extends Omit<Posts, 'files'> {

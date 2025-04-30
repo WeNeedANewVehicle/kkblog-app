@@ -30,7 +30,9 @@ function CommentList({ comments, postId }: CommentListProps) {
                 id={id}
                 postId={postId}
                 createdAt={timeAgo(createdAt)}
-                onOpenDeleteModal={() => onOpenDeleteCommentModal({id, postId })}
+                onOpenDeleteModal={() =>
+                  onOpenDeleteCommentModal({ id, postId })
+                }
                 {...rest}
               />
             ))}

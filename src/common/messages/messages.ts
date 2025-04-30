@@ -18,6 +18,9 @@ export const messages = {
     auth: {
       invalid_bearer_token: 'Bearer 토큰 검증 실패',
     },
+    posts: {
+      min_length: '검색어는 2글자 이상 입력해주세요',
+    },
   },
 
   storage: {

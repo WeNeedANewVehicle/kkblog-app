@@ -26,7 +26,7 @@ function PostItem({
           <div className="flex flex-col gap-2">
             <h2 className="line-clamp-1">{title}</h2>
             <p className="line-clamp-3 text-gray-500">
-              {desc ?? '콘텐츠에 미리보기 내용이 없습니다.'}
+              {desc?.trim() ? desc : '콘텐츠에 미리보기 내용이 없습니다.'}
             </p>
           </div>
 

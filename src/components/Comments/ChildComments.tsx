@@ -31,19 +31,23 @@ function ChildComments({ comments, postId, isCollapsed }: ChildCommentsProps) {
 
         return (
           <Fragment key={key}>
-            {page.data.map(({ depth, createdAt, id, parentCommentId, ...rest }) => (
-              <CommentItem
-                key={id}
-                id={id}
-                // UI Nesting은 1뎁스까지만, 2뎁스부터는 1뎁스와 동일,
-                className={`${depth > 0 ? 'w-full pr-0' : ''} ${depth > 1 ? 'pl-0 pb-0' : ''}`}
-                depth={depth}
-                postId={postId}
-                createdAt={timeAgo(createdAt)}
-                onOpenDeleteModal={() => onOpenDeleteCommentModal({id, postId, parentCommentId })}
-                {...rest}
-              />
-            ))}
+            {page.data.map(
+              ({ depth, createdAt, id, parentCommentId, ...rest }) => (
+                <CommentItem
+                  key={id}
+                  id={id}
+                  // UI Nesting은 1뎁스까지만, 2뎁스부터는 1뎁스와 동일,
+                  className={`${depth > 0 ? 'w-full pr-0' : ''} ${depth > 1 ? 'pl-0 pb-0' : ''}`}
+                  depth={depth}
+                  postId={postId}
+                  createdAt={timeAgo(createdAt)}
+                  onOpenDeleteModal={() =>
+                    onOpenDeleteCommentModal({ id, postId, parentCommentId })
+                  }
+                  {...rest}
+                />
+              )
+            )}
             <div ref={scrollRef} />
           </Fragment>
         )
