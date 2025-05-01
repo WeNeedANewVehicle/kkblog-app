@@ -53,8 +53,9 @@ export async function signUpApi(params: SignUpDto) {
 
 // 엑세스 토큰 재발급
 export async function refreshAccessTokenApi() {
-  return await api<undefined, BaseResponse<undefined>>({
+  return await api<undefined, BaseResponse<null>>({
     url: '/auth/refresh/token',
+    method: METHODS.POST,
     credentials: 'include',
     middleware: authMiddleWare
   })

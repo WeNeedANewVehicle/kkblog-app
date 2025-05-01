@@ -36,7 +36,7 @@ function ProgressBar() {
   }, []);
   return (
     createPortal(
-      <div className='fixed z-10001 top-[64px] w-screen max-w-7xl h-1 bg-gray-600'>
+      <div className='sticky z-10001 top-[64px] w-screen max-w-7xl h-1 bg-gray-600'>
         <div className="w-full bg-blink h-1 transform-[scaleX(0%)] transition-transform origin-left" ref={ref}/>
       </div>,
       document.body
