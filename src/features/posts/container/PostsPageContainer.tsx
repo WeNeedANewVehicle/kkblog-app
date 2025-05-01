@@ -25,7 +25,10 @@ function PostsPageContainer() {
   const { data: me } = useMe()
   const ref = useInfiniteScroll<HTMLDivElement>({ hasNextPage, fetchNextPage })
 
-  const isNoResult = useMemo(() => posts?.pages.length === 1 && posts.pages[0].data.length === 0, [posts])
+  const isNoResult = useMemo(
+    () => posts?.pages.length === 1 && posts.pages[0].data.length === 0,
+    [posts]
+  )
   return (
     <section className="flex flex-col items-center justify-center gap-8 pt-20">
       <title>글 목록 | 크크블로그</title>
@@ -45,8 +48,10 @@ function PostsPageContainer() {
       </div>
 
       <QueryError error={error} message="글 목록을 가져오는데 실패했습니다." />
-      {!error && !isNoResult && <PostList posts={posts} isFetching={isFetching} />}
-      <NoPost search={search} isNoResult={isNoResult}/>
+      {!error && !isNoResult && (
+        <PostList posts={posts} isFetching={isFetching} />
+      )}
+      <NoPost search={search} isNoResult={isNoResult} />
       <div ref={ref} />
     </section>
   )

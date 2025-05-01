@@ -5,9 +5,11 @@ import tokenStorage from '@/common/storages/token-storage'
 import { isServer, QueryClient } from '@tanstack/react-query'
 
 function retry(failureCount: number, error: ErrorBaseResponse) {
-  
-  if (error.error.path === '/auth/refresh/token' && error.meta.status === HttpStatus.NOT_FOUND) {
-    tokenStorage.clearAccessToken();
+  if (
+    error.error.path === '/auth/refresh/token' &&
+    error.meta.status === HttpStatus.NOT_FOUND
+  ) {
+    tokenStorage.clearAccessToken()
   }
 
   switch (error.meta.status) {
@@ -16,7 +18,7 @@ function retry(failureCount: number, error: ErrorBaseResponse) {
     case HttpStatus.FORBIDDEN:
       return false
     case HttpStatus.BAD_REQUEST:
-      return false;
+      return false
     default:
       break
   }

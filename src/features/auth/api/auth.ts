@@ -26,7 +26,7 @@ export async function signInApi(params: SignInDto) {
     method: METHODS.POST,
     body: params,
     credentials: 'include',
-    middleware: authMiddleWare
+    middleware: authMiddleWare,
   })
 }
 
@@ -47,7 +47,7 @@ export async function signUpApi(params: SignUpDto) {
     url: '/auth/sign-up',
     method: METHODS.POST,
     body: params,
-    middleware: authMiddleWare
+    middleware: authMiddleWare,
   })
 }
 
@@ -57,6 +57,6 @@ export async function refreshAccessTokenApi() {
     url: '/auth/refresh/token',
     method: METHODS.POST,
     credentials: 'include',
-    middleware: authMiddleWare
+    middleware: authMiddleWare,
   })
 }
