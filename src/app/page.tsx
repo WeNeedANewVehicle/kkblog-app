@@ -4,16 +4,20 @@ import QueryError from '@/components/ErrorMessage/QueryError'
 import MainArticle from '@/features/main/components/Article/MainArticle'
 import PostListSummary from '@/features/posts/components/PostListSummary'
 import Count from '@/features/statistics/components/Count'
+import useIncreaseVisitor from '@/features/statistics/hooks/useIncreaseVisitor'
 import useMainPageStatistics from '@/features/statistics/hooks/useMainPageStatistics'
 import { useMemo } from 'react'
 
 function Page() {
+  useIncreaseVisitor()
+  
   const [
     { data: posts, error: postsError }, 
     { data: statistics }
   ] = useMainPageStatistics()
 
   const statisticsData = useMemo(() => statistics?.data, [statistics?.data]);
+
 
   return (
     <section className="flex flex-col gap-4">
