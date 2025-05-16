@@ -1,10 +1,19 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 function ProgressBar() {
   const ref = useRef<HTMLDivElement>(null)
+  const [target, setTarget] = useState<Element>();
+  
+
+  useLayoutEffect(() => {
+    if (target) {
+      return;
+    }
+    setTarget(document.querySelector('.header-wrapper')!)
+  }, [target]);
 
   useEffect(() => {
     const scrollEvent = () => {
@@ -32,14 +41,19 @@ function ProgressBar() {
       window.removeEventListener('scroll', scrollEvent)
     }
   }, [])
+
+  if (!target) {
+    return;
+  }
+
   return createPortal(
-    <div className="sticky z-10001 top-[64px] w-screen max-w-7xl h-1 bg-gray-600">
+    <div className="pg-bar sticky z-10001 top-[64px] w-full max-w-7xl h-1 bg-gray-600">
       <div
         className="w-full bg-blink h-1 transform-[scaleX(0%)] transition-transform origin-left"
         ref={ref}
       />
-    </div>,
-    document.body
+    </div>, target!
+    
   )
 }
 

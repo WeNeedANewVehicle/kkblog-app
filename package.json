@@ -16,6 +16,7 @@
     "@tanstack/react-query": "^5.56.2",
     "@tanstack/react-query-devtools": "^5.66.0",
     "@types/draft-js": "^0.11.18",
+    "chart.js": "^4.4.9",
     "ckeditor5": "^44.3.0",
     "dayjs": "^1.11.13",
     "next": "14.2.6",

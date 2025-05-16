@@ -1,7 +1,7 @@
 import React, { LiHTMLAttributes, ReactNode } from 'react'
 
 interface CountProps extends LiHTMLAttributes<HTMLDivElement> {
-  count: number
+  count: number | string
   text: string | ReactNode
   unit: '명' | '개' | '회'
 }
@@ -15,7 +15,7 @@ function Count({ count, text, unit, className, ...rest }: CountProps) {
       <span className="text-white text-xl">{text}</span>
 
       <div className="text-white">
-        <span className="text-3xl font-black">{count}</span>
+        <span className="text-3xl font-black">{count?.toLocaleString()}</span>
         {unit}
       </div>
     </div>

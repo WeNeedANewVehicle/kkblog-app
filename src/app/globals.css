@@ -177,8 +177,12 @@
   @apply border-b-gray-200 dark:border-b-gray-600;
 }
 
+.header-wrapper {
+  @apply sticky flex flex-col top-0;
+}
+
 .header {
-  @apply sticky m-auto w-full flex justify-between top-0 p-4 text-white border-b bg-white dark:bg-gray-900 dark:text-gray-200;
+  @apply m-auto w-full flex justify-between top-0 p-4 text-white border-b bg-white dark:bg-gray-900 dark:text-gray-200;
 }
 
 .icon {

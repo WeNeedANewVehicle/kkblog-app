@@ -40,7 +40,8 @@ function Header({ menu }: HeaderProps) {
   }, [dispatch])
 
   return (
-    <menu className="header header-border-b z-[9999] h-[4rem]">
+    <div className="header-wrapper flex-1">
+      <menu className="header header-border-b z-[9999] h-[4rem]">
       <ul className="navigator">
         {menu.map(({ text, to }) => (
           <li key={to} className={`${active(to)} mobile-hidden`}>
@@ -86,6 +87,8 @@ function Header({ menu }: HeaderProps) {
 
       <MobileHeader menu={menu} user={user} onClickLink={onClickLink} />
     </menu>
+    </div>
+    
   )
 }
 
