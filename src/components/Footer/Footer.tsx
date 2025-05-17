@@ -7,7 +7,7 @@ function Footer() {
   return (
     <footer className="flex flex-col px-8 md:px-16  py-16 gap-16 items-center bg-gray-950 text-gray-200 m-auto">
       <div className="flex justify-between w-full  gap-4 flex-col">
-        <Logo className="logo" width={100} height={32} />
+        <Logo className="logo [&>path]:fill-gray-200" width={100} height={32} />
 
         <div className="flex gap-4 justify-end">
           <a
