@@ -19,6 +19,7 @@ import {
   Superscript,
   Subscript,
   EventInfo,
+  Font,
 } from 'ckeditor5'
 import React from 'react'
 import styles from '@/components/WysiwygEditor/WysiwygEditor.module.css'
@@ -42,6 +43,7 @@ function WysiwygEditor({ onChange, onReady }: WysiwygEditorProps) {
           licenseKey: 'GPL',
           plugins: [
             Essentials,
+            Font,
             Paragraph,
             Bold,
             Italic,
@@ -62,6 +64,10 @@ function WysiwygEditor({ onChange, onReady }: WysiwygEditorProps) {
           toolbar: [
             'undo',
             'redo',
+            '|',
+            'fontSize',
+            'fontFamily',
+            'fontColor',
             '|',
             'bold',
             'italic',
