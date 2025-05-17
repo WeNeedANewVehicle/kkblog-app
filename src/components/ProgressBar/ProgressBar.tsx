@@ -47,7 +47,7 @@ function ProgressBar() {
   }
 
   return createPortal(
-    <div className="pg-bar sticky z-10001 top-[64px] w-full max-w-7xl h-1 bg-gray-600">
+    <div className="pg-bar w-full max-w-7xl h-1 bg-gray-600">
       <div
         className="w-full bg-blink h-1 transform-[scaleX(0%)] transition-transform origin-left"
         ref={ref}

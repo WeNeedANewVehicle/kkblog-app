@@ -10,7 +10,7 @@ function NoPost({ search, isNoResult }: NoPostProps) {
   return (
     isNoResult && (
       <div className="flex flex-col text-center justify-center items-center gap-4">
-        <WarningIcon className="size-20 stroke-red-600 dark:stroke-burgundy-600" />
+        <WarningIcon className="cursor-default size-20 stroke-red-600 dark:stroke-burgundy-600" />
         {search ? '검색된 글이 없습니다' : '등록된 글이 없습니다.'}
       </div>
     )
