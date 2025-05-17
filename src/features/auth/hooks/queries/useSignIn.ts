@@ -11,6 +11,7 @@ function useSignIn() {
   const redirectionUrl = redirectStorage.getRedirectUrl()
   return useMutation({
     mutationFn: signInApi,
+    retry: false,
     onSuccess: () => {
       router.replace(redirectionUrl ?? route.index)
     },

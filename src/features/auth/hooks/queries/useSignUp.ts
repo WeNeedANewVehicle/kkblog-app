@@ -18,6 +18,7 @@ function useSignUp({ setError }: UseSignUpParams) {
   const router = useRouter()
 
   return useMutation({
+    retry: false,
     mutationFn: signUpApi,
     onSuccess: (_) => {
       const redirectUrl = redirectStorage.getRedirectUrl()

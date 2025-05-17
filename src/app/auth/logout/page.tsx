@@ -12,7 +12,7 @@ function Page() {
     logout()
 
     const redirect = setTimeout(() => {
-      router.replace(route.auth.index)
+      router.replace(route.index)
     }, 1000 * 3)
 
     return () => {
