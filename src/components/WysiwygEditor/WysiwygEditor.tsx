@@ -66,7 +66,6 @@ function WysiwygEditor({ onChange, onReady }: WysiwygEditorProps) {
             'redo',
             '|',
             'fontSize',
-            'fontFamily',
             'fontColor',
             '|',
             'bold',
