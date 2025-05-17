@@ -2,7 +2,6 @@ import route from '@/routes/routes'
 import { OrderBy } from '../types/orderBy.type'
 
 export const isProd: boolean = process.env.NODE_ENV === 'production'
-
 export const baseUrl = isProd
   ? 'https://api.kkblog.co.kr'
   : 'http://localhost:8080'
