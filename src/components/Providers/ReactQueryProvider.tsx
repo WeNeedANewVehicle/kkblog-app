@@ -2,6 +2,7 @@
 import { ErrorBaseResponse } from '@/common/dto/baseResponse'
 import { HttpStatus } from '@/common/enum/http-status.enum'
 import tokenStorage from '@/common/storages/token-storage'
+import { isTokenExpiredError } from '@/common/util/isTokenExpired.util'
 import { isServer, QueryClient } from '@tanstack/react-query'
 
 function retry(failureCount: number, error: ErrorBaseResponse) {
@@ -23,10 +24,8 @@ function retry(failureCount: number, error: ErrorBaseResponse) {
       break
   }
 
-  if (
-    error.meta.status === HttpStatus.UNAUTHORIZED &&
-    error.meta.code === 'ACCESS TOKEN EXPIRED'
-  ) {
+  const isTokenExpired = isTokenExpiredError(error)
+  if (isTokenExpired) {
     return true
   }
 

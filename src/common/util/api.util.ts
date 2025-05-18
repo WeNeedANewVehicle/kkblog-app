@@ -3,6 +3,7 @@ import { HttpStatus } from '@/common/enum/http-status.enum'
 import { BaseResponse, ErrorBaseResponse } from '@/common/dto/baseResponse'
 import tokenStorage from '@/common/storages/token-storage'
 import { refreshAccessTokenApi } from '@/features/auth/api/auth'
+import { isTokenExpiredError } from './isTokenExpired.util'
 
 interface ApiParams<P> {
   url: string
@@ -61,16 +62,9 @@ async function api<P, T>({
     throw (await result.json()) as ErrorBaseResponse
   } catch (e) {
     const error = e as unknown as ErrorBaseResponse
-    if (
-      error?.meta?.status === HttpStatus.UNAUTHORIZED &&
-      error?.meta?.code === 'ACCESS TOKEN EXPIRED'
-    ) {
+    const isTokenExpired = isTokenExpiredError(error)
+    if (isTokenExpired) {
       await refreshAccessTokenApi()
-      // .then((res) => {
-      //   if (res.data.meta.status === HttpStatus.NOT_FOUND) {
-      //     tokenStorage.clearAccessToken();
-      //   }
-      // })
     }
 
     throw error

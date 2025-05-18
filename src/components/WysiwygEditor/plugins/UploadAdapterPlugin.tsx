@@ -1,4 +1,7 @@
 import { baseUrl } from '@/common/constant/constant'
+import { ErrorBaseResponse } from '@/common/dto/baseResponse'
+import { FileUploadPath } from '@/common/enum/uploadPath.enum'
+import { isTokenExpiredError } from '@/common/util/isTokenExpired.util'
 import { uploadFileApi } from '@/features/files/api/file'
 import { Editor, FileLoader } from 'ckeditor5'
 
@@ -20,20 +23,38 @@ class UploadAdapter {
 
     const form = new FormData()
     form.append('file', file, file.name)
+    form.append('path', FileUploadPath.CREATE_POST)
 
-    const response = await uploadFileApi(form)
+    const result = await this.exponentialFileUpload(form)
 
-    if (response.error) {
-      throw response.error
-    }
-
-    return {
-      default: response.data,
-    }
+    return result
   }
 
   abort() {
     // 업로드 취소 기능 (선택 구현)
+  }
+
+  async exponentialFileUpload(
+    form: FormData,
+    retryCount = 0
+  ): Promise<{ default: string }> {
+    if (retryCount === 5) {
+      throw alert('이미지 업로드에 실패했습니다.')
+    }
+
+    try {
+      const response = await uploadFileApi(form)
+      return { default: response.data }
+    } catch (e) {
+      const err = e as unknown as ErrorBaseResponse
+
+      const isTokenExpired = isTokenExpiredError(err)
+      if (!isTokenExpired) {
+        throw err
+      }
+      const result = await this.exponentialFileUpload(form, retryCount + 1)
+      return result
+    }
   }
 }
 
