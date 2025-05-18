@@ -14,7 +14,7 @@ function LoginGuard(props: LoginGuardProps) {
     if (isFetching || me) {
       return
     }
-    
+
     redirectStorage.setRedirectUrl(pathname)
     router.push(route.auth.signIn)
   }, [router, me, isFetching, pathname])

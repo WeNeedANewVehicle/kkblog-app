@@ -17,9 +17,7 @@ function useGetMainPageSummary() {
         queryFn: () => getMainPageSummary(),
       },
     ],
-
   })
 }
-
 
 export default useGetMainPageSummary

@@ -5,15 +5,14 @@ import { createPortal } from 'react-dom'
 
 function ProgressBar() {
   const ref = useRef<HTMLDivElement>(null)
-  const [target, setTarget] = useState<Element>();
-  
+  const [target, setTarget] = useState<Element>()
 
   useLayoutEffect(() => {
     if (target) {
-      return;
+      return
     }
     setTarget(document.querySelector('.header-wrapper')!)
-  }, [target]);
+  }, [target])
 
   useEffect(() => {
     const scrollEvent = () => {
@@ -43,7 +42,7 @@ function ProgressBar() {
   }, [])
 
   if (!target) {
-    return;
+    return
   }
 
   return createPortal(
@@ -52,8 +51,8 @@ function ProgressBar() {
         className="w-full bg-blink h-1 transform-[scaleX(0%)] transition-transform origin-left"
         ref={ref}
       />
-    </div>, target!
-    
+    </div>,
+    target!
   )
 }
 

@@ -18,7 +18,7 @@ function PostListSummaryItem({
             height={48}
             src={thumbnail}
             quality={100}
-            sizes='192px'
+            sizes="192px"
             alt={`게시물 ${title}의 썸네일이 보입니다.`}
           />
         )}

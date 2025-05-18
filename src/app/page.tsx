@@ -10,14 +10,11 @@ import { useMemo } from 'react'
 
 function Page() {
   useIncreaseVisitor()
-  
-  const [
-    { data: posts, error: postsError }, 
-    { data: statistics }
-  ] = useMainPageStatistics()
 
-  const statisticsData = useMemo(() => statistics?.data, [statistics?.data]);
+  const [{ data: posts, error: postsError }, { data: statistics }] =
+    useMainPageStatistics()
 
+  const statisticsData = useMemo(() => statistics?.data, [statistics?.data])
 
   return (
     <section className="flex flex-col gap-4">

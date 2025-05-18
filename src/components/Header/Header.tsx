@@ -42,53 +42,52 @@ function Header({ menu }: HeaderProps) {
   return (
     <div className="header-wrapper flex-1 z-10001">
       <menu className="header header-border-b  h-[4rem]">
-      <ul className="navigator">
-        {menu.map(({ text, to }) => (
-          <li key={to} className={`${active(to)} mobile-hidden`}>
-            <Link href={to} className="text-black dark:text-gray-200">
-              {text}
+        <ul className="navigator">
+          {menu.map(({ text, to }) => (
+            <li key={to} className={`${active(to)} mobile-hidden`}>
+              <Link href={to} className="text-black dark:text-gray-200">
+                {text}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <Link href={route.index}>
+          <Logo className="logo" width={100} height={32} />
+        </Link>
+
+        <ul className="navigator">
+          <li className="mobile-hidden">
+            <Link
+              className="text-black dark:text-gray-200"
+              href={user ? route.auth.logout : route.auth.signIn}
+              onClick={onClickLink}
+            >
+              {user ? '로그아웃' : '로그인'}
             </Link>
           </li>
-        ))}
-      </ul>
 
-      <Link href={route.index}>
-        <Logo className="logo" width={100} height={32} />
-      </Link>
+          <li className="mobile-hidden">
+            <Link
+              className="text-black dark:text-gray-200"
+              href={user ? route.users.profile : route.auth.signUp}
+              onClick={onClickLink}
+            >
+              {user ? '내 정보' : '회원가입'}
+            </Link>
+          </li>
 
-      <ul className="navigator">
-        <li className="mobile-hidden">
-          <Link
-            className="text-black dark:text-gray-200"
-            href={user ? route.auth.logout : route.auth.signIn}
-            onClick={onClickLink}
-          >
-            {user ? '로그아웃' : '로그인'}
-          </Link>
-        </li>
+          <Button className="mobile-visible icon-btn">
+            <MenuIcon
+              className="icon stroke-black dark:stroke-gray-200 stroke-2"
+              onClick={onOpenMobileHeader}
+            />
+          </Button>
+        </ul>
 
-        <li className="mobile-hidden">
-          <Link
-            className="text-black dark:text-gray-200"
-            href={user ? route.users.profile : route.auth.signUp}
-            onClick={onClickLink}
-          >
-            {user ? '내 정보' : '회원가입'}
-          </Link>
-        </li>
-
-        <Button className="mobile-visible icon-btn">
-          <MenuIcon
-            className="icon stroke-black dark:stroke-gray-200 stroke-2"
-            onClick={onOpenMobileHeader}
-          />
-        </Button>
-      </ul>
-
-      <MobileHeader menu={menu} user={user} onClickLink={onClickLink} />
-    </menu>
+        <MobileHeader menu={menu} user={user} onClickLink={onClickLink} />
+      </menu>
     </div>
-    
   )
 }
 
