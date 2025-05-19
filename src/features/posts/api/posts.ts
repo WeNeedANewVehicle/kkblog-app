@@ -37,6 +37,7 @@ export async function getPostsApi(params: GetPostsDto) {
 export async function getPostApi(id: string) {
   return await api<string, GetPostResponseDto>({
     url: `/board/posts/${id}`,
+    cache: 'no-store'
   })
 }
 
