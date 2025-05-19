@@ -10,6 +10,7 @@ import { usePathname } from 'next/navigation'
 import './globals.css'
 import Footer from '@/components/Footer/Footer'
 import AuthUserGlobalEffect from '@/features/effects/AuthUserGlobalEffect'
+import { useMemo } from 'react'
 
 export default function RootLayout({
   children,
@@ -17,8 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   const pathname = usePathname()
-
-  const isHideGnb = hideGnbPaths.find((path) => pathname.startsWith(path))
+  const isHideGnb = useMemo(() => hideGnbPaths.find((path) => pathname.startsWith(path)), [pathname])
 
   return (
     <html lang="en">
