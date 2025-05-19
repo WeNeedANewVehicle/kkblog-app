@@ -6,11 +6,11 @@ import Search from '@/components/Search/Search'
 import route from '@/routes/routes'
 import useInfiniteGetPosts from '@/features/posts/hooks/useInfiniteGetPosts'
 import useGetPostsQuery from '@/features/posts/hooks/useGetPostsQuery'
-import useMe from '@/features/auth/hooks/queries/useMe'
 import useInfiniteScroll from '@/common/hooks/useInfiniteScroll'
 import PostList from '@/components/Post/PostList/PostList'
 import QueryError from '@/components/ErrorMessage/QueryError'
 import NoPost from '@/components/Post/NoPost/NoPost'
+import { useAppContext } from '@/components/Providers/hooks/useAppContext'
 
 function PostsPageContainer() {
   const { register, onSubmit, onClear, formState, search } = useGetPostsQuery()
@@ -22,7 +22,7 @@ function PostsPageContainer() {
     isFetching,
     error,
   } = useInfiniteGetPosts(search)
-  const { data: me } = useMe()
+  const { user } = useAppContext()
   const ref = useInfiniteScroll<HTMLDivElement>({ hasNextPage, fetchNextPage })
 
   const isNoResult = useMemo(
@@ -40,7 +40,7 @@ function PostsPageContainer() {
       />
 
       <div className="flex w-full h-[4rem] justify-end">
-        {me && (
+        {user?.permissions.posts.create && (
           <Link href={route.posts.write} className="btn-black box-sm h-fit">
             글쓰기
           </Link>

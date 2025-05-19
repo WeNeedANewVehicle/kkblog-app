@@ -1,8 +1,8 @@
 import { ModalContext } from '@/components/Modal/types/ModalContext.type'
-import { Author } from '@/features/auth/types/auth.type'
+import { MeResponseDto } from '@/features/auth/api/dto/signIn.dto'
 
 export interface AppContextType {
   modal: ModalContext
   isMenuOpen: boolean
-  user: null | Author
+  user: null | MeResponseDto
 }
