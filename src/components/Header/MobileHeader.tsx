@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, MouseEvent } from 'react'
+import React, { useCallback, MouseEvent, useEffect } from 'react'
 import LogoIcon from '@/../public/icons/logo.svg'
 import CloseIcon from '@/../public/icons/close.svg'
 import { HeaderMenuItem } from './data/header.data'
@@ -9,11 +9,12 @@ import Button from '@/components/Button/Button'
 import route from '@/routes/routes'
 import { useAppContext } from '@/components/Providers/hooks/useAppContext'
 import { useSetAppContext } from '@/components/Providers/hooks/useSetAppContext'
-import { Author } from '@/features/auth/types/auth.type'
+import { MeResponseDto } from '@/features/auth/api/dto/signIn.dto'
+import usePreventScroll from '@/common/hooks/usePreventScroll'
 
 interface MobileHeaderProps {
   menu: HeaderMenuItem[]
-  user: Author | null
+  user: MeResponseDto | null
   onClickLink: () => void
 }
 
@@ -36,7 +37,7 @@ function MobileHeader({ menu, user, onClickLink }: MobileHeaderProps) {
 
   return (
     <div
-      className={`flex flex-col h-full fixed top-0 right-0 w-full mobile-visible bg-white dark:bg-gray-900 origin-right transition-transform z-[10000] ${isMenuOpen ? 'animate-collapse-x' : 'transform-[scaleX(0%)]'}`}
+      className={`mobile-header-wrapper mobile-visible ${isMenuOpen ? 'animate-collapse-x' : 'transform-[scaleX(0%)]'}`}
     >
       <div className="border-b header-border-b p-4 flex justify-between items-center">
         <Link href={route.index} onClick={onCloseMobileHeader}>
@@ -64,20 +65,20 @@ function MobileHeader({ menu, user, onClickLink }: MobileHeaderProps) {
         <li className="flex flex-1">
           <Link
             className="text-black dark:text-gray-200 w-full py-2"
-            href={user ? route.auth.logout : route.auth.signIn}
+            href={user ? route.users.profile : route.auth.signUp}
             onClick={onClickMobileLink}
           >
-            {user ? '로그아웃' : '로그인'}
+            {user ? '내 정보' : '회원가입'}
           </Link>
         </li>
 
         <li className="flex flex-1">
           <Link
             className="text-black dark:text-gray-200 w-full py-2"
-            href={user ? route.users.profile : route.auth.signUp}
+            href={user ? route.auth.logout : route.auth.signIn}
             onClick={onClickMobileLink}
           >
-            {user ? '내 정보' : '회원가입'}
+            {user ? '로그아웃' : '로그인'}
           </Link>
         </li>
       </ul>

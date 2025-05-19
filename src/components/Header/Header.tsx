@@ -40,8 +40,8 @@ function Header({ menu }: HeaderProps) {
   }, [dispatch])
 
   return (
-    <div className="header-wrapper flex-1 z-10001">
-      <menu className="header header-border-b  h-[4rem]">
+    <div className="header-wrapper flex-1 z-10001 backdrop-blur-sm">
+      <menu className="header header-border-b h-[4rem]">
         <ul className="navigator">
           {menu.map(({ text, to }) => (
             <li key={to} className={`${active(to)} mobile-hidden`}>
@@ -60,20 +60,20 @@ function Header({ menu }: HeaderProps) {
           <li className="mobile-hidden">
             <Link
               className="text-black dark:text-gray-200"
-              href={user ? route.auth.logout : route.auth.signIn}
+              href={user ? route.users.profile : route.auth.signUp}
               onClick={onClickLink}
             >
-              {user ? '로그아웃' : '로그인'}
+              {user ? '내 정보' : '회원가입'}
             </Link>
           </li>
 
           <li className="mobile-hidden">
             <Link
               className="text-black dark:text-gray-200"
-              href={user ? route.users.profile : route.auth.signUp}
+              href={user ? route.auth.logout : route.auth.signIn}
               onClick={onClickLink}
             >
-              {user ? '내 정보' : '회원가입'}
+              {user ? '로그아웃' : '로그인'}
             </Link>
           </li>
 

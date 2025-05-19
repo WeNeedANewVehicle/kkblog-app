@@ -181,8 +181,12 @@
   @apply sticky flex flex-col top-0;
 }
 
+.mobile-header-wrapper {
+  @apply flex flex-col h-[100dvh] fixed top-0 right-0 bg-white dark:bg-gray-900 w-full origin-right transition-transform z-[10000];
+}
+
 .header {
-  @apply m-auto w-full flex justify-between top-0 p-4 text-white border-b bg-white dark:bg-gray-900 dark:text-gray-200;
+  @apply m-auto w-full flex justify-between top-0 p-4 text-white border-b dark:text-gray-200;
 }
 
 .icon {
