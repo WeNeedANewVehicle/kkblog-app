@@ -5,20 +5,16 @@ import usePostForm from '@/features/posts/hooks/usePostForm'
 import PostWrite from '@/components/Post/PostWrite/PostWrite'
 import { useParams } from 'next/navigation'
 import useGetPost from '@/features/posts/hooks/useGetPost'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import useInitPost from '@/features/posts/hooks/useInitPost'
-import { ClassicEditor } from 'ckeditor5'
 import SeoModal from '@/components/Modal/SeoModal/SeoModal'
 import useUploadFile from '@/features/files/hooks/useUploadFile'
 import useUpdatePost from '@/features/posts/hooks/useUpdatePost'
 
 function PostEditPage() {
-  const [isOpen, setIsOpen] = useState(false)
   const { id } = useParams()
   const postId = useMemo(() => (Array.isArray(id) ? id[0] : id), [id])
   const { data } = useGetPost(postId)
-
-  const { mutateAsync: uploadFile, isPending } = useUploadFile()
 
   const {
     //
@@ -34,6 +30,9 @@ function PostEditPage() {
     getValues,
     watch,
   } = usePostForm()
+
+  const [isOpen, setIsOpen] = useState(false)
+  const { mutateAsync: uploadFile, isPending } = useUploadFile()
 
   const { mutateAsync: updatePost } = useUpdatePost(postId)
 
@@ -59,38 +58,29 @@ function PostEditPage() {
     await updatePost(data)
   })
 
-  // 에디터 초기화
-  const onEditorReady = useCallback(
-    (e: ClassicEditor) => {
-      if (data?.data.content) {
-        e.setData(data?.data.content)
-      }
-    },
-    [data]
+  const onOpenSeoModal = handleSubmit(
+    useCallback(async (values) => {
+      delete values.tagInput
+      setIsOpen(true)
+    }, [])
   )
 
   useInitPost({
     reset,
-    post: data?.data,
     id: postId,
+    post: data?.data,
+    setFocus,
   })
-
-  useEffect(() => {
-    return () => {
-      setFocus('title')
-    }
-    // eslint-disable-next-line
-  }, [])
 
   return (
     <LoginGuard>
       <PostWrite
         //
+        data={data?.data.content}
+        onChange={onChangeEditor}
         formState={formState}
-        onChangeEditor={onChangeEditor}
         onChangeTag={onChangeTag}
-        onSubmit={() => {}}
-        onReady={onEditorReady}
+        onSubmit={onOpenSeoModal}
         register={register}
         tagFields={tagFields}
       />
