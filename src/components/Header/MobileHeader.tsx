@@ -10,7 +10,6 @@ import route from '@/routes/routes'
 import { useAppContext } from '@/components/Providers/hooks/useAppContext'
 import { useSetAppContext } from '@/components/Providers/hooks/useSetAppContext'
 import { MeResponseDto } from '@/features/auth/api/dto/signIn.dto'
-import usePreventScroll from '@/common/hooks/usePreventScroll'
 
 interface MobileHeaderProps {
   menu: HeaderMenuItem[]
