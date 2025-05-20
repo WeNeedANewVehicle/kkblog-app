@@ -9,9 +9,9 @@ function useLogout() {
   const dispatch = useSetAppContext()
 
   const logout = useCallback(() => {
-    tokenStorage.clearAccessToken();
-    dispatch((state) => ({ ...state, user: null }));
-    queryClient.removeQueries({ queryKey: [ME] });
+    tokenStorage.clearAccessToken()
+    dispatch((state) => ({ ...state, user: null }))
+    queryClient.removeQueries({ queryKey: [ME] })
   }, [queryClient])
 
   return {

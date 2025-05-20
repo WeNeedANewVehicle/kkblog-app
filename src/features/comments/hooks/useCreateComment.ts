@@ -1,14 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createCommentApi } from '@/features/comments/api/comments.api'
-import {
-  GetCommentsItemDto,
-  GetCommentsResponseDto,
-} from '../api/dto/getComments.dto'
-import {
-  GET_COMMENTS,
-  UseGetInfiniteCommentsReturnType,
-} from '@/features/comments/hooks/useGetInfiniteComents'
-import { BaseResponse } from '@/common/dto/baseResponse'
+import { GET_COMMENTS } from '@/features/comments/hooks/useGetInfiniteComents'
 import { GET_CHILD_COMMENTS } from './useGetInfiniteChildComments'
 import { Dispatch, SetStateAction } from 'react'
 

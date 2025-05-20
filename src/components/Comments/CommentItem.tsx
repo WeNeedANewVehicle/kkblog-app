@@ -10,7 +10,6 @@ import ChildComments from './ChildComments'
 import CommentsControl from './CommentsControl'
 import useCreateComment from '@/features/comments/hooks/useCreateComment'
 import useCommentForm from '@/features/comments/hooks/useCommentForm'
-import LoadingIcon from '@/../public/icons/loading.svg'
 import useGetChildComments from '@/features/comments/hooks/useGetChildComments'
 import CommentTargetAuthorNickName from './CommentTargetAuthorNickName'
 import useUpdateComment from '@/features/comments/hooks/useUpdateComment'
@@ -113,72 +112,73 @@ function CommentItem({
   )
 
   return (
-    <li className={`flex flex-col p-4 gap-4 ${className && className}`}>
-      <div className="flex justify-between gap-2">
-        <div className="flex gap-2 items-center">
-          {author.nickname} <div className="text-gray-600">{createdAt}</div>
-        </div>
+    <li className={`flex flex-col p-4 ${className && className}`}>
+      <article className="flex flex-col gap-4">
+        <span className="flex justify-between gap-2">
+          <span className="flex gap-2 items-center">
+            {author.nickname} <span className="text-gray-600">{createdAt}</span>
+          </span>
 
-        <CommentsControl
-          author={author}
-          isEdit={isEdit}
-          onEdit={isEdit ? onCloseCommentEditForm : onOpenCommentEditForm}
-          onDelete={onOpenDeleteModal}
-        />
-      </div>
-      <div className="flex flex-col whitespace-break-spaces">
-        <p>
-          <CommentTargetAuthorNickName depth={depth} parent={parent} />
-          {!isEdit && content}
-        </p>
-        {/* 댓글 수정 폼 */}
+          <CommentsControl
+            author={author}
+            isEdit={isEdit}
+            onEdit={isEdit ? onCloseCommentEditForm : onOpenCommentEditForm}
+            onDelete={onOpenDeleteModal}
+          />
+        </span>
+        <span className="flex flex-col whitespace-break-spaces">
+          <p>
+            <CommentTargetAuthorNickName depth={depth} parent={parent} />
+            {!isEdit && content}
+          </p>
+          {/* 댓글 수정 폼 */}
+          <CommentForm
+            //
+            isOpen={isEdit}
+            onSubmit={onEditComment}
+            register={register}
+            isPending={isPending}
+          />
+
+          {!isEdit && (
+            <Button
+              className="btn-black w-fit self-end px-3 py-1 rounded-none!"
+              onClick={() => setIsCommentFormOpen((state) => !state)}
+            >
+              <span className="hidden sm:inline">
+                {isCommentFormOpen ? '취소' : '답글'}
+              </span>
+              {isCommentFormOpen ? (
+                <CloseIcon className="[&>path]:stroke-2 sm:hidden" />
+              ) : (
+                <CommentIcon className="[&>path]:stroke-2 sm:hidden" />
+              )}
+            </Button>
+          )}
+        </span>
+
+        {/** 답글 작성 폼 */}
         <CommentForm
-          //
-          isOpen={isEdit}
-          onSubmit={onEditComment}
+          isOpen={isCommentFormOpen}
+          onSubmit={onSubmit}
           register={register}
           isPending={isPending}
         />
 
-        {!isEdit && (
-          <Button
-            className="btn-black w-fit self-end px-3 py-1 rounded-none!"
-            onClick={() => setIsCommentFormOpen((state) => !state)}
-          >
-            <span className="hidden sm:inline">
-              {isCommentFormOpen ? '취소' : '답글'}
-            </span>
-            {isCommentFormOpen ? (
-              <CloseIcon className="[&>path]:stroke-2 sm:hidden" />
-            ) : (
-              <CommentIcon className="[&>path]:stroke-2 sm:hidden" />
-            )}
-          </Button>
-        )}
-      </div>
+        {/** 답글 펼치기 & 접기 */}
+        <CommentCollapse
+          commentCount={_count?.childs ?? 0}
+          onClick={collapseReplyArea}
+          isCollapsed={isCollapsed}
+        />
 
-      {/** 답글 작성 폼 */}
-      <CommentForm
-        isOpen={isCommentFormOpen}
-        onSubmit={onSubmit}
-        register={register}
-        isPending={isPending}
-      />
-
-      {/** 답글 펼치기 & 접기 */}
-      <CommentCollapse
-        commentCount={_count?.childs ?? 0}
-        onClick={collapseReplyArea}
-        isCollapsed={isCollapsed}
-      />
-
-      <ChildComments
-        comments={childComments}
-        postId={postId}
-        isCollapsed={isCollapsed}
-      />
-
-      <div ref={ref} />
+        <ChildComments
+          comments={childComments}
+          postId={postId}
+          isCollapsed={isCollapsed}
+        />
+      </article>
+      <span ref={ref} />
     </li>
   )
 }

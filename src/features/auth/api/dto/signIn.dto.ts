@@ -1,4 +1,4 @@
-import { PermissionResponseDto } from "@/features/auth/api/dto/permission.dto"
+import { PermissionResponseDto } from '@/features/auth/api/dto/permission.dto'
 
 export interface SignInDto {
   email: string
@@ -8,7 +8,6 @@ export interface SignInDto {
 export interface SignInResponseDto {
   accessToken: string
 }
-
 
 export interface MeResponseDto {
   id: string

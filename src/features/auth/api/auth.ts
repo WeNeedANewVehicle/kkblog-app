@@ -7,7 +7,10 @@ import {
   SignInDto,
   SignInResponseDto,
 } from '@/features/auth/api/dto/signIn.dto'
-import { SignUpDto, SignUpResponseDto } from '@/features/auth/api/dto/signUp.dto'
+import {
+  SignUpDto,
+  SignUpResponseDto,
+} from '@/features/auth/api/dto/signUp.dto'
 
 function authMiddleWare(response: Response) {
   const authorization = response.headers.get('Authorization')

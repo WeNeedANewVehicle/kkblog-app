@@ -19,7 +19,7 @@ function useUpdatePost(id: string) {
     },
     onError: () => {
       alert(errorMessages.posts.update_failed)
-    }
+    },
   })
 }
 

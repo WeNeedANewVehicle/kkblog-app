@@ -22,7 +22,7 @@ function CursorPagingButton({
 
   return (
     <Button
-      className="btn-black box-sm"
+      className={`btn-black box-sm ${!hasNextPage && 'opacity-50'}`}
       onClick={onClick}
       isLoading={isLoading}
       disabled={isLoading || !hasNextPage}

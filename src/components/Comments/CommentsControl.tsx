@@ -27,7 +27,7 @@ function CommentsControl({
   }
 
   return (
-    <div className="flex gap-0 sm:gap-2 ">
+    <span className="flex gap-0 sm:gap-2 ">
       <Button className="icon-btn" onClick={onEdit}>
         <span className="hidden sm:inline">{isEdit ? '취소' : '수정'}</span>
         <span className="sm:hidden">
@@ -45,7 +45,7 @@ function CommentsControl({
           <TrashCanIcon className="size-4" />
         </span>
       </Button>
-    </div>
+    </span>
   )
 }
 

@@ -77,7 +77,9 @@ function CommentSection({ postId, commentCounts }: CommentSectionProps) {
         isLoading={isCommentsPending}
         hasNextPage={hasNextPage}
       >
-        {!hasNextPage && !isPending ? '모든 댓글을 확인했습니다' : '더 보기'}
+        {!hasNextPage && !isPending
+          ? '모든 댓글을 확인했습니다'
+          : '댓글 더 보기'}
       </CursorPagingButton>
     </section>
   )
