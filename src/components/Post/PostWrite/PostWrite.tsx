@@ -9,7 +9,7 @@ import Button from '@/components/Button/Button'
 import Link from 'next/link'
 import route from '@/routes/routes'
 import { UsePostFormReturn } from '@/features/posts/hooks/usePostForm'
-import { ClassicEditor } from 'ckeditor5'
+import { WysiwygEditorProps } from '@/components/WysiwygEditor/WysiwygEditor'
 
 const DynamicWysiwygEditor = dynamic(
   () => import('@/components/WysiwygEditor/WysiwygEditor'),
@@ -24,14 +24,15 @@ const DynamicWysiwygEditor = dynamic(
   }
 )
 
-interface PostWriteProps
-  extends Pick<
-    UsePostFormReturn,
-    'formState' | 'register' | 'tagFields' | 'onChangeEditor' | 'onChangeTag'
-  > {
-  onSubmit: (e: BaseSyntheticEvent) => void
-  onReady?: (e: ClassicEditor) => void
-}
+type PostWriteForm = Pick<
+  UsePostFormReturn,
+  'formState' | 'register' | 'tagFields' | 'onChangeTag'
+>
+
+type PostWriteProps = PostWriteForm &
+  WysiwygEditorProps & {
+    onSubmit: (e: BaseSyntheticEvent) => void
+  }
 
 function PostWrite({
   register,
@@ -39,8 +40,9 @@ function PostWrite({
   formState,
   tagFields,
   onChangeTag,
-  onChangeEditor,
+  onChange,
   onReady,
+  data,
 }: PostWriteProps) {
   return (
     <form className="flex flex-col flex-1 gap-4" onSubmit={onSubmit}>
@@ -77,7 +79,11 @@ function PostWrite({
 
       <div className="flex flex-col flex-1 gap-1">
         <LabeledText required label="내용" />
-        <DynamicWysiwygEditor onChange={onChangeEditor} onReady={onReady} />
+        <DynamicWysiwygEditor
+          onChange={onChange}
+          onReady={onReady}
+          data={data}
+        />
         <ErrorMessage message={formState.errors.content?.message} />
       </div>
 

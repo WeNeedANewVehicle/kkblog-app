@@ -12,6 +12,7 @@ interface ApiParams<P> {
   body?: P
   credentials?: RequestInit['credentials']
   accessToken?: string | null
+  cache?: RequestInit['cache']
   middleware?: (response: Response) => unknown
 }
 
@@ -21,6 +22,7 @@ async function api<P, T>({
   body,
   queries,
   credentials,
+  cache,
   accessToken,
   middleware,
 }: ApiParams<P>): Promise<BaseResponse<T>> {
@@ -48,6 +50,7 @@ async function api<P, T>({
       body: isFile ? body : JSON.stringify(body),
       headers,
       credentials,
+      cache,
     })
 
     if (middleware) {
