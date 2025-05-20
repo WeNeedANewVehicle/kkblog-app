@@ -3,7 +3,6 @@ import Link from 'next/link'
 import React, { useCallback } from 'react'
 import { HeaderMenuItem } from '@/components/Header/data/header.data'
 import route from '@/routes/routes'
-import useMe from '@/features/auth/hooks/queries/useMe'
 import Logo from '@/../public/icons/logo.svg'
 import MenuIcon from '@/../public/icons/menu.svg'
 import redirectStorage from '@/common/storages/redirect-storage'
@@ -11,7 +10,8 @@ import { usePathname } from 'next/navigation'
 import MobileHeader from '@/components/Header/MobileHeader'
 import { useSetAppContext } from '@/components/Providers/hooks/useSetAppContext'
 import Button from '@/components/Button/Button'
-import { useAppContext } from '../Providers/hooks/useAppContext'
+import { useAppContext } from '@/components/Providers/hooks/useAppContext';
+import HeaderItem from '@/components/Header/HeaderItem'
 
 interface HeaderProps {
   menu: HeaderMenuItem[]
@@ -57,25 +57,13 @@ function Header({ menu }: HeaderProps) {
         </Link>
 
         <ul className="navigator">
-          <li className="mobile-hidden">
-            <Link
-              className="text-black dark:text-gray-200"
-              href={user ? route.users.profile : route.auth.signUp}
-              onClick={onClickLink}
-            >
-              {user ? '내 정보' : '회원가입'}
-            </Link>
-          </li>
+          <HeaderItem href={user ? route.users.profile : route.auth.signUp} onClick={onClickLink}>
+            {user? '내 정보' : '회원가입'}
+          </HeaderItem>
 
-          <li className="mobile-hidden">
-            <Link
-              className="text-black dark:text-gray-200"
-              href={user ? route.auth.logout : route.auth.signIn}
-              onClick={onClickLink}
-            >
-              {user ? '로그아웃' : '로그인'}
-            </Link>
-          </li>
+          <HeaderItem href={user ? route.auth.logout : route.auth.signIn} onClick={onClickLink}>
+            {user ? '로그아웃' : '로그인'}
+          </HeaderItem>
 
           <Button className="mobile-visible icon-btn">
             <MenuIcon

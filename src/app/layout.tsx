@@ -1,7 +1,7 @@
 'use client'
 import { kia } from '@/theme/font'
 import Providers from '@/components/Providers/Providers'
-import GNB from '@/components/Header/Header'
+import Header from '@/components/Header/Header'
 import { menu } from '@/components/Header/data/header.data'
 import { hideGnbPaths } from '@/common/constant/constant'
 import ModalContainer from '@/components/Modal/ModalContainer'
@@ -18,7 +18,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   const pathname = usePathname()
-  const isHideGnb = useMemo(() => hideGnbPaths.find((path) => pathname.startsWith(path)), [pathname])
+  const isHideGnb = useMemo(
+    () => hideGnbPaths.find((path) => pathname.startsWith(path)),
+    [pathname]
+  )
 
   return (
     <html lang="en">
@@ -30,7 +33,7 @@ export default function RootLayout({
       <body className={kia.className}>
         <Providers>
           <AuthUserGlobalEffect>
-            {!isHideGnb && <GNB menu={menu} />}
+            {!isHideGnb && <Header menu={menu} />}
             <main id="main">{children}</main>
             <ModalContainer />
           </AuthUserGlobalEffect>
