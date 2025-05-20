@@ -5,6 +5,7 @@ import React, {
   useState,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from 'react'
 
 const initialAppContext: AppContextType = {
@@ -20,6 +21,14 @@ export const SetAppContext = createContext<Dispatch<
 
 export function AppContextProvider({ children }: PropsWithChildren) {
   const [state, setState] = useState(initialAppContext)
+
+  useEffect(() => {
+    if (state.isMenuOpen) {
+      document.body.classList.add('overflow-hidden')
+    } else {
+      document.body.classList.remove('overflow-hidden')
+    }
+  }, [state.isMenuOpen])
 
   return (
     <AppContext.Provider value={state}>
