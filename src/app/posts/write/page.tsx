@@ -23,7 +23,7 @@ function PostWritePage() {
 
   const [isOpen, setIsOpen] = useState(false)
   const { mutateAsync: createPost } = useCreatePost()
-  const { mutateAsync: uploadFile, isPending } = useUploadFile()
+  const { mutateAsync: uploadFile } = useUploadFile()
 
   const onConfirm = handleSubmit(async (values) => {
     const attachedFiles = values.attachedFiles?.item(0)
@@ -47,7 +47,7 @@ function PostWritePage() {
     await createPost(data)
   })
 
-  const onSubmit = handleSubmit(
+  const onOpenSeoModal = handleSubmit(
     useCallback(async (values) => {
       delete values.tagInput
       setIsOpen(true)
@@ -66,9 +66,9 @@ function PostWritePage() {
       <PostWrite
         //
         register={register}
-        onSubmit={onSubmit}
+        onSubmit={onOpenSeoModal}
         formState={formState}
-        onChangeEditor={onChangeEditor}
+        onChange={onChangeEditor}
         tagFields={tagFields}
         onChangeTag={onChangeTag}
       />
