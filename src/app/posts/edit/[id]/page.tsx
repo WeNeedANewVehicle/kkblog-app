@@ -10,6 +10,7 @@ import useInitPost from '@/features/posts/hooks/useInitPost'
 import SeoModal from '@/components/Modal/SeoModal/SeoModal'
 import useUploadFile from '@/features/files/hooks/useUploadFile'
 import useUpdatePost from '@/features/posts/hooks/useUpdatePost'
+import { FileUploadPath } from '@/common/enum/uploadPath.enum'
 
 function PostEditPage() {
   const { id } = useParams()
@@ -51,6 +52,7 @@ function PostEditPage() {
 
     if (attachedFiles) {
       form.append('file', attachedFiles, attachedFiles.name)
+      form.append('path', FileUploadPath.CREATE_POST)
       const thumbnailResponse = await uploadFile(form)
       data.thumbnail = thumbnailResponse.data
     }

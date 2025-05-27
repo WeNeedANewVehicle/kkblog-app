@@ -23,7 +23,7 @@ class UploadAdapter {
 
     const form = new FormData()
     form.append('file', file, file.name)
-    form.append('path', FileUploadPath.CREATE_POST)
+    form.append('path', FileUploadPath.TEMP)
 
     const result = await this.exponentialFileUpload(form)
 
