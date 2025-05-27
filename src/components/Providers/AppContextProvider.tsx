@@ -1,3 +1,4 @@
+import usePreventScroll from '@/common/hooks/usePreventScroll'
 import { AppContextType } from '@/components/Providers/types/AppContext.type'
 import React, {
   createContext,
@@ -22,13 +23,7 @@ export const SetAppContext = createContext<Dispatch<
 export function AppContextProvider({ children }: PropsWithChildren) {
   const [state, setState] = useState(initialAppContext)
 
-  useEffect(() => {
-    if (state.isMenuOpen) {
-      document.body.classList.add('overflow-hidden')
-    } else {
-      document.body.classList.remove('overflow-hidden')
-    }
-  }, [state.isMenuOpen])
+  usePreventScroll(state.isMenuOpen)
 
   return (
     <AppContext.Provider value={state}>
