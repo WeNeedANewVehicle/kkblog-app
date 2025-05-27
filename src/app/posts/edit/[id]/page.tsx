@@ -16,7 +16,6 @@ function PostEditPage() {
   const { id } = useParams()
   const postId = useMemo(() => (Array.isArray(id) ? id[0] : id), [id])
   const { data } = useGetPost(postId)
-
   const {
     //
     fileFields,
@@ -52,7 +51,7 @@ function PostEditPage() {
 
     if (attachedFiles) {
       form.append('file', attachedFiles, attachedFiles.name)
-      form.append('path', FileUploadPath.CREATE_POST)
+      form.append('path', FileUploadPath.TEMP)
       const thumbnailResponse = await uploadFile(form)
       data.thumbnail = thumbnailResponse.data
     }

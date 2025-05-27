@@ -7,6 +7,7 @@ import useCreatePost from '@/features/posts/hooks/useCreatePost'
 import SeoModal from '@/components/Modal/SeoModal/SeoModal'
 import useUploadFile from '@/features/files/hooks/useUploadFile'
 import PostWrite from '@/components/Post/PostWrite/PostWrite'
+import { FileUploadPath } from '@/common/enum/uploadPath.enum'
 
 function PostWritePage() {
   const {
@@ -40,6 +41,7 @@ function PostWritePage() {
 
     if (attachedFiles) {
       form.append('file', attachedFiles, attachedFiles.name)
+      form.append('path', FileUploadPath.TEMP)
       const thumbnailResponse = await uploadFile(form)
       data.thumbnail = thumbnailResponse.data
     }
