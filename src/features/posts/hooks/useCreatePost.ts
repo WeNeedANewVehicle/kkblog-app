@@ -8,7 +8,7 @@ const CREATE_POST = 'CREATE_POST'
 
 function useCreatePost() {
   const router = useRouter()
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
   return useMutation({
     mutationKey: [CREATE_POST],
@@ -16,10 +16,9 @@ function useCreatePost() {
     onSuccess: (res) => {
       // 글 등록 후 글 목록을 갱신
       queryClient.invalidateQueries({
-        queryKey: [GET_INFINITE_POSTS]
+        queryKey: [GET_INFINITE_POSTS],
       })
       router.replace(route.posts.detail(res.data.id))
-
     },
   })
 }

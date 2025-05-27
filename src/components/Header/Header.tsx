@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation'
 import MobileHeader from '@/components/Header/MobileHeader'
 import { useSetAppContext } from '@/components/Providers/hooks/useSetAppContext'
 import Button from '@/components/Button/Button'
-import { useAppContext } from '@/components/Providers/hooks/useAppContext';
+import { useAppContext } from '@/components/Providers/hooks/useAppContext'
 import HeaderItem from '@/components/Header/HeaderItem'
 
 interface HeaderProps {
@@ -57,11 +57,17 @@ function Header({ menu }: HeaderProps) {
         </Link>
 
         <ul className="navigator">
-          <HeaderItem href={user ? route.users.profile : route.auth.signUp} onClick={onClickLink}>
-            {user? '내 정보' : '회원가입'}
+          <HeaderItem
+            href={user ? route.users.profile : route.auth.signUp}
+            onClick={onClickLink}
+          >
+            {user ? '내 정보' : '회원가입'}
           </HeaderItem>
 
-          <HeaderItem href={user ? route.auth.logout : route.auth.signIn} onClick={onClickLink}>
+          <HeaderItem
+            href={user ? route.auth.logout : route.auth.signIn}
+            onClick={onClickLink}
+          >
             {user ? '로그아웃' : '로그인'}
           </HeaderItem>
 

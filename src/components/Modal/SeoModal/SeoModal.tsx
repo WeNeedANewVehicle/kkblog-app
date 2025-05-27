@@ -126,11 +126,11 @@ function SeoModal({
         </div>
 
         <div className="grid lg:col-span-12 grid-cols-2 gap-4 h-fit">
-          <Button type="submit" className="icon-btn btn-black rounded-none!">
+          <Button type="submit" className="btn-black rounded-none">
             등록
           </Button>
           <Button
-            className="icon-btn btn-black rounded-none!"
+            className="btn-black rounded-none"
             onClick={(e) => {
               e.preventDefault()
               onClose()

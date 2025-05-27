@@ -21,7 +21,7 @@ function useInitPost({ reset, post, id, setFocus }: UseInitPostParams) {
         thumbnail: post?.thumbnail ? post.thumbnail : undefined,
       })
     }
-  }, [id, post, reset])
+  }, [id, post, reset, setFocus])
 }
 
 export default useInitPost
