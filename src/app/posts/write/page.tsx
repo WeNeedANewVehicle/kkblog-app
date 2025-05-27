@@ -19,6 +19,7 @@ function PostWritePage() {
     onChangeEditor,
     onChangeTag,
     watch,
+    setValue,
     formState,
   } = usePostForm()
 
@@ -82,6 +83,7 @@ function PostWritePage() {
         watch={watch}
         onConfirm={onConfirm}
         register={register}
+        setValue={setValue}
       />
     </LoginGuard>
   )

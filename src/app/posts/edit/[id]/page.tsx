@@ -28,6 +28,7 @@ function PostEditPage() {
     reset,
     tagFields,
     getValues,
+    setValue,
     watch,
   } = usePostForm()
 
@@ -93,6 +94,7 @@ function PostEditPage() {
         getValues={getValues}
         watch={watch}
         onConfirm={onConfirm}
+        setValue={setValue}
       />
     </LoginGuard>
   )

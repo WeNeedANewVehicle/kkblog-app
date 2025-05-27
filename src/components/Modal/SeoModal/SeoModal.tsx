@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { MouseEvent, useCallback, useMemo } from 'react'
 import Modal, { ModalProps } from '@/components/Modal/Modal'
 
 import CloseIcon from '@/../public/icons/close.svg'
@@ -8,13 +8,17 @@ import Button from '@/components/Button/Button'
 import { UseFormReturn } from 'react-hook-form'
 import { PostSchema } from '@/features/posts/schema/post.schema'
 import Image from 'next/image'
+import usePreventScroll from '@/common/hooks/usePreventScroll'
+
+type PostSchemaFormReturn = UseFormReturn<PostSchema>;
 
 interface SeoModalProps extends ModalProps {
   onClose: () => void
-  register: UseFormReturn<PostSchema>['register']
+  register: PostSchemaFormReturn['register']
   onConfirm: () => void
-  getValues: UseFormReturn<PostSchema>['getValues']
-  watch: UseFormReturn<PostSchema>['watch']
+  getValues: PostSchemaFormReturn['getValues']
+  watch: PostSchemaFormReturn['watch']
+  setValue: PostSchemaFormReturn['setValue']
 }
 
 function SeoModal({
@@ -24,10 +28,25 @@ function SeoModal({
   isOpen,
   register,
   getValues,
+  setValue,
   watch,
   ...rest
 }: SeoModalProps) {
-  const previewImg = useMemo(() => watch('attachedFiles')?.item(0), [watch])
+  const attachedFiles = watch('attachedFiles')
+  const thumbnail = watch('thumbnail')
+
+  const previewImg = useMemo(() => attachedFiles?.item(0), [attachedFiles])
+  const hasImage = useMemo(
+    () => Boolean(previewImg || thumbnail),
+    [previewImg, thumbnail]
+  )
+
+  const onClearImage = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    setValue('attachedFiles', undefined);
+    setValue('thumbnail', undefined);
+  }, [setValue])
+  usePreventScroll(isOpen)
 
   return (
     <Modal
@@ -54,23 +73,33 @@ function SeoModal({
             <div
               className={`flex justify-center items-center relative aspect-video border-2 border-black dark:border-gray-800`}
             >
+              {hasImage && (
+                <Button
+                  className="absolute top-0 right-0 z-10 flex self-end icon-btn w-fit border"
+                  onClick={onClearImage}
+                >
+                  <CloseIcon />
+                </Button>
+              )}
               <label
                 className={`flex box-sm pointer btn-black`}
                 htmlFor="thumbnail"
               >
                 등록하기
               </label>
-              {previewImg && (
+              {hasImage && (
                 <Image
                   src={
-                    URL.createObjectURL(previewImg as Blob) ??
-                    watch('thumbnail')
+                    previewImg
+                      ? URL.createObjectURL(previewImg as Blob)
+                      : watch('thumbnail')!
                   }
                   fill
                   alt={`게시물 "${getValues('title')}"의 썸네일 이미지가 보입니다.`}
                   style={{ objectFit: 'cover' }}
                 />
               )}
+              
             </div>
           </LabeledText>
           <Input
@@ -96,12 +125,12 @@ function SeoModal({
           </LabeledText>
         </div>
 
-        <div className="grid lg:col-span-12 grid-cols-2 gap-4">
-          <Button type="submit" className="icon-btn btn-black">
+        <div className="grid lg:col-span-12 grid-cols-2 gap-4 h-fit">
+          <Button type="submit" className="icon-btn btn-black rounded-none!">
             등록
           </Button>
           <Button
-            className="icon-btn btn-black"
+            className="icon-btn btn-black rounded-none!"
             onClick={(e) => {
               e.preventDefault()
               onClose()
