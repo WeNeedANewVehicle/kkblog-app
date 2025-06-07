@@ -34,4 +34,4 @@ function PostList({ posts, isFetching }: PostListProps) {
   )
 }
 
-export default PostList
+export default React.memo(PostList)

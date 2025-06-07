@@ -14,7 +14,7 @@ function useGetPostsQuery() {
   const params = useSearchParams()
   const search = params.get('search')
 
-  const { formState, resetField, register, handleSubmit, setError } =
+  const { formState, resetField, register, handleSubmit, setError, watch } =
     useForm<PostSearchSchema>({
       resolver: zodResolver(postSearchSchema),
       defaultValues: {
@@ -48,7 +48,7 @@ function useGetPostsQuery() {
     })
   }, [resetField, router])
 
-  return { formState, register, onSubmit, onClear, search }
+  return { formState, register, onSubmit, onClear, search, watch }
 }
 
 export default useGetPostsQuery
