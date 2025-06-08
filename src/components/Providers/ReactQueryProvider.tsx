@@ -1,18 +1,17 @@
 'use client'
 import { ErrorBaseResponse } from '@/common/dto/baseResponse'
 import { HttpStatus } from '@/common/enum/http-status.enum'
-import tokenStorage from '@/common/storages/token-storage'
-import { isTokenExpiredError } from '@/common/util/isTokenExpired.util'
+import { isRefreshExpiredError, isTokenExpiredError } from '@/common/util/isTokenExpired.util'
 import { isServer, QueryClient } from '@tanstack/react-query'
 
+
 function retry(failureCount: number, error: ErrorBaseResponse) {
-  if (
-    error.error.path === '/auth/refresh/token' &&
-    error.meta.status === HttpStatus.NOT_FOUND
-  ) {
-    tokenStorage.clearAccessToken()
+  
+  if (isRefreshExpiredError(error)) {
+    return false;
   }
 
+  // 404, 403, 400 에러도 재시도하지 않음
   switch (error.meta.status) {
     case HttpStatus.NOT_FOUND:
       return false

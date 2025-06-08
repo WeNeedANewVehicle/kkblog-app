@@ -27,4 +27,5 @@ export const ORDER_BY: Record<'ASC' | 'DESC', OrderBy> = {
   DESC: 'desc',
 }
 
+export const isRefreshTokenExpiredError = 'REFRESH TOKEN EXPIRED';
 export const allowedFileExtensions = []

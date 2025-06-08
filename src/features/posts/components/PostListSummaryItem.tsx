@@ -9,7 +9,7 @@ function PostListSummaryItem({
   thumbnail,
 }: GetPostsItemResponseDto) {
   return (
-    <li className="flex justify-between items-center odd:border-t not-odd:border-b border-gray-600 box-sm-wide">
+    <li className="flex justify-between items-center odd:border-t not-odd:border-b border-gray-600 py-2">
       <span className="flex gap-4 items-center">
         {thumbnail && (
           <Image
@@ -25,9 +25,12 @@ function PostListSummaryItem({
         {!thumbnail && (
           <LogoIcon className="border p-2 border-gray-600 size-12" />
         )}
-        {title}
+        <span className="w-fit line-clamp-1">
+          {title}
+        </span>
       </span>
-      <span>{createdAt}</span>
+      
+      <span className="text-sm text-gray-600">{createdAt}</span>
     </li>
   )
 }
