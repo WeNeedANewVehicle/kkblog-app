@@ -10,7 +10,7 @@ function PostListSummaryItem({
 }: GetPostsItemResponseDto) {
   return (
     <li className="flex justify-between items-center odd:border-t not-odd:border-b border-gray-600 py-2">
-      <span className="flex gap-4 items-center">
+      <span className="flex gap-4 items-center flex-1">
         {thumbnail && (
           <Image
             className="size-12 object-cover"
@@ -30,7 +30,7 @@ function PostListSummaryItem({
         </span>
       </span>
       
-      <span className="text-sm text-gray-600">{createdAt}</span>
+      <span className="flex text-sm text-gray-600">{createdAt}</span>
     </li>
   )
 }
