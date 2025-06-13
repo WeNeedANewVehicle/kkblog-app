@@ -2,6 +2,7 @@ import React from 'react'
 import { GetPostResponseDto } from '@/features/posts/api/dto/get-post.dto'
 import PostTag from '@/components/Post/PostTag/PostTag'
 import PostControl from '@/components/Post/PostControl/PostControl'
+import 'ckeditor5/ckeditor5.css'
 
 export interface PostProps
   extends Omit<GetPostResponseDto, 'updatedAt' | '_count'> {}
@@ -26,7 +27,7 @@ function Post({ author, title, tags, content, createdAt, id }: PostProps) {
       <hr className="my-4 border-t border-t-gray-600" />
 
       <div
-        className="pt-4 min-h-dvh max-w-7xl"
+        className="pt-4 min-h-dvh max-w-7xl ck ck-content"
         dangerouslySetInnerHTML={{ __html: content }}
       />
     </article>
