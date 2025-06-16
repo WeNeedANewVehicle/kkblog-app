@@ -2,7 +2,7 @@
 
 import Button from '@/components/Button/Button'
 import { useAppContext } from '@/components/Providers/hooks/useAppContext'
-import { GetPostResponseDto } from '@/features/posts/api/dto/get-post.dto'
+import { GetPostResponseDto } from '@/features/posts/api/dto/getPost.dto'
 import route from '@/routes/routes'
 import Link from 'next/link'
 import React from 'react'

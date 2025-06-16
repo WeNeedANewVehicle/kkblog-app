@@ -5,12 +5,12 @@ import {
   CreatePostDto,
   CreatePostResponseDto,
 } from '@/features/posts/api/dto/createPost.dto'
-import { GetPostResponseDto } from '@/features/posts/api/dto/get-post.dto'
+import { GetPostResponseDto } from '@/features/posts/api/dto/getPost.dto'
 import {
   GetNearByPostsDto,
   GetPostsDto,
   GetPostsResponseDto,
-} from '@/features/posts/api/dto/get-post-list.dto'
+} from '@/features/posts/api/dto/getPostList.dto'
 import { UpdatePostDto } from './dto/updatePost.dto'
 import objectToQueryString from '@/common/util/objectToQueryString'
 
@@ -30,6 +30,13 @@ export async function getPostsApi(params: GetPostsDto) {
   return await api<GetPostsDto, GetPostsResponseDto>({
     url: '/board/posts',
     queries: objectToQueryString(params),
+  })
+}
+
+// 임시 글 불러오기
+export async function getTempPosts() {
+  return await api<>({
+    url: '/board/posts/temp'
   })
 }
 

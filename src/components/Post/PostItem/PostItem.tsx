@@ -1,4 +1,4 @@
-import { GetPostsItemResponseDto } from '@/features/posts/api/dto/get-post-list.dto'
+import { GetPostsItemResponseDto } from '@/features/posts/api/dto/getPostList.dto'
 import route from '@/routes/routes'
 import Link from 'next/link'
 import React from 'react'

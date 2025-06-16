@@ -6,7 +6,7 @@ import LogoIcon from '@/../public/icons/logo.svg'
 import Link from 'next/link'
 import route from '@/routes/routes'
 import Image from 'next/image'
-import { GetPostsItemResponseDto } from '@/features/posts/api/dto/get-post-list.dto'
+import { GetPostsItemResponseDto } from '@/features/posts/api/dto/getPostList.dto'
 
 interface NearByPostsProps {
   postId: string

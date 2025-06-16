@@ -1,5 +1,5 @@
 import React from 'react'
-import { GetPostsItemResponseDto } from '../api/dto/get-post-list.dto'
+import { GetPostsItemResponseDto } from '../api/dto/getPostList.dto'
 import Image from 'next/image'
 import LogoIcon from '@/../public/icons/logo.svg'
 

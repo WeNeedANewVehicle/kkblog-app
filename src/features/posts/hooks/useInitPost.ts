@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { UsePostFormReturn } from './usePostForm'
-import { GetPostResponseDto } from '../api/dto/get-post.dto'
+import { GetPostResponseDto } from '../api/dto/getPost.dto'
 import { UseFormSetFocus } from 'react-hook-form'
 import { PostSchema } from '../schema/post.schema'
 

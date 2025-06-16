@@ -1,5 +1,5 @@
 import React from 'react'
-import { GetPostsResponseDto } from '../api/dto/get-post-list.dto'
+import { GetPostsResponseDto } from '../api/dto/getPostList.dto'
 import PostListSummaryItem from './PostListSummaryItem'
 import { timeAgo } from '@/common/util/time.util'
 import route from '@/routes/routes'
