@@ -60,6 +60,11 @@ function PostEditPage() {
     await updatePost(data)
   })
 
+  const onSaveTemp = useCallback(() => {
+    setValue('isPublished', false)
+    onConfirm()
+  }, [onConfirm, setValue])
+
   const onOpenSeoModal = handleSubmit(
     useCallback(async (values) => {
       delete values.tagInput
@@ -85,6 +90,7 @@ function PostEditPage() {
         onSubmit={onOpenSeoModal}
         register={register}
         tagFields={tagFields}
+        onSaveTemp={onSaveTemp}
       />
       <SeoModal
         //
