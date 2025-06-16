@@ -12,6 +12,7 @@ const initialValue = {
   tags: [],
   title: '',
   id: undefined,
+  isPublished: true
 }
 
 export type UsePostFormReturn = ReturnType<typeof usePostForm>

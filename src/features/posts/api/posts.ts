@@ -48,6 +48,7 @@ export async function getNearByPosts(id: string) {
   })
 }
 
+// 글 수정
 export async function updatePostApi(id: string, params: UpdatePostDto) {
   const accessToken = tokenStorage.getAccessToken()
   return await api<UpdatePostDto, boolean>({

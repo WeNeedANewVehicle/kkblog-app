@@ -27,28 +27,34 @@ function PostWritePage() {
   const { mutateAsync: createPost } = useCreatePost()
   const { mutateAsync: uploadFile } = useUploadFile()
 
-  const onConfirm = handleSubmit(async (values) => {
-    const attachedFiles = values.attachedFiles?.item(0)
+  const onConfirm = handleSubmit(async ({ attachedFiles, content, tags, title, files, thumbnail, desc, isPublished }) => {
     const form = new FormData()
 
     const data = {
-      content: values.content,
-      tags: values?.tags ?? [],
-      title: values.title,
-      files: values.files,
-      thumbnail: values.thumbnail,
-      desc: values.desc,
+      content,
+      tags: tags ?? [],
+      title,
+      files,
+      thumbnail,
+      desc,
+      isPublished,
     }
 
-    if (attachedFiles) {
-      form.append('file', attachedFiles, attachedFiles.name)
+    const hasThumbnail = attachedFiles?.item(0)
+    if (hasThumbnail) {
+      form.append('file', hasThumbnail, hasThumbnail!.name)
       form.append('path', FileUploadPath.TEMP)
       const thumbnailResponse = await uploadFile(form)
       data.thumbnail = thumbnailResponse.data
     }
 
     await createPost(data)
-  })
+  });
+
+  const onSaveTemp = useCallback(() => {
+    setValue('isPublished', false)
+    onConfirm()
+  }, [onConfirm, setValue])
 
   const onOpenSeoModal = handleSubmit(
     useCallback(async (values) => {
@@ -74,6 +80,7 @@ function PostWritePage() {
         onChange={onChangeEditor}
         tagFields={tagFields}
         onChangeTag={onChangeTag}
+        onSaveTemp={onSaveTemp}
       />
       <SeoModal
         //
