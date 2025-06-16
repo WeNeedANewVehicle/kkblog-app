@@ -3,7 +3,10 @@ import { HttpStatus } from '@/common/enum/http-status.enum'
 import { BaseResponse, ErrorBaseResponse } from '@/common/dto/baseResponse'
 import tokenStorage from '@/common/storages/token-storage'
 import { refreshAccessTokenApi } from '@/features/auth/api/auth'
-import { isRefreshExpiredError, isTokenExpiredError } from './isTokenExpired.util'
+import {
+  isRefreshExpiredError,
+  isTokenExpiredError,
+} from './isTokenExpired.util'
 
 interface ApiParams<P> {
   url: string

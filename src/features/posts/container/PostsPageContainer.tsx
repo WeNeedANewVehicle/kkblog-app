@@ -12,14 +12,17 @@ import QueryError from '@/components/ErrorMessage/QueryError'
 import NoPost from '@/components/Post/NoPost/NoPost'
 import { useAppContext } from '@/components/Providers/hooks/useAppContext'
 import SearchAutoSuggestionResult from '../../tags/components/SearchAutoSuggestionResult'
-import useGetAutoSuggestionTags, { GET_AUTO_SUGGESTION_TAGS } from '@/features/tags/hooks/useGetAutoSuggestionTags'
+import useGetAutoSuggestionTags, {
+  GET_AUTO_SUGGESTION_TAGS,
+} from '@/features/tags/hooks/useGetAutoSuggestionTags'
 import useMutateAutoSuggestionTags from '@/features/tags/hooks/useMutateAutoSuggestionTags'
 
 function PostsPageContainer() {
   const { user } = useAppContext()
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(true)
 
-  const { register, onSubmit, onClear, formState, search, watch } = useGetPostsQuery();
+  const { register, onSubmit, onClear, formState, search, watch } =
+    useGetPostsQuery()
 
   const { data: tags } = useGetAutoSuggestionTags({ search: watch('search') })
   const {
@@ -34,18 +37,21 @@ function PostsPageContainer() {
 
   const { mutateAsync: getTags } = useMutateAutoSuggestionTags()
 
-  const searchTags = useCallback(async (e: ChangeEvent<HTMLInputElement>) => await getTags({ search: e.target.value }), [getTags])
+  const searchTags = useCallback(
+    async (e: ChangeEvent<HTMLInputElement>) =>
+      await getTags({ search: e.target.value }),
+    [getTags]
+  )
 
   const isNoResult = useMemo(
     () => posts?.pages.length === 1 && posts.pages[0].data.length === 0,
     [posts]
   )
 
-
   return (
     <section className="flex flex-col items-center justify-center gap-8 pt-20">
       <title>글 목록 | 크크블로그</title>
-      <article className='w-full'>
+      <article className="w-full">
         <Search
           register={register}
           onSubmitForm={onSubmit}
@@ -55,9 +61,11 @@ function PostsPageContainer() {
           onBlur={() => setIsCollapsed(true)}
           onChange={searchTags}
         />
-        <SearchAutoSuggestionResult isCollapsed={isCollapsed} tags={tags?.data ?? []} />
+        <SearchAutoSuggestionResult
+          isCollapsed={isCollapsed}
+          tags={tags?.data ?? []}
+        />
       </article>
-      
 
       <div className="flex w-full h-[4rem] justify-end">
         {user?.permissions.posts.create && (

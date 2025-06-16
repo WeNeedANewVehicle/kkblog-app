@@ -10,7 +10,7 @@ import { PostSchema } from '@/features/posts/schema/post.schema'
 import Image from 'next/image'
 import usePreventScroll from '@/common/hooks/usePreventScroll'
 
-type PostSchemaFormReturn = UseFormReturn<PostSchema>;
+type PostSchemaFormReturn = UseFormReturn<PostSchema>
 
 interface SeoModalProps extends ModalProps {
   onClose: () => void
@@ -41,11 +41,14 @@ function SeoModal({
     [previewImg, thumbnail]
   )
 
-  const onClearImage = useCallback((e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    setValue('attachedFiles', undefined);
-    setValue('thumbnail', undefined);
-  }, [setValue])
+  const onClearImage = useCallback(
+    (e: MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault()
+      setValue('attachedFiles', undefined)
+      setValue('thumbnail', undefined)
+    },
+    [setValue]
+  )
   usePreventScroll(isOpen)
 
   return (
@@ -99,7 +102,6 @@ function SeoModal({
                   style={{ objectFit: 'cover' }}
                 />
               )}
-              
             </div>
           </LabeledText>
           <Input

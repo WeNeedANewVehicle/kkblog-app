@@ -27,29 +27,40 @@ function PostWritePage() {
   const { mutateAsync: createPost } = useCreatePost()
   const { mutateAsync: uploadFile } = useUploadFile()
 
-  const onConfirm = handleSubmit(async ({ attachedFiles, content, tags, title, files, thumbnail, desc, isPublished }) => {
-    const form = new FormData()
-
-    const data = {
+  const onConfirm = handleSubmit(
+    async ({
+      attachedFiles,
       content,
-      tags: tags ?? [],
+      tags,
       title,
       files,
       thumbnail,
       desc,
       isPublished,
-    }
+    }) => {
+      const form = new FormData()
 
-    const hasThumbnail = attachedFiles?.item(0)
-    if (hasThumbnail) {
-      form.append('file', hasThumbnail, hasThumbnail!.name)
-      form.append('path', FileUploadPath.TEMP)
-      const thumbnailResponse = await uploadFile(form)
-      data.thumbnail = thumbnailResponse.data
-    }
+      const data = {
+        content,
+        tags: tags ?? [],
+        title,
+        files,
+        thumbnail,
+        desc,
+        isPublished,
+      }
 
-    await createPost(data)
-  });
+      const hasThumbnail = attachedFiles?.item(0)
+      if (hasThumbnail) {
+        form.append('file', hasThumbnail, hasThumbnail!.name)
+        form.append('path', FileUploadPath.TEMP)
+        const thumbnailResponse = await uploadFile(form)
+        data.thumbnail = thumbnailResponse.data
+      }
+
+      await createPost(data)
+    }
+  )
 
   const onSaveTemp = useCallback(() => {
     setValue('isPublished', false)

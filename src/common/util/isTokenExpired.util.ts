@@ -12,6 +12,7 @@ export function isTokenExpiredError(err: ErrorBaseResponse) {
 export function isRefreshExpiredError(err: ErrorBaseResponse) {
   return (
     err.error.path === '/auth/refresh/token' &&
-    err.meta.status === HttpStatus.UNAUTHORIZED && err.meta.code === isRefreshTokenExpiredError
+    err.meta.status === HttpStatus.UNAUTHORIZED &&
+    err.meta.code === isRefreshTokenExpiredError
   )
 }

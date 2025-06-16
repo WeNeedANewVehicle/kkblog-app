@@ -30,7 +30,6 @@ function PostTag({ label, onDelete, isEdit }: PostTagProps) {
           </Button>
         )}
       </Link>
-      
     </li>
   )
 }

@@ -10,17 +10,16 @@ export const SIGN_IN = 'SIGN_IN'
 function useSignIn() {
   const router = useRouter()
   const redirectionUrl = redirectStorage.getRedirectUrl()
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   return useMutation({
     mutationFn: signInApi,
     retry: false,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [ME]
-      });
+        queryKey: [ME],
+      })
 
       router.replace(redirectionUrl ?? route.index)
-
     },
   })
 }

@@ -32,7 +32,7 @@ type PostWriteForm = Pick<
 type PostWriteProps = PostWriteForm &
   WysiwygEditorProps & {
     onSubmit: (e: BaseSyntheticEvent) => void
-    onSaveTemp: () => void;
+    onSaveTemp: () => void
   }
 
 function PostWrite({
@@ -96,7 +96,9 @@ function PostWrite({
         >
           돌아가기
         </Link>
-        <Button className="box-sm" onClick={onSaveTemp}>임시 저장</Button>
+        <Button className="box-sm" onClick={onSaveTemp}>
+          임시 저장
+        </Button>
         <Button
           type="submit"
           className="btn-black box-sm"

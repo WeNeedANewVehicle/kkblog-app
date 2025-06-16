@@ -25,11 +25,9 @@ function PostListSummaryItem({
         {!thumbnail && (
           <LogoIcon className="border p-2 border-gray-600 size-12" />
         )}
-        <span className="w-fit line-clamp-1">
-          {title}
-        </span>
+        <span className="w-fit line-clamp-1">{title}</span>
       </span>
-      
+
       <span className="flex text-sm text-gray-600">{createdAt}</span>
     </li>
   )

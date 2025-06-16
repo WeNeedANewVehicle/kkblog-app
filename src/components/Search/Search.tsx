@@ -17,7 +17,15 @@ interface SearchProps extends InputProps {
   formState: FormState<PostSearchSchema>
 }
 
-function Search({ register, onSubmitForm, onClear, onFocus, onBlur, onChange, formState }: SearchProps) {
+function Search({
+  register,
+  onSubmitForm,
+  onClear,
+  onFocus,
+  onBlur,
+  onChange,
+  formState,
+}: SearchProps) {
   const searchError = formState.errors.search
 
   return (
