@@ -22,7 +22,6 @@ import {
   Font,
 } from 'ckeditor5'
 import React from 'react'
-import styles from '@/components/WysiwygEditor/WysiwygEditor.module.css'
 import { UploadAdapterPlugin } from '@/components/WysiwygEditor/plugins/UploadAdapterPlugin'
 import 'ckeditor5/ckeditor5.css'
 import './WysiwygEditor.css'
@@ -35,7 +34,7 @@ export interface WysiwygEditorProps {
 
 function WysiwygEditor({ onChange, onReady, data }: WysiwygEditorProps) {
   return (
-    <div className={styles.wrapper}>
+    <div className="flex flex-col flex-1 border-2 border-black max-h-screen">
       <CKEditor
         onChange={onChange}
         onReady={onReady}

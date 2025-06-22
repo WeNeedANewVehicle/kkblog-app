@@ -1,6 +1,0 @@
-.wrapper {
-  border: 2px solid var(--color-black);
-  display: flex;
-  flex-flow: column;
-  flex: 1;
-}
