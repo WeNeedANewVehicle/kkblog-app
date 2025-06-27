@@ -2,11 +2,9 @@ import useModal from '@/components/Modal/hooks/useModal';
 import TempPostModal, { TempPostModalProps } from '@/components/Modal/TempPostModal/TempPostModal';
 import { BaseSyntheticEvent, ChangeEvent, useCallback, useMemo, useState } from 'react'
 import useGetMyPosts from '@/features/posts/hooks/useGetMyPosts'
-import { useRouter } from 'next/navigation';
 import { GetMyPostsItemResponseDto } from '../api/dto/getMyPosts.dto';
 
 function useLoadTempPosts() {
-    const router = useRouter();
     const { data: tempPosts } = useGetMyPosts({ published: false })
     const {
         open: openTempPostModal,

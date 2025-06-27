@@ -12,14 +12,12 @@ import SeoModal from '@/components/Modal/SeoModal/SeoModal'
 import useUploadFile from '@/features/files/hooks/useUploadFile'
 import useUpdatePost from '@/features/posts/hooks/useUpdatePost'
 import { FileUploadPath } from '@/common/enum/uploadPath.enum'
-import useModal from '@/components/Modal/hooks/useModal'
-import TempPostModal from '@/components/Modal/TempPostModal/TempPostModal'
+import useLoadTempPosts from '@/features/posts/hooks/useLoadTempPosts'
 
 function PostEditPage() {
   const { id } = useParams()
-  const { close, open } = useModal(TempPostModal);
   const postId = useMemo(() => (Array.isArray(id) ? id[0] : id), [id])
-  const { data: post  } = useGetMyPost(postId)
+  const { data: post } = useGetMyPost(postId)
   const { data: tempPosts } = useGetMyPosts({ published: false });
   const {
     //
@@ -36,6 +34,8 @@ function PostEditPage() {
     setValue,
     watch,
   } = usePostForm()
+
+  const { onOpenTempPostModal, } = useLoadTempPosts()
 
   const [isOpen, setIsOpen] = useState(false)
   const { mutateAsync: uploadFile, isPending } = useUploadFile()
@@ -76,15 +76,6 @@ function PostEditPage() {
       setIsOpen(true)
     }, [])
   )
-
-  const onOpenTempPostModal = useCallback(() => {
-    open({
-      isOpen: true,
-      onClose: () => {},
-      onConfirm: () => {},
-      tempPosts: tempPosts?.data ?? []
-    })
-  }, [open, tempPosts]);
 
   useInitPost({
     reset,
