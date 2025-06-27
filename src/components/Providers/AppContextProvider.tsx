@@ -22,8 +22,6 @@ export const SetAppContext = createContext<Dispatch<
 export function AppContextProvider({ children }: PropsWithChildren) {
   const [state, setState] = useState(initialAppContext)
 
-  console.log(state);
-  
   usePreventScroll(state.isMenuOpen)
 
   return (
