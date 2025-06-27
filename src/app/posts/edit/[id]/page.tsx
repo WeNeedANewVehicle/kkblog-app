@@ -35,7 +35,7 @@ function PostEditPage() {
     watch,
   } = usePostForm()
 
-  const { onOpenTempPostModal, } = useLoadTempPosts()
+  const { onOpenTempPostModal } = useLoadTempPosts()
 
   const [isOpen, setIsOpen] = useState(false)
   const { mutateAsync: uploadFile, isPending } = useUploadFile()

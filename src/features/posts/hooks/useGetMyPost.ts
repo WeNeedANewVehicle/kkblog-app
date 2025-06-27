@@ -5,7 +5,7 @@ export const GET_MY_POST = 'GET_MY_POST'
 
 function useGetMyPostQueryOptions(id: string) {
   return queryOptions({
-    queryKey: [GET_MY_POST],
+    queryKey: [GET_MY_POST, { id }],
     queryFn: () => getMyPost(id),
     enabled: Boolean(id)
   })
