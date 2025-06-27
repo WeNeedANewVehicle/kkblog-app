@@ -33,6 +33,8 @@ type PostWriteProps = PostWriteForm &
   WysiwygEditorProps & {
     onSubmit: (e: BaseSyntheticEvent) => void
     onSaveTemp: () => void
+    tempPostCount: number
+    onOpenTempPostModal: (e: BaseSyntheticEvent) => void
   }
 
 function PostWrite({
@@ -44,7 +46,9 @@ function PostWrite({
   onChange,
   onReady,
   onSaveTemp,
+  onOpenTempPostModal,
   data,
+  tempPostCount,
 }: PostWriteProps) {
   return (
     <form className="flex flex-col flex-1 gap-4" onSubmit={onSubmit}>
@@ -89,23 +93,39 @@ function PostWrite({
         <ErrorMessage message={formState.errors.content?.message} />
       </div>
 
-      <div className="flex gap-4">
-        <Link
-          className="flex items-center bg-gray-100 color-gray-200 box-sm"
-          href={route.posts.index}
-        >
-          돌아가기
-        </Link>
-        <Button className="box-sm" onClick={onSaveTemp}>
-          임시 저장
-        </Button>
-        <Button
-          type="submit"
-          className="btn-black box-sm"
-          disabled={formState.isLoading || formState.isSubmitting}
-        >
-          작성
-        </Button>
+      <div className="flex justify-between max-md:flex-col">
+        <div className="flex gap-2">
+          <Button
+            className="text-gray-600 hover:bg-gray-200 box-sm"
+            onClick={onSaveTemp}
+          >
+            임시저장
+          </Button>
+          <Button
+            className={`text-gray-600 hover:bg-gray-200 box-sm ${!tempPostCount && 'line-through'}`}
+            onClick={onOpenTempPostModal}
+            disabled={tempPostCount <= 0}
+          >
+            불러오기 ({tempPostCount})
+          </Button>
+        </div>
+
+        <div className="flex gap-2">
+          <Link
+            className="flex items-center color-gray-200 hover:bg-burgundy-100 text-red-600 box-sm"
+            href={route.posts.index}
+          >
+            돌아가기
+          </Link>
+
+          <Button
+            type="submit"
+            className="text-black dark:text-white dark:hover:bg-black hover:bg-gray-200 box-sm"
+            disabled={formState.isLoading || formState.isSubmitting}
+          >
+            작성
+          </Button>
+        </div>
       </div>
     </form>
   )

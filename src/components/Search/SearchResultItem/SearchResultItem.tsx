@@ -1,4 +1,4 @@
-import { GetPostsItemResponseDto } from '@/features/posts/api/dto/getPostList.dto'
+import { GetPostsItemResponseDto } from '@/features/posts/api/dto/getPosts'
 import React from 'react'
 
 interface SearchResultItemProps extends GetPostsItemResponseDto {}

@@ -8,6 +8,8 @@ import SeoModal from '@/components/Modal/SeoModal/SeoModal'
 import useUploadFile from '@/features/files/hooks/useUploadFile'
 import PostWrite from '@/components/Post/PostWrite/PostWrite'
 import { FileUploadPath } from '@/common/enum/uploadPath.enum'
+import useBeforeUnload from '@/common/hooks/useBeforeUnload'
+import useLoadTempPosts from '@/features/posts/hooks/useLoadTempPosts'
 
 function PostWritePage() {
   const {
@@ -27,7 +29,7 @@ function PostWritePage() {
   const { mutateAsync: createPost } = useCreatePost()
   const { mutateAsync: uploadFile } = useUploadFile()
 
-  const onConfirm = handleSubmit(
+  const onUpload = handleSubmit(
     async ({
       attachedFiles,
       content,
@@ -63,9 +65,12 @@ function PostWritePage() {
   )
 
   const onSaveTemp = useCallback(() => {
-    setValue('isPublished', false)
-    onConfirm()
-  }, [onConfirm, setValue])
+    const setUnPublished = new Promise((resolve) => {
+      resolve(setValue('isPublished', false))
+    })
+    
+    setUnPublished.then(() => onUpload())
+  }, [onUpload, setValue])
 
   const onOpenSeoModal = handleSubmit(
     useCallback(async (values) => {
@@ -73,6 +78,12 @@ function PostWritePage() {
       setIsOpen(true)
     }, [])
   )
+
+  
+  const { onOpenTempPostModal, tempPosts } = useLoadTempPosts();
+
+  useBeforeUnload();
+  
 
   useEffect(() => {
     return () => {
@@ -92,6 +103,8 @@ function PostWritePage() {
         tagFields={tagFields}
         onChangeTag={onChangeTag}
         onSaveTemp={onSaveTemp}
+        tempPostCount={tempPosts?.data.length ?? 0}
+        onOpenTempPostModal={onOpenTempPostModal}
       />
       <SeoModal
         //
@@ -99,7 +112,7 @@ function PostWritePage() {
         onClose={() => setIsOpen(false)}
         getValues={getValues}
         watch={watch}
-        onConfirm={onConfirm}
+        onConfirm={onUpload}
         register={register}
         setValue={setValue}
       />

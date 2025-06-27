@@ -4,18 +4,23 @@ import LoginGuard from '@/components/Guard/LoginGuard'
 import usePostForm from '@/features/posts/hooks/usePostForm'
 import PostWrite from '@/components/Post/PostWrite/PostWrite'
 import { useParams } from 'next/navigation'
-import useGetPost from '@/features/posts/hooks/useGetPost'
+import useGetMyPost from '@/features/posts/hooks/useGetMyPost'
+import useGetMyPosts from '@/features/posts/hooks/useGetMyPosts'
 import { useCallback, useMemo, useState } from 'react'
 import useInitPost from '@/features/posts/hooks/useInitPost'
 import SeoModal from '@/components/Modal/SeoModal/SeoModal'
 import useUploadFile from '@/features/files/hooks/useUploadFile'
 import useUpdatePost from '@/features/posts/hooks/useUpdatePost'
 import { FileUploadPath } from '@/common/enum/uploadPath.enum'
+import useModal from '@/components/Modal/hooks/useModal'
+import TempPostModal from '@/components/Modal/TempPostModal/TempPostModal'
 
 function PostEditPage() {
   const { id } = useParams()
+  const { close, open } = useModal(TempPostModal);
   const postId = useMemo(() => (Array.isArray(id) ? id[0] : id), [id])
-  const { data } = useGetPost(postId)
+  const { data: post  } = useGetMyPost(postId)
+  const { data: tempPosts } = useGetMyPosts({ published: false });
   const {
     //
     fileFields,
@@ -72,10 +77,19 @@ function PostEditPage() {
     }, [])
   )
 
+  const onOpenTempPostModal = useCallback(() => {
+    open({
+      isOpen: true,
+      onClose: () => {},
+      onConfirm: () => {},
+      tempPosts: tempPosts?.data ?? []
+    })
+  }, [open, tempPosts]);
+
   useInitPost({
     reset,
     id: postId,
-    post: data?.data,
+    post: post?.data,
     setFocus,
   })
 
@@ -83,7 +97,7 @@ function PostEditPage() {
     <LoginGuard>
       <PostWrite
         //
-        data={data?.data.content}
+        data={post?.data.content}
         onChange={onChangeEditor}
         formState={formState}
         onChangeTag={onChangeTag}
@@ -91,6 +105,8 @@ function PostEditPage() {
         register={register}
         tagFields={tagFields}
         onSaveTemp={onSaveTemp}
+        onOpenTempPostModal={onOpenTempPostModal}
+        tempPostCount={tempPosts?.data.length ?? 0}
       />
       <SeoModal
         //

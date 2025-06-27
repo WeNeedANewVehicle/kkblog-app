@@ -16,14 +16,14 @@ function useModal<T>(
           ...prevState,
           modal: target
             ? prevState.modal.map((m) =>
-                m.Component === Component
-                  ? { ...m, props: { ...props, isOpen: props.isOpen } }
-                  : m
-              )
+              m.Component === Component
+                ? { ...m, props: { ...props, isOpen: props.isOpen } }
+                : m
+            )
             : prevState.modal.concat({
-                Component,
-                props,
-              }),
+              Component,
+              props,
+            }),
         }
       })
     },
@@ -47,7 +47,20 @@ function useModal<T>(
     })
   }, [dispatch, Component])
 
-  return { open, close }
+  const update = useCallback((props: T extends ModalProps ? Partial<T> : ModalProps) => {
+    dispatch((prevState) => {
+      return {
+        ...prevState,
+        modal: prevState.modal.map((m) =>
+          m.Component === Component
+            ? { ...m, props: { ...m.props, ...props } }
+            : m
+        )
+      }
+    })
+  }, []);
+
+  return { open, close, update }
 }
 
 export default useModal

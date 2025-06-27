@@ -10,9 +10,10 @@ import {
   GetNearByPostsDto,
   GetPostsDto,
   GetPostsResponseDto,
-} from '@/features/posts/api/dto/getPostList.dto'
+} from '@/features/posts/api/dto/getPosts'
 import { UpdatePostDto } from './dto/updatePost.dto'
 import objectToQueryString from '@/common/util/objectToQueryString'
+import { GetMyPostsDto, GetMyPostsItemResponseDto } from '@/features/posts/api/dto/getMyPosts.dto'
 
 // 글 작성
 export async function createPostApi(params: CreatePostDto) {
@@ -33,10 +34,22 @@ export async function getPostsApi(params: GetPostsDto) {
   })
 }
 
-// 임시 글 불러오기
-export async function getTempPosts() {
-  return await api<>({
-    url: '/board/posts/temp'
+// 글 불러오기 (편집 시)
+export async function getMyPost(id: string) {
+  const accessToken = tokenStorage.getAccessToken()
+  return await api<undefined, GetPostResponseDto>({
+    url: `/board/posts/my/${id}`,
+    accessToken,
+  })
+}
+
+// 글 목록 불러오기 (편집 시)
+export async function getMyPosts(params: GetMyPostsDto) {
+  const accessToken = tokenStorage.getAccessToken()
+  return await api<undefined, GetMyPostsItemResponseDto[]>({
+    url: `/board/posts/my`,
+    accessToken,
+    queries: objectToQueryString(params)
   })
 }
 
