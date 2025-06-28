@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import Input, { InputProps } from '@/components/Input/Input'
-import PostTag, { PostTagProps } from '@/components/Post/PostTag/PostTag'
+import PostTag, { PostTagProps } from '@/features/posts/components/PostTag/PostTag'
 import { UseFieldArrayAppend, UseFieldArrayRemove } from 'react-hook-form'
 import { PostSchema } from '@/features/posts/schema/post.schema'
 

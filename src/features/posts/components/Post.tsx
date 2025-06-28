@@ -1,7 +1,7 @@
 import React from 'react'
 import { GetPostResponseDto } from '@/features/posts/api/dto/getPost.dto'
-import PostTag from '@/components/Post/PostTag/PostTag'
-import PostControl from '@/components/Post/PostControl/PostControl'
+import PostTag from '@/features/posts/components/PostTag/PostTag'
+import PostControl from '@/features/posts/components/PostControl/PostControl'
 import 'ckeditor5/ckeditor5.css'
 
 export interface PostProps

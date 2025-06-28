@@ -2,7 +2,7 @@ import { GetPostsItemResponseDto } from '@/features/posts/api/dto/getPosts'
 import route from '@/routes/routes'
 import Link from 'next/link'
 import React from 'react'
-import PostThumbnail from '@/components/Post/PostThumbnail/PostThumbnail'
+import PostThumbnail from '@/features/posts/components/PostThumbnail/PostThumbnail'
 import { timeAgo } from '@/common/util/time.util'
 
 export interface PostItemProps extends GetPostsItemResponseDto {}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { PostItemProps } from '@/components/Post/PostItem/PostItem'
+import { PostItemProps } from '@/features/posts/components/PostItem/PostItem'
 import Image from 'next/image'
 import ImageIcon from '@/../public/icons/image.svg'
 

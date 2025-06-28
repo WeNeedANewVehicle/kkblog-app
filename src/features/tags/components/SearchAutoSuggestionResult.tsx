@@ -1,4 +1,4 @@
-import PostTag from '@/components/Post/PostTag/PostTag'
+import PostTag from '@/features/posts/components/PostTag/PostTag'
 import React from 'react'
 import { GetAutoSuggestionTagsResponseDto } from '@/features/tags/api/dto/getAutoSuggestionTags.dto'
 

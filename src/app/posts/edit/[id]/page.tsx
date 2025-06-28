@@ -2,7 +2,7 @@
 
 import LoginGuard from '@/components/Guard/LoginGuard'
 import usePostForm from '@/features/posts/hooks/usePostForm'
-import PostWrite from '@/components/Post/PostWrite/PostWrite'
+import PostWrite from '@/features/posts/components/PostWrite/PostWrite'
 import { useParams } from 'next/navigation'
 import useGetMyPost from '@/features/posts/hooks/useGetMyPost'
 import useGetMyPosts from '@/features/posts/hooks/useGetMyPosts'
