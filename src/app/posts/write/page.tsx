@@ -68,7 +68,7 @@ function PostWritePage() {
     const setUnPublished = new Promise((resolve) => {
       resolve(setValue('isPublished', false))
     })
-    
+
     setUnPublished.then(() => onUpload())
   }, [onUpload, setValue])
 
@@ -79,11 +79,9 @@ function PostWritePage() {
     }, [])
   )
 
-  
-  const { onOpenTempPostModal, tempPosts } = useLoadTempPosts();
+  const { onOpenTempPostModal, tempPosts } = useLoadTempPosts()
 
-  useBeforeUnload();
-  
+  useBeforeUnload()
 
   useEffect(() => {
     return () => {

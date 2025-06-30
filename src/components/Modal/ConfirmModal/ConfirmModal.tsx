@@ -27,7 +27,6 @@ function ConfirmModal({
   isConfirmDisabled,
   ...rest
 }: ConfirmModalProps) {
-
   usePreventScroll(isOpen)
 
   if (!isOpen) {

@@ -13,7 +13,10 @@ import {
 } from '@/features/posts/api/dto/getPosts'
 import { UpdatePostDto } from './dto/updatePost.dto'
 import objectToQueryString from '@/common/util/objectToQueryString'
-import { GetMyPostsDto, GetMyPostsItemResponseDto } from '@/features/posts/api/dto/getMyPosts.dto'
+import {
+  GetMyPostsDto,
+  GetMyPostsItemResponseDto,
+} from '@/features/posts/api/dto/getMyPosts.dto'
 
 // 글 작성
 export async function createPostApi(params: CreatePostDto) {
@@ -49,7 +52,7 @@ export async function getMyPosts(params: GetMyPostsDto) {
   return await api<undefined, GetMyPostsItemResponseDto[]>({
     url: `/board/posts/my`,
     accessToken,
-    queries: objectToQueryString(params)
+    queries: objectToQueryString(params),
   })
 }
 

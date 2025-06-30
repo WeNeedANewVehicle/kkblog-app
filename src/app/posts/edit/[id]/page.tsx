@@ -18,7 +18,7 @@ function PostEditPage() {
   const { id } = useParams()
   const postId = useMemo(() => (Array.isArray(id) ? id[0] : id), [id])
   const { data: post } = useGetMyPost(postId)
-  const { data: tempPosts } = useGetMyPosts({ published: false });
+  const { data: tempPosts } = useGetMyPosts({ published: false })
   const {
     //
     fileFields,
