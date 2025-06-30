@@ -1,11 +1,11 @@
 import React, { HTMLAttributes, PropsWithChildren } from 'react'
 
-interface MainArticleProps extends PropsWithChildren {
+interface ArticleProps extends PropsWithChildren {
   className?: string
   title: string
 }
 
-function MainArticle({ children, className, title }: MainArticleProps) {
+function Article({ children, className, title }: ArticleProps) {
   return (
     <article
       className={`flex flex-col gap-4 py-8 border-b-2 ${className && ''}`}
@@ -16,4 +16,4 @@ function MainArticle({ children, className, title }: MainArticleProps) {
   )
 }
 
-export default MainArticle
+export default Article
