@@ -12,7 +12,7 @@ function useLogout() {
     tokenStorage.clearAccessToken()
     dispatch((state) => ({ ...state, user: null }))
     queryClient.removeQueries({ queryKey: [ME] })
-  }, [queryClient])
+  }, [queryClient, dispatch])
 
   return {
     logout,
