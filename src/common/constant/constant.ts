@@ -22,6 +22,8 @@ export const hideGnbPaths = [
   route.posts.edit(''),
 ]
 
+export const DEFAULT_PROFILE_IMAGE = '/icons/user-circle.svg'
+
 export const ORDER_BY: Record<'ASC' | 'DESC', OrderBy> = {
   ASC: 'asc',
   DESC: 'desc',

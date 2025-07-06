@@ -4,14 +4,14 @@ import Button from '@/components/Button/Button'
 import Folder from '@/../public/icons/folder.svg'
 import Input from '@/components/Input/Input'
 
-interface FileUploadProps {}
+interface FileUploadProps {
+  label: string
+  className?: string
+}
 
-function FileUpload({}: FileUploadProps) {
+function FileUpload({ label, className }: FileUploadProps) {
   return (
-    <LabeledText label="파일 첨부" className="color-black">
-      <Button>
-        <Folder />
-      </Button>
+    <LabeledText label={label} className={className}>
       <Input type="file" hidden />
       <ul></ul>
     </LabeledText>
