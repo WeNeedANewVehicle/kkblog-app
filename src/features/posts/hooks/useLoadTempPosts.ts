@@ -32,6 +32,7 @@ function useLoadTempPosts() {
       setSelectedTempPost(post)
       updateTempPostModalProps({ ...props, selectedTempPost: post })
     },
+    // eslint-disable-next-line
     [tempPosts, setSelectedTempPost, selectedTempPost, updateTempPostModalProps]
   )
 
@@ -44,7 +45,7 @@ function useLoadTempPosts() {
       isOpen: true,
       tempPosts: tempPosts?.data ?? [],
     }),
-    [tempPosts, selectedTempPost]
+    [tempPosts, selectedTempPost, closeTempPostModal, onChangeRadio]
   )
 
   const onOpenTempPostModal = useCallback(
@@ -52,14 +53,7 @@ function useLoadTempPosts() {
       e.preventDefault()
       openTempPostModal({ ...props, selectedTempPost })
     },
-    [
-      openTempPostModal,
-      closeTempPostModal,
-      onChangeRadio,
-      tempPosts,
-      selectedTempPost,
-      props,
-    ]
+    [openTempPostModal, selectedTempPost, props]
   )
 
   return {
