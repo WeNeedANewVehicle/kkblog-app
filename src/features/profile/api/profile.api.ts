@@ -1,8 +1,8 @@
 import { METHODS } from "@/common/constant/constant";
 import tokenStorage from "@/common/storages/token-storage";
 import api from "@/common/util/api.util";
-import { GetMyProfileResponseDto } from "@/features/profile/api/dto/getMyProfile.api";
-import { UpdateMyProfileDto, UpdateMyProfileResponseDto } from "@/features/profile/api/dto/updateMyProfile.api";
+import { GetMyProfileResponseDto } from "@/features/profile/api/dto/getMyProfile.dto";
+import { UpdateMyProfileDto, UpdateMyProfileResponseDto } from "@/features/profile/api/dto/updateMyProfile.dto";
 
 export async function getMyProfileApi() {
     const accessToken = tokenStorage.getAccessToken()

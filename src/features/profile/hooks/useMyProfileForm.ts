@@ -2,14 +2,14 @@ import { useForm } from "react-hook-form"
 import { profileSchema, ProfileSchmea } from "@/features/profile/schema/profile.schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useCallback, useEffect, useMemo } from "react"
-import { GetMyProfileResponseDto } from "@/features/profile/api/dto/getMyProfile.api"
+import { GetMyProfileResponseDto } from "@/features/profile/api/dto/getMyProfile.dto"
 
 interface UseMyProfileFormParams {
     profile?: GetMyProfileResponseDto
 }
 
 function useMyProfileForm({ profile }: UseMyProfileFormParams) {
-    const { register, formState, reset, getValues } = useForm<ProfileSchmea>({
+    const { register, formState, reset, getValues, setValue, watch, handleSubmit } = useForm<ProfileSchmea>({
         resolver: zodResolver(profileSchema),
     })
 
@@ -37,7 +37,7 @@ function useMyProfileForm({ profile }: UseMyProfileFormParams) {
     }, [profile, onResetFields])
 
 
-    return { register, formState, onResetFields, getValues }
+    return { register, formState, onResetFields, getValues, setValue, watch, handleSubmit }
 }
 
 export default useMyProfileForm

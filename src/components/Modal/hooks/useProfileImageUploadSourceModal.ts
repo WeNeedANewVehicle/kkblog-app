@@ -7,24 +7,17 @@ import useAttachFile from '@/features/files/hooks/useAttachFile'
 function useProfileImageUploadSourceModal() {
   const { open, close, update } = useModal(ImageUploadSourceModal)
   const { ref } = useAttachFile()
-  const [profileImageSource, setProfileImageSource] = useState<ProfileImageSource>()
-
-  const onConfirm = useCallback(() => {
-    console.log(profileImageSource)
-  }, [profileImageSource])
 
   const onOpenModal = useCallback(
     (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault()
       open({
-        profileImageSource,
         isOpen: true,
         onClose: close,
-        onConfirm,
-        onChangeRadio: (e) => setProfileImageSource(e.target.value as ProfileImageSource),
+        ref
       })
     },
-    [open, close, onConfirm, setProfileImageSource, profileImageSource]
+    [open, close, ref]
   )
 
   return {

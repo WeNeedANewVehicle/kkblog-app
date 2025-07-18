@@ -8,3 +8,9 @@ export const fileSchema = z.object({
 })
 
 export type FileSchema = z.infer<typeof fileSchema>
+
+export const attachedFileSchema = typeof FileList !== 'undefined'
+  ? z.instanceof(FileList).optional()
+  : z.undefined();
+
+export type AttachedFileSchema = z.infer<typeof attachedFileSchema>;
