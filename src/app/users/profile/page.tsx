@@ -191,13 +191,13 @@ function ProfilePage() {
           </LabeledText>
 
           <LabeledText label="한 줄 소개">
-            <Input {...register('bio')} />
+            <Input {...register('summary')} />
           </LabeledText>
 
           <LabeledText label="소개">
             <textarea
               className="border-2 box-sm border-gray-800"
-              {...register('summary')}
+              {...register('bio')}
             />
           </LabeledText>
 
