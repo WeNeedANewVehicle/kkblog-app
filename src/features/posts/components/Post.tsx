@@ -11,9 +11,9 @@ function Post({ author, title, tags, content, createdAt, id }: PostProps) {
   return (
     <article className="mt-40">
       <div className="flex flex-col gap-4 py-16">
-        <h2 className="text-4xl font-black">{title}</h2>
+        <h2 className="text-4xl md:text-6xl font-black">{title}</h2>
         <div className="flex justify-between">
-          <div>{author?.nickname}</div>
+          <div className="">{author?.nickname}</div>
           <div className="text-gray-400 dark:text-gray-600">{createdAt}</div>
         </div>
 

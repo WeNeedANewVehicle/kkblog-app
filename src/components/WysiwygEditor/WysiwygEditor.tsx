@@ -42,6 +42,26 @@ function WysiwygEditor({ onChange, onReady, data }: WysiwygEditorProps) {
         editor={ClassicEditor}
         config={{
           licenseKey: 'GPL',
+          codeBlock: {
+            languages: [
+              // 퍙문에 대해서는 css 클래스 렌더링하지 않음
+              { language: 'plaintext', label: 'Plain text', class: '' },
+
+              // PHP 코드 블록에는  "php-code" 클래스 사용
+              { language: 'php', label: 'PHP', class: 'php-code' },
+
+              // 자바스크립트 코드블록에는 "js" 클래스 사용
+              // 데이터를 로드할 때 블록의 언어는 첫 번째("js") 클래스에 의해서만 결정됨
+              {
+                language: 'javascript',
+                label: 'JavaScript',
+                class: 'js javascript js-code',
+              },
+
+              // 파이썬 코드블록은 기본적으로 "language-python" css 클ㄹ래스를 가짐
+              { language: 'python', label: 'Python' },
+            ],
+          },
           plugins: [
             Essentials,
             Font,

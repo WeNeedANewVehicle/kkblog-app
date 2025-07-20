@@ -13,6 +13,7 @@ import HorizontalLine from '@/components/Line/Horizontal'
 import CommentSection from '@/components/Comments/CommentSection'
 import NearByPosts from '@/features/posts/components/NearByPosts/NearByPosts'
 import ProgressBar from '@/components/ProgressBar/ProgressBar'
+import PostAuthor from '@/features/posts/components/PostAuthor/PostAuthor'
 
 interface PostPageMetadata {
   params: DynamicParam<'id'>['params']
@@ -82,8 +83,12 @@ async function Page({ params }: DynamicParam<'id'>) {
           createdAt={toReadableDate(post.createdAt)}
         />
 
-        <div className="flex justify-end pt-10">
-          <ShareButton />
+        <div className="flex flex-col pt-10 gap-8">
+          <PostAuthor author={post.author} />
+
+          <div className="flex justify-end">
+            <ShareButton />
+          </div>
         </div>
         <HorizontalLine className="border-t-gray-600" />
 

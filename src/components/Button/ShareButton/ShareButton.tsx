@@ -16,7 +16,7 @@ function ShareButton() {
   return (
     <Button
       onClick={copyClipBoard}
-      className="btn-black rounded-4xl p-2 dark:border-gray-200 hover:after:hover-desc"
+      className="btn-black rounded-4xl p-4 dark:border-gray-200 hover:after:hover-desc"
     >
       <ShareIcon className="icon" />
     </Button>
