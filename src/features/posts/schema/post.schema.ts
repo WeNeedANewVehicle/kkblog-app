@@ -9,7 +9,6 @@ export const postSchema = z.object({
   desc: z.string().max(300).optional(),
   tagInput: z.string().optional(), // 태그를 추가할 때 입력 데이터
   thumbnail: z.string().url().optional(),
-  isPublished: z.boolean().default(true),
   tags: z
     .array(tagSchema)
     .max(10)

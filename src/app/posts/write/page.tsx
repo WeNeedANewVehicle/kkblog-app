@@ -10,6 +10,7 @@ import PostWrite from '@/features/posts/components/PostWrite/PostWrite'
 import { FileUploadPath } from '@/common/enum/uploadPath.enum'
 import useBeforeUnload from '@/common/hooks/useBeforeUnload'
 import useLoadTempPosts from '@/features/posts/hooks/useLoadTempPosts'
+import useUploadedFilePath from '@/features/files/hooks/useUploadedFilePath'
 
 function PostWritePage() {
   const {
@@ -27,21 +28,10 @@ function PostWritePage() {
 
   const [isOpen, setIsOpen] = useState(false)
   const { mutateAsync: createPost } = useCreatePost()
-  const { mutateAsync: uploadFile } = useUploadFile()
+  const { uploadedFilePath } = useUploadedFilePath()
 
   const onUpload = handleSubmit(
-    async ({
-      attachedFiles,
-      content,
-      tags,
-      title,
-      files,
-      thumbnail,
-      desc,
-      isPublished,
-    }) => {
-      const form = new FormData()
-
+    async ({ attachedFiles, content, tags, title, files, thumbnail, desc }) => {
       const data = {
         content,
         tags: tags ?? [],
@@ -49,28 +39,42 @@ function PostWritePage() {
         files,
         thumbnail,
         desc,
-        isPublished,
       }
 
-      const hasThumbnail = attachedFiles?.item(0)
-      if (hasThumbnail) {
-        form.append('file', hasThumbnail, hasThumbnail!.name)
-        form.append('path', FileUploadPath.TEMP)
-        const thumbnailResponse = await uploadFile(form)
-        data.thumbnail = thumbnailResponse.data
+      const file = attachedFiles?.item(0)
+      if (file) {
+        data.thumbnail = await uploadedFilePath(file)
       }
 
-      await createPost(data)
+      await createPost(
+        { ...data, isPublished: true },
+        { onSuccess: () => setIsOpen(false) }
+      )
     }
   )
 
-  const onSaveTemp = useCallback(() => {
-    const setUnPublished = new Promise((resolve) => {
-      resolve(setValue('isPublished', false))
-    })
+  const onUploadTemp = handleSubmit(
+    async ({ attachedFiles, content, tags, title, files, thumbnail, desc }) => {
+      const data = {
+        content,
+        tags: tags ?? [],
+        title,
+        files,
+        thumbnail,
+        desc,
+      }
 
-    setUnPublished.then(() => onUpload())
-  }, [onUpload, setValue])
+      const file = attachedFiles?.item(0)
+      if (file) {
+        data.thumbnail = await uploadedFilePath(file)
+      }
+
+      await createPost(
+        { ...data, isPublished: false },
+        { onSuccess: () => setIsOpen(false) }
+      )
+    }
+  )
 
   const onOpenSeoModal = handleSubmit(
     useCallback(async (values) => {
@@ -100,7 +104,7 @@ function PostWritePage() {
         onChange={onChangeEditor}
         tagFields={tagFields}
         onChangeTag={onChangeTag}
-        onSaveTemp={onSaveTemp}
+        onSaveTemp={onUploadTemp}
         tempPostCount={tempPosts?.data.length ?? 0}
         onOpenTempPostModal={onOpenTempPostModal}
       />

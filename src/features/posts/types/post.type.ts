@@ -5,6 +5,7 @@ export interface Posts {
   id: string
   title: string
   content: string
+  isPublished: boolean;
   tags: Array<Pick<Tag, 'id' | 'label' | 'postId'>>
   files?: Array<Files> | undefined
   createdAt: string

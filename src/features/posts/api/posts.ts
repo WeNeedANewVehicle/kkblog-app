@@ -37,7 +37,7 @@ export async function getPostsApi(params: GetPostsDto) {
   })
 }
 
-// 글 불러오기 (편집 시)
+// 글 불러오기 (편집 시 사용 - 비공개 글 포함)
 export async function getMyPost(id: string) {
   const accessToken = tokenStorage.getAccessToken()
   return await api<undefined, GetPostResponseDto>({
@@ -46,7 +46,7 @@ export async function getMyPost(id: string) {
   })
 }
 
-// 글 목록 불러오기 (편집 시)
+// 글 목록 불러오기 (편집 시 사용 - 비공개)
 export async function getMyPosts(params: GetMyPostsDto) {
   const accessToken = tokenStorage.getAccessToken()
   return await api<undefined, GetMyPostsItemResponseDto[]>({
@@ -81,3 +81,4 @@ export async function updatePostApi(id: string, params: UpdatePostDto) {
     body: params,
   })
 }
+

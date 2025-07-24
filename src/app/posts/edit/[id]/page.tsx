@@ -9,7 +9,7 @@ import useGetMyPosts from '@/features/posts/hooks/useGetMyPosts'
 import { useCallback, useMemo, useState } from 'react'
 import useInitPost from '@/features/posts/hooks/useInitPost'
 import SeoModal from '@/components/Modal/SeoModal/SeoModal'
-import useUploadFile from '@/features/files/hooks/useUploadFile'
+import useUploadedFilePath from '@/features/files/hooks/useUploadedFilePath'
 import useUpdatePost from '@/features/posts/hooks/useUpdatePost'
 import { FileUploadPath } from '@/common/enum/uploadPath.enum'
 import useLoadTempPosts from '@/features/posts/hooks/useLoadTempPosts'
@@ -38,14 +38,10 @@ function PostEditPage() {
   const { onOpenTempPostModal } = useLoadTempPosts()
 
   const [isOpen, setIsOpen] = useState(false)
-  const { mutateAsync: uploadFile, isPending } = useUploadFile()
-
+  const { uploadedFilePath } = useUploadedFilePath()
   const { mutateAsync: updatePost } = useUpdatePost(postId)
 
-  const onConfirm = handleSubmit(async (values) => {
-    const attachedFiles = values.attachedFiles?.item(0)
-    const form = new FormData()
-
+  const onUpload = handleSubmit(async (values) => {
     const data = {
       content: values.content,
       tags: values?.tags ?? [],
@@ -55,20 +51,31 @@ function PostEditPage() {
       desc: values.desc,
     }
 
-    if (attachedFiles) {
-      form.append('file', attachedFiles, attachedFiles.name)
-      form.append('path', FileUploadPath.TEMP)
-      const thumbnailResponse = await uploadFile(form)
-      data.thumbnail = thumbnailResponse.data
+    const file = values.attachedFiles?.item(0)
+    if (file) {
+      data.thumbnail = await uploadedFilePath(file)
     }
 
-    await updatePost(data)
+    await updatePost({ ...data, isPublished: true })
   })
 
-  const onSaveTemp = useCallback(() => {
-    setValue('isPublished', false)
-    onConfirm()
-  }, [onConfirm, setValue])
+  const onUploadTemp = handleSubmit(async (values) => {
+    const data = {
+      content: values.content,
+      tags: values?.tags ?? [],
+      title: values.title,
+      files: values.files,
+      thumbnail: values.thumbnail,
+      desc: values.desc,
+    }
+
+    const file = values.attachedFiles?.item(0)
+    if (file) {
+      data.thumbnail = await uploadedFilePath(file)
+    }
+
+    await updatePost({ ...data, isPublished: false })
+  })
 
   const onOpenSeoModal = handleSubmit(
     useCallback(async (values) => {
@@ -95,7 +102,7 @@ function PostEditPage() {
         onSubmit={onOpenSeoModal}
         register={register}
         tagFields={tagFields}
-        onSaveTemp={onSaveTemp}
+        onSaveTemp={onUploadTemp}
         onOpenTempPostModal={onOpenTempPostModal}
         tempPostCount={tempPosts?.data.length ?? 0}
       />
@@ -106,7 +113,7 @@ function PostEditPage() {
         register={register}
         getValues={getValues}
         watch={watch}
-        onConfirm={onConfirm}
+        onConfirm={onUpload}
         setValue={setValue}
       />
     </LoginGuard>
