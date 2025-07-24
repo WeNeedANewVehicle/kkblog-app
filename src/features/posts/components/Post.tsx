@@ -5,7 +5,7 @@ import PostControl from '@/features/posts/components/PostControl/PostControl'
 import 'ckeditor5/ckeditor5.css'
 
 export interface PostProps
-  extends Omit<GetPostResponseDto, 'updatedAt' | '_count'> {}
+  extends Omit<GetPostResponseDto, 'updatedAt' | '_count' | 'isPublished'> {}
 
 function Post({ author, title, tags, content, createdAt, id }: PostProps) {
   return (
